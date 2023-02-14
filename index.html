@@ -2,6 +2,7 @@
 <!doctype html>
 <html>
   <head>
+    <link href="images/favicon-505dbb06.ico" rel="icon" type="image/ico" />
     <meta charset="utf-8">
     <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -295,7 +296,7 @@
     </script>
   </head>
 
-  <body class="index" data-languages="[&quot;shell&quot;]">
+  <body class="index" data-languages="[]">
     <a href="#" id="nav-button">
       <span>
         NAV
@@ -304,9 +305,6 @@
     </a>
     <div class="toc-wrapper">
       <img src="images/logo-3e7f1500.png" class="logo" alt="" />
-        <div class="lang-selector">
-              <a href="#" data-language-name="shell">shell</a>
-        </div>
         <div class="search">
           <input type="text" class="search" id="input-search" placeholder="Search">
         </div>
@@ -404,10 +402,6 @@
             <a href="#errors" class="toc-h1 toc-link" data-title="Errors">Errors</a>
           </li>
       </ul>
-        <ul class="toc-footer">
-            <li><a href='#'>Sign Up for a Developer Key</a></li>
-            <li><a href='https://github.com/slatedocs/slate'>Documentation Powered by Slate</a></li>
-        </ul>
     </div>
     <div class="page-wrapper">
       <div class="dark-box"></div>
@@ -424,7 +418,55 @@
 <p>提交创建后，需平台方审核通过后才能获得 API Key</p>
 
 <p><code>POST api/v1/apikey/create</code></p>
-
+<div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="p">{</span>
+  <span class="dl">"</span><span class="s2">timezone</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">UTC</span><span class="dl">"</span><span class="p">,</span>
+  <span class="dl">"</span><span class="s2">serverTime</span><span class="dl">"</span><span class="p">:</span> <span class="mi">1565246363776</span><span class="p">,</span>
+  <span class="dl">"</span><span class="s2">rateLimits</span><span class="dl">"</span><span class="p">:</span> <span class="p">[</span>
+    <span class="p">{</span>
+      <span class="c1">//这些在"限制种类 (rateLimitType)"下的"枚举定义"部分中定义</span>
+      <span class="c1">//所有限制都是可选的</span>
+    <span class="p">}</span>
+  <span class="p">],</span>
+  <span class="dl">"</span><span class="s2">exchangeFilters</span><span class="dl">"</span><span class="p">:</span> <span class="p">[</span>
+    <span class="c1">//这些是"过滤器"部分中定义的过滤器</span>
+    <span class="c1">//所有限制都是可选的</span>
+  <span class="p">],</span>
+  <span class="dl">"</span><span class="s2">symbols</span><span class="dl">"</span><span class="p">:</span> <span class="p">[</span>
+    <span class="p">{</span>
+      <span class="dl">"</span><span class="s2">symbol</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">ETHBTC</span><span class="dl">"</span><span class="p">,</span>
+      <span class="dl">"</span><span class="s2">status</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">TRADING</span><span class="dl">"</span><span class="p">,</span>
+      <span class="dl">"</span><span class="s2">baseAsset</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">ETH</span><span class="dl">"</span><span class="p">,</span>
+      <span class="dl">"</span><span class="s2">baseAssetPrecision</span><span class="dl">"</span><span class="p">:</span> <span class="mi">8</span><span class="p">,</span>
+      <span class="dl">"</span><span class="s2">quoteAsset</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">BTC</span><span class="dl">"</span><span class="p">,</span>
+      <span class="dl">"</span><span class="s2">quotePrecision</span><span class="dl">"</span><span class="p">:</span> <span class="mi">8</span><span class="p">,</span>
+      <span class="dl">"</span><span class="s2">quoteAssetPrecision</span><span class="dl">"</span><span class="p">:</span> <span class="mi">8</span><span class="p">,</span>
+      <span class="dl">"</span><span class="s2">orderTypes</span><span class="dl">"</span><span class="p">:</span> <span class="p">[</span>
+        <span class="dl">"</span><span class="s2">LIMIT</span><span class="dl">"</span><span class="p">,</span>
+        <span class="dl">"</span><span class="s2">LIMIT_MAKER</span><span class="dl">"</span><span class="p">,</span>
+        <span class="dl">"</span><span class="s2">MARKET</span><span class="dl">"</span><span class="p">,</span>
+        <span class="dl">"</span><span class="s2">STOP_LOSS</span><span class="dl">"</span><span class="p">,</span>
+        <span class="dl">"</span><span class="s2">STOP_LOSS_LIMIT</span><span class="dl">"</span><span class="p">,</span>
+        <span class="dl">"</span><span class="s2">TAKE_PROFIT</span><span class="dl">"</span><span class="p">,</span>
+        <span class="dl">"</span><span class="s2">TAKE_PROFIT_LIMIT</span><span class="dl">"</span>
+      <span class="p">],</span>
+      <span class="dl">"</span><span class="s2">icebergAllowed</span><span class="dl">"</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+      <span class="dl">"</span><span class="s2">ocoAllowed</span><span class="dl">"</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+      <span class="dl">"</span><span class="s2">quoteOrderQtyMarketAllowed</span><span class="dl">"</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+      <span class="dl">"</span><span class="s2">allowTrailingStop</span><span class="dl">"</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+      <span class="dl">"</span><span class="s2">isSpotTradingAllowed</span><span class="dl">"</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+      <span class="dl">"</span><span class="s2">isMarginTradingAllowed</span><span class="dl">"</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+      <span class="dl">"</span><span class="s2">cancelReplaceAllowed</span><span class="dl">"</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+      <span class="dl">"</span><span class="s2">filters</span><span class="dl">"</span><span class="p">:</span> <span class="p">[</span>
+        <span class="c1">//这些在"过滤器"部分中定义</span>
+        <span class="c1">//所有限制都是可选的</span>
+      <span class="p">],</span>
+      <span class="dl">"</span><span class="s2">permissions</span><span class="dl">"</span><span class="p">:</span> <span class="p">[</span><span class="dl">"</span><span class="s2">SPOT</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">MARGIN</span><span class="dl">"</span><span class="p">],</span>
+      <span class="dl">"</span><span class="s2">defaultSelfTradePreventionMode</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">NONE</span><span class="dl">"</span><span class="p">,</span>
+      <span class="dl">"</span><span class="s2">allowedSelfTradePreventionModes</span><span class="dl">"</span><span class="p">:</span> <span class="p">[</span><span class="dl">"</span><span class="s2">NONE</span><span class="dl">"</span><span class="p">]</span>
+    <span class="p">}</span>
+  <span class="p">]</span>
+<span class="p">}</span>
+</code></pre></div>
 <p><strong>参数</strong></p>
 
 <table><thead>
@@ -506,14 +548,7 @@
 <td>API Key</td>
 </tr>
 </tbody></table>
-
-<blockquote>
-<p>返回参数</p>
-</blockquote>
-<div class="highlight"><pre class="highlight shell tab-shell"><code><span class="o">{</span>
-  status: 1, API Key 状态，0（可用）、1（不可用）
-<span class="o">}</span>
-</code></pre></div><h1 id='account'>账户(account)</h1><h2 id='9ec360d41d'>创建账户</h2>
+<h1 id='account'>账户(account)</h1><h2 id='9ec360d41d'>创建账户</h2>
 <p><code>POST api/v1/account/create</code></p>
 
 <p><strong>请求参数</strong></p>
@@ -1642,9 +1677,6 @@ This error section is stored in a separate file in <code>includes/_errors.md</co
 
       </div>
       <div class="dark-box">
-          <div class="lang-selector">
-                <a href="#" data-language-name="shell">shell</a>
-          </div>
       </div>
     </div>
   </body>
