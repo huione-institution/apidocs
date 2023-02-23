@@ -424,15 +424,6 @@
                   <li>
                     <a href="#82169890c1" class="toc-h2 toc-link" data-title="执行提现">执行提现</a>
                   </li>
-                  <li>
-                    <a href="#a7b116f58d" class="toc-h2 toc-link" data-title="获取提币历史">获取提币历史</a>
-                  </li>
-                  <li>
-                    <a href="#825def5259" class="toc-h2 toc-link" data-title="区块确认数">区块确认数</a>
-                  </li>
-                  <li>
-                    <a href="#26cafa8e90" class="toc-h2 toc-link" data-title="查询最小提现金额">查询最小提现金额</a>
-                  </li>
               </ul>
           </li>
           <li>
@@ -2326,300 +2317,130 @@
     <span class="dl">"</span><span class="s2">data</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">0</span><span class="dl">"</span>
 <span class="p">}</span>
 </code></pre></div><h1 id='e2a8b79c5c'>提现功能</h1><h2 id='82169890c1'>执行提现</h2>
-<p>api/v1/assets/withdraw/apply</p>
-
-<p>POST</p>
+<p><code>POST api/v1/assets/withDraw</code></p>
 
 <p><strong>请求参数</strong></p>
 
 <table><thead>
 <tr>
 <th><strong>参数</strong></th>
-<th><strong>是否必须</strong></th>
-<th><strong>类型</strong></th>
-<th><strong>说明</strong></th>
+<th><strong>是否必填</strong></th>
+<th><strong>参数类型</strong></th>
+<th><strong>描述说明</strong></th>
 </tr>
 </thead><tbody>
 <tr>
-<td>apiID</td>
-<td>true</td>
-<td></td>
-<td>APIID 具有唯一性</td>
+<td>thirdId</td>
+<td>是</td>
+<td>String</td>
+<td>三方订单id</td>
 </tr>
 <tr>
-<td>accountId</td>
-<td>true</td>
-<td></td>
-<td>账户 id，具有唯一性</td>
+<td>accout</td>
+<td>是</td>
+<td>String</td>
+<td>提现账户id</td>
 </tr>
 <tr>
+<td>symbol</td>
+<td>是</td>
+<td>String</td>
 <td>token</td>
-<td>true</td>
-<td></td>
-<td>币种</td>
 </tr>
 <tr>
-<td>address</td>
-<td>true</td>
-<td></td>
-<td>提币地址</td>
-</tr>
-<tr>
-<td>network</td>
-<td>true</td>
-<td></td>
-<td>转账网络</td>
-</tr>
-<tr>
-<td>qty</td>
-<td>true</td>
-<td></td>
-<td>数量</td>
-</tr>
-</tbody></table>
-
-<p><strong>返回参数</strong></p>
-
-<table><thead>
-<tr>
-<th><strong>参数</strong></th>
-<th><strong>类型</strong></th>
-<th><strong>说明</strong></th>
-</tr>
-</thead><tbody>
-</tbody></table>
-<h2 id='a7b116f58d'>获取提币历史</h2>
-<p>api/v1/assets/withdraw/history</p>
-
-<p>GET</p>
-
-<p><strong>请求参数</strong></p>
-
-<table><thead>
-<tr>
-<th><strong>参数</strong></th>
-<th><strong>是否必须</strong></th>
-<th><strong>类型</strong></th>
-<th><strong>说明</strong></th>
-</tr>
-</thead><tbody>
-<tr>
-<td>apiID</td>
-<td>true</td>
-<td></td>
-<td>APIID 具有唯一性</td>
-</tr>
-<tr>
-<td>accountId</td>
-<td>true</td>
-<td></td>
-<td>账户 id，具有唯一性</td>
-</tr>
-<tr>
-<td>startTime</td>
-<td>false</td>
-<td></td>
-<td>币种</td>
-</tr>
-<tr>
-<td>endTime</td>
-<td>false</td>
-<td></td>
-<td>提币地址</td>
-</tr>
-<tr>
-<td>token</td>
-<td>false</td>
-<td></td>
-<td>转账网络</td>
-</tr>
-<tr>
-<td>status</td>
-<td>false</td>
-<td></td>
+<td>amount</td>
+<td>是</td>
+<td>String</td>
 <td>数量</td>
 </tr>
 <tr>
-<td>txid</td>
-<td>false</td>
-<td></td>
-<td>交易哈希</td>
-</tr>
-</tbody></table>
-
-<p><strong>返回参数</strong></p>
-
-<table><thead>
-<tr>
-<th><strong>参数</strong></th>
-<th><strong>类型</strong></th>
-<th><strong>说明</strong></th>
-</tr>
-</thead><tbody>
-<tr>
-<td>time</td>
-<td></td>
-<td>时间</td>
+<td>chain</td>
+<td>是</td>
+<td>String</td>
+<td>链名称</td>
 </tr>
 <tr>
-<td>token</td>
-<td></td>
-<td>代币</td>
-</tr>
-<tr>
-<td>qty</td>
-<td></td>
-<td>数量</td>
-</tr>
-<tr>
-<td>address</td>
-<td></td>
+<td>addr</td>
+<td>是</td>
+<td>String</td>
 <td>提现地址</td>
 </tr>
 <tr>
-<td>txid</td>
-<td></td>
-<td>交易哈希</td>
+<td>isSync</td>
+<td>是</td>
+<td>Boolean</td>
+<td>是否同步执行</td>
 </tr>
 </tbody></table>
-<h2 id='825def5259'>区块确认数</h2>
-<p>api/v1/assets/deposit/block/number</p>
 
-<p>GET</p>
-
-<p><strong>请求参数</strong></p>
-
-<table><thead>
-<tr>
-<th><strong>参数</strong></th>
-<th><strong>是否必须</strong></th>
-<th><strong>类型</strong></th>
-<th><strong>说明</strong></th>
-</tr>
-</thead><tbody>
-<tr>
-<td>apiID</td>
-<td>true</td>
-<td></td>
-<td>APIID 具有唯一性</td>
-</tr>
-<tr>
-<td>accountId</td>
-<td>true</td>
-<td></td>
-<td>账户 id，具有唯一性</td>
-</tr>
-<tr>
-<td>startTime</td>
-<td>false</td>
-<td></td>
-<td>币种</td>
-</tr>
-<tr>
-<td>endTime</td>
-<td>false</td>
-<td></td>
-<td>提币地址</td>
-</tr>
-<tr>
-<td>token</td>
-<td>false</td>
-<td></td>
-<td>转账网络</td>
-</tr>
-<tr>
-<td>status</td>
-<td>false</td>
-<td></td>
-<td>数量</td>
-</tr>
-<tr>
-<td>txid</td>
-<td>false</td>
-<td></td>
-<td>交易哈希</td>
-</tr>
-</tbody></table>
+<blockquote>
+<p>示例请求
+<code>JavaScript
+{
+    &quot;thirdId&quot;: &quot;11111&quot;,
+    &quot;accout&quot;: &quot;123&quot;,
+    &quot;symbol&quot;: &quot;HUI&quot;,
+    &quot;amount&quot;: &quot;20&quot;,
+    &quot;chain&quot;: &quot;hui&quot;,
+    &quot;addr&quot;: &quot;0xAb41dEdC0B7333fD76A0619A145a4Aa3492cB017&quot;,
+    &quot;isSync&quot;: true
+}
+</code></p>
+</blockquote>
 
 <p><strong>返回参数</strong></p>
 
 <table><thead>
 <tr>
 <th><strong>参数</strong></th>
-<th><strong>类型</strong></th>
-<th><strong>说明</strong></th>
+<th><strong>是否必填</strong></th>
+<th><strong>参数类型</strong></th>
+<th><strong>描述说明</strong></th>
 </tr>
 </thead><tbody>
 <tr>
-<td>time</td>
-<td></td>
-<td>时间</td>
+<td>code</td>
+<td>是</td>
+<td>Integer</td>
+<td>0为ok 其余为错误</td>
 </tr>
 <tr>
-<td>token</td>
-<td></td>
-<td>代币</td>
+<td>msg</td>
+<td>是</td>
+<td>String</td>
+<td>错误描述</td>
 </tr>
 <tr>
-<td>qty</td>
+<td>data</td>
+<td>是</td>
+<td>Object</td>
 <td></td>
-<td>数量</td>
 </tr>
 <tr>
-<td>address</td>
-<td></td>
-<td>提现地址</td>
+<td>dataOrderId</td>
+<td>是</td>
+<td>String</td>
+<td>订单id</td>
+</tr>
+<tr>
+<td>dataThirdId</td>
+<td>是</td>
+<td>String</td>
+<td>三方订单id</td>
+</tr>
+<tr>
+<td>dataSucess</td>
+<td>是</td>
+<td>Boolean</td>
+<td>是否成功</td>
 </tr>
 </tbody></table>
 
-<hr>
-<h2 id='26cafa8e90'>查询最小提现金额</h2>
-<p>小于最小金额将无法提现</p>
-
-<p>api/v1/assets/withdraw/minsize</p>
-
-<p>POST</p>
-
-<p><strong>请求参数</strong></p>
-
-<table><thead>
-<tr>
-<th><strong>参数</strong></th>
-<th><strong>是否必须</strong></th>
-<th><strong>类型</strong></th>
-<th><strong>说明</strong></th>
-</tr>
-</thead><tbody>
-<tr>
-<td>token</td>
-<td>true</td>
-<td></td>
-<td>代币</td>
-</tr>
-<tr>
-<td>network</td>
-<td>true</td>
-<td></td>
-<td>网络</td>
-</tr>
-</tbody></table>
-
-<p><strong>返回参数</strong></p>
-
-<table><thead>
-<tr>
-<th><strong>参数</strong></th>
-<th><strong>类型</strong></th>
-<th><strong>说明</strong></th>
-</tr>
-</thead><tbody>
-<tr>
-<td>minSize</td>
-<td></td>
-<td>最小充值金额</td>
-</tr>
-</tbody></table>
-<h1 id='token'>代币管理 token</h1><h2 id='e63d65c2dc'>查询已发代币列表</h2>
+<blockquote>
+<p>返回示例</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>{"code":-1000,"msg":"notify withdrawl fail","data":{"orderId":"","thirdId":"11111","sucess":false}}
+</code></pre></div><h1 id='token'>代币管理 token</h1><h2 id='e63d65c2dc'>查询已发代币列表</h2>
 <p>查询某个账户 ID 下所发代币的代币列表</p>
 
 <p><code>GET api/v1/coin-manage/tokenList</code></p>
