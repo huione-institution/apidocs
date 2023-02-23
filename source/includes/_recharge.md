@@ -2,9 +2,7 @@
 
 ## 获取充值地址
 
-api/v1/assets/deposit/address
-
-GET
+`GET api/v1/assets/deposit/address`
 
 **请求参数**
 
@@ -23,9 +21,7 @@ GET
 
 ## 获取充值历史
 
-api/v1/assets/deposit/history
-
-GET
+`GET api/v1/assets/deposit/history`
 
 **请求参数**
 
@@ -53,9 +49,7 @@ GET
 
 小于最小金额的充值将不会上账
 
-api/v1/assets/deposit/minsize
-
-GET
+`GET api/v1/assets/deposit/minsize`
 
 **请求参数**
 
