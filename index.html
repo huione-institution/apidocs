@@ -405,13 +405,16 @@
             <a href="#6c2fd6e7fd" class="toc-h1 toc-link" data-title="所有链-所有币">所有链-所有币</a>
               <ul class="toc-list-h2">
                   <li>
-                    <a href="#483a1a428c" class="toc-h2 toc-link" data-title="获取所有链">获取所有链</a>
+                    <a href="#1" class="toc-h2 toc-link" data-title="1.获取所有链">1.获取所有链</a>
                   </li>
                   <li>
-                    <a href="#41d5971960" class="toc-h2 toc-link" data-title="获取所有币">获取所有币</a>
+                    <a href="#2" class="toc-h2 toc-link" data-title="2.获取所有币">2.获取所有币</a>
                   </li>
                   <li>
-                    <a href="#3cf16b6adf" class="toc-h2 toc-link" data-title="所有币配置">所有币配置</a>
+                    <a href="#3" class="toc-h2 toc-link" data-title="3.所有币配置">3.所有币配置</a>
+                  </li>
+                  <li>
+                    <a href="#4" class="toc-h2 toc-link" data-title="4.获取提现手续费">4.获取提现手续费</a>
                   </li>
               </ul>
           </li>
@@ -2090,10 +2093,10 @@
 <td>网络</td>
 </tr>
 </tbody></table>
-<h1 id='6c2fd6e7fd'>所有链-所有币</h1><h2 id='483a1a428c'>获取所有链</h2>
+<h1 id='6c2fd6e7fd'>所有链-所有币</h1><h2 id='1'>1.获取所有链</h2>
 <p>请求方式: GET</p>
 
-<p>请求路径:/chain/list</p>
+<p>请求路径:api/v1/config/chain/list</p>
 
 <p>返回参数:</p>
 
@@ -2105,15 +2108,50 @@
 </tr>
 </thead><tbody>
 <tr>
-<td>data</td>
-<td>[]string</td>
-<td>所有链</td>
+<td>confirmationNumber</td>
+<td>int</td>
+<td>区块确认数</td>
+</tr>
+<tr>
+<td>chain</td>
+<td>string</td>
+<td>链名称</td>
 </tr>
 </tbody></table>
-<h2 id='41d5971960'>获取所有币</h2>
+
+<p>返回示例:
+<code>javascript
+{
+  &quot;code&quot;: 0,
+    &quot;message&quot;: &quot;&quot;,
+    &quot;data&quot;: [
+    {
+      &quot;chain&quot;: &quot;hui&quot;,
+      &quot;confirmationNumber&quot;: 6
+    }
+  ]
+}
+</code></p>
+<h2 id='2'>2.获取所有币</h2>
 <p>请求方式: GET</p>
 
-<p>请求路径:/token/list</p>
+<p>请求路径:api/v1/config/token/list?chain=</p>
+
+<p>请求参数:</p>
+
+<table><thead>
+<tr>
+<th><strong>字段</strong></th>
+<th><strong>类型</strong></th>
+<th><strong>描述</strong></th>
+</tr>
+</thead><tbody>
+<tr>
+<td>chain</td>
+<td>string</td>
+<td>链名称</td>
+</tr>
+</tbody></table>
 
 <p>返回参数:</p>
 
@@ -2135,9 +2173,9 @@
 <td>精度</td>
 </tr>
 <tr>
-<td>mapped_symbol</td>
+<td>mappedSymbol</td>
 <td>string</td>
-<td>huione 链内代币符号</td>
+<td>huione链内代币符号</td>
 </tr>
 <tr>
 <td>symbol</td>
@@ -2145,10 +2183,30 @@
 <td>代币符号</td>
 </tr>
 </tbody></table>
-<h2 id='3cf16b6adf'>所有币配置</h2>
+
+<p>返回示例:</p>
+<div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="p">{</span>
+  <span class="dl">"</span><span class="s2">code</span><span class="dl">"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">message</span><span class="dl">"</span><span class="p">:</span> <span class="dl">""</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">data</span><span class="dl">"</span><span class="p">:</span> <span class="p">[</span>
+    <span class="p">{</span>
+      <span class="dl">"</span><span class="s2">chain</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">hui</span><span class="dl">"</span><span class="p">,</span>
+      <span class="dl">"</span><span class="s2">symbol</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">hui</span><span class="dl">"</span><span class="p">,</span>
+      <span class="dl">"</span><span class="s2">mappedSymbol</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">hui</span><span class="dl">"</span><span class="p">,</span>
+      <span class="dl">"</span><span class="s2">decimals</span><span class="dl">"</span><span class="p">:</span> <span class="mi">18</span>
+    <span class="p">},</span>
+    <span class="p">{</span>
+      <span class="dl">"</span><span class="s2">chain</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">hui</span><span class="dl">"</span><span class="p">,</span>
+      <span class="dl">"</span><span class="s2">symbol</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">tsc111</span><span class="dl">"</span><span class="p">,</span>
+      <span class="dl">"</span><span class="s2">mappedSymbol</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">tsc111</span><span class="dl">"</span><span class="p">,</span>
+      <span class="dl">"</span><span class="s2">decimals</span><span class="dl">"</span><span class="p">:</span> <span class="mi">18</span>
+    <span class="p">}</span>
+  <span class="p">]</span>
+<span class="p">}</span>
+</code></pre></div><h2 id='3'>3.所有币配置</h2>
 <p>请求方式: GET</p>
 
-<p>请求路径:/token/config</p>
+<p>请求路径:api/v1/config/token/config</p>
 
 <p>返回参数:</p>
 
@@ -2160,47 +2218,112 @@
 </tr>
 </thead><tbody>
 <tr>
-<td>token_code</td>
+<td>chain</td>
+<td>string</td>
+<td>链名称</td>
+</tr>
+<tr>
+<td>symbol</td>
 <td>string</td>
 <td>代币符号</td>
 </tr>
 <tr>
-<td>allow_pay</td>
+<td>allowPay</td>
 <td>bool</td>
 <td>是否允许充值</td>
 </tr>
 <tr>
-<td>allow_withdraw</td>
+<td>allowWithdraw</td>
 <td>bool</td>
 <td>是否允许提现</td>
 </tr>
 <tr>
-<td>allow_inter_transfer</td>
+<td>allowInterTransfer</td>
 <td>bool</td>
 <td>是否允许内部转账</td>
 </tr>
 <tr>
-<td>min_withdraw</td>
+<td>minWithdraw</td>
 <td>float64</td>
 <td>最低提现额度</td>
 </tr>
 <tr>
-<td>fee_rate</td>
+<td>minPay</td>
 <td>float64</td>
-<td>手续费比例</td>
-</tr>
-<tr>
-<td>fee_const</td>
-<td>float64</td>
-<td>手续费固定值</td>
-</tr>
-<tr>
-<td>is_fee_const</td>
-<td>bool</td>
-<td>手续费是否是固定值</td>
+<td>最低充值额度</td>
 </tr>
 </tbody></table>
-<h1 id='e2a8b79c5c'>提现功能</h1><h2 id='82169890c1'>执行提现</h2>
+
+<p>返回示例:</p>
+<div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="p">{</span>
+  <span class="dl">"</span><span class="s2">code</span><span class="dl">"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">message</span><span class="dl">"</span><span class="p">:</span> <span class="dl">""</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">data</span><span class="dl">"</span><span class="p">:</span> <span class="p">[</span>
+    <span class="p">{</span>
+      <span class="dl">"</span><span class="s2">chain</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">hui</span><span class="dl">"</span><span class="p">,</span>
+      <span class="dl">"</span><span class="s2">symbol</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">TSC111</span><span class="dl">"</span><span class="p">,</span>
+      <span class="dl">"</span><span class="s2">allowInterTransfer</span><span class="dl">"</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+      <span class="dl">"</span><span class="s2">allowWithdraw</span><span class="dl">"</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+      <span class="dl">"</span><span class="s2">allowPay</span><span class="dl">"</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+      <span class="dl">"</span><span class="s2">minWithdraw</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">2</span><span class="dl">"</span><span class="p">,</span>
+      <span class="dl">"</span><span class="s2">minPay</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">4</span><span class="dl">"</span>
+    <span class="p">}</span>
+  <span class="p">]</span>
+<span class="p">}</span>
+</code></pre></div><h2 id='4'>4.获取提现手续费</h2>
+<p>请求方式: POST</p>
+
+<p>请求路径:api/v1/config/token/fee</p>
+
+<p>请求参数:</p>
+
+<table><thead>
+<tr>
+<th><strong>字段</strong></th>
+<th><strong>类型</strong></th>
+<th><strong>描述</strong></th>
+</tr>
+</thead><tbody>
+<tr>
+<td>amount</td>
+<td>float</td>
+<td>提现金额</td>
+</tr>
+<tr>
+<td>symbol</td>
+<td>string</td>
+<td>代币名称</td>
+</tr>
+<tr>
+<td>chain</td>
+<td>string</td>
+<td>链名称</td>
+</tr>
+</tbody></table>
+
+<p>返回参数:</p>
+
+<table><thead>
+<tr>
+<th><strong>字段</strong></th>
+<th><strong>类型</strong></th>
+<th><strong>描述</strong></th>
+</tr>
+</thead><tbody>
+<tr>
+<td>data</td>
+<td>float</td>
+<td>手续费</td>
+</tr>
+</tbody></table>
+
+<p>返回示例:</p>
+<div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="p">{</span>
+  <span class="dl">"</span><span class="s2">code</span><span class="dl">"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">message</span><span class="dl">"</span><span class="p">:</span> <span class="dl">""</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">data</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">0</span><span class="dl">"</span>
+<span class="p">}</span>
+</code></pre></div><h1 id='e2a8b79c5c'>提现功能</h1><h2 id='82169890c1'>执行提现</h2>
 <p>api/v1/assets/withdraw/apply</p>
 
 <p>POST</p>
