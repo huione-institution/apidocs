@@ -405,10 +405,10 @@
             <a href="#6c2fd6e7fd" class="toc-h1 toc-link" data-title="所有链-所有币">所有链-所有币</a>
               <ul class="toc-list-h2">
                   <li>
-                    <a href="#1" class="toc-h2 toc-link" data-title="1.获取所有链">1.获取所有链</a>
+                    <a href="#483a1a428c" class="toc-h2 toc-link" data-title="获取所有链">获取所有链</a>
                   </li>
                   <li>
-                    <a href="#2" class="toc-h2 toc-link" data-title="2.获取所有币">2.获取所有币</a>
+                    <a href="#41d5971960" class="toc-h2 toc-link" data-title="获取所有币">获取所有币</a>
                   </li>
                   <li>
                     <a href="#3" class="toc-h2 toc-link" data-title="3.所有币配置">3.所有币配置</a>
@@ -2093,10 +2093,8 @@
 <td>网络</td>
 </tr>
 </tbody></table>
-<h1 id='6c2fd6e7fd'>所有链-所有币</h1><h2 id='1'>1.获取所有链</h2>
-<p>请求方式: GET</p>
-
-<p>请求路径:api/v1/config/chain/list</p>
+<h1 id='6c2fd6e7fd'>所有链-所有币</h1><h2 id='483a1a428c'>获取所有链</h2>
+<p><code>GET api/v1/config/chain/list</code></p>
 
 <p>返回参数:</p>
 
@@ -2119,6 +2117,7 @@
 </tr>
 </tbody></table>
 
+<blockquote>
 <p>返回示例:
 <code>javascript
 {
@@ -2132,10 +2131,11 @@
   ]
 }
 </code></p>
-<h2 id='2'>2.获取所有币</h2>
-<p>请求方式: GET</p>
+</blockquote>
+<h2 id='41d5971960'>获取所有币</h2>
+<p>请求方式: </p>
 
-<p>请求路径:api/v1/config/token/list?chain=</p>
+<p><code>GET api/v1/config/token/list?chain=</code></p>
 
 <p>请求参数:</p>
 
@@ -2184,7 +2184,9 @@
 </tr>
 </tbody></table>
 
+<blockquote>
 <p>返回示例:</p>
+</blockquote>
 <div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="p">{</span>
   <span class="dl">"</span><span class="s2">code</span><span class="dl">"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
     <span class="dl">"</span><span class="s2">message</span><span class="dl">"</span><span class="p">:</span> <span class="dl">""</span><span class="p">,</span>
@@ -2204,9 +2206,7 @@
   <span class="p">]</span>
 <span class="p">}</span>
 </code></pre></div><h2 id='3'>3.所有币配置</h2>
-<p>请求方式: GET</p>
-
-<p>请求路径:api/v1/config/token/config</p>
+<p><code>GET api/v1/config/token/config</code></p>
 
 <p>返回参数:</p>
 
@@ -2254,7 +2254,9 @@
 </tr>
 </tbody></table>
 
+<blockquote>
 <p>返回示例:</p>
+</blockquote>
 <div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="p">{</span>
   <span class="dl">"</span><span class="s2">code</span><span class="dl">"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
     <span class="dl">"</span><span class="s2">message</span><span class="dl">"</span><span class="p">:</span> <span class="dl">""</span><span class="p">,</span>
@@ -2271,9 +2273,7 @@
   <span class="p">]</span>
 <span class="p">}</span>
 </code></pre></div><h2 id='4'>4.获取提现手续费</h2>
-<p>请求方式: POST</p>
-
-<p>请求路径:api/v1/config/token/fee</p>
+<p><code>POST api/v1/config/token/fee</code></p>
 
 <p>请求参数:</p>
 
@@ -2317,7 +2317,9 @@
 </tr>
 </tbody></table>
 
+<blockquote>
 <p>返回示例:</p>
+</blockquote>
 <div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="p">{</span>
   <span class="dl">"</span><span class="s2">code</span><span class="dl">"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
     <span class="dl">"</span><span class="s2">message</span><span class="dl">"</span><span class="p">:</span> <span class="dl">""</span><span class="p">,</span>
