@@ -421,6 +421,17 @@
               </ul>
           </li>
           <li>
+            <a href="#8e9ec9ac7d" class="toc-h1 toc-link" data-title="转账">转账</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#2e01b09406" class="toc-h2 toc-link" data-title="执行内部转账">执行内部转账</a>
+                  </li>
+                  <li>
+                    <a href="#a67844d19d" class="toc-h2 toc-link" data-title="充值提现转账历史记录">充值提现转账历史记录</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
             <a href="#token" class="toc-h1 toc-link" data-title="代币管理 token">代币管理 token</a>
               <ul class="toc-list-h2">
                   <li>
@@ -2292,6 +2303,382 @@
 <p>返回示例</p>
 </blockquote>
 <div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="p">{</span><span class="dl">"</span><span class="s2">code</span><span class="dl">"</span><span class="p">:</span><span class="o">-</span><span class="mi">1000</span><span class="p">,</span><span class="dl">"</span><span class="s2">msg</span><span class="dl">"</span><span class="p">:</span><span class="dl">"</span><span class="s2">notify withdrawl fail</span><span class="dl">"</span><span class="p">,</span><span class="dl">"</span><span class="s2">data</span><span class="dl">"</span><span class="p">:{</span><span class="dl">"</span><span class="s2">orderId</span><span class="dl">"</span><span class="p">:</span><span class="dl">""</span><span class="p">,</span><span class="dl">"</span><span class="s2">thirdId</span><span class="dl">"</span><span class="p">:</span><span class="dl">"</span><span class="s2">11111</span><span class="dl">"</span><span class="p">,</span><span class="dl">"</span><span class="s2">sucess</span><span class="dl">"</span><span class="p">:</span><span class="kc">false</span><span class="p">}}</span>
+</code></pre></div><h1 id='8e9ec9ac7d'>转账</h1><h2 id='2e01b09406'>执行内部转账</h2>
+<p><code>POST /v1/internalTransfer</code></p>
+
+<p><strong>请求参数</strong></p>
+
+<table><thead>
+<tr>
+<th><strong>参数名</strong></th>
+<th><strong>是否必填</strong></th>
+<th><strong>参数类型</strong></th>
+<th><strong>描述说明</strong></th>
+</tr>
+</thead><tbody>
+<tr>
+<td>transfers</td>
+<td>是</td>
+<td></td>
+<td>请求转账结构体数组</td>
+</tr>
+<tr>
+<td>transfersFromAccout</td>
+<td>是</td>
+<td>String</td>
+<td>转出账户</td>
+</tr>
+<tr>
+<td>transfersToAccout</td>
+<td>是</td>
+<td>String</td>
+<td>转入账户</td>
+</tr>
+<tr>
+<td>transfersThirdId</td>
+<td>是</td>
+<td>String</td>
+<td>外部订单id(重复不处理)</td>
+</tr>
+<tr>
+<td>transfersSymbol</td>
+<td>是</td>
+<td>String</td>
+<td>代币名称</td>
+</tr>
+<tr>
+<td>transfersAmount</td>
+<td>是</td>
+<td>String</td>
+<td>转账金额</td>
+</tr>
+<tr>
+<td>transfersCallBack</td>
+<td>否</td>
+<td>String</td>
+<td>转账成功回调地址</td>
+</tr>
+<tr>
+<td>transfersExt</td>
+<td>否</td>
+<td>String</td>
+<td>透传参数</td>
+</tr>
+<tr>
+<td>isSync</td>
+<td>是</td>
+<td>Boolean</td>
+<td>是否同步执行</td>
+</tr>
+<tr>
+<td>isTransaction</td>
+<td>是</td>
+<td>Boolean</td>
+<td>是否整体做为事务</td>
+</tr>
+</tbody></table>
+<div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="c1">//示例</span>
+<span class="p">{</span>
+    <span class="dl">"</span><span class="s2">transfers</span><span class="dl">"</span><span class="p">:[</span>
+        <span class="p">{</span>
+            <span class="dl">"</span><span class="s2">from_accout</span><span class="dl">"</span><span class="p">:</span><span class="dl">"</span><span class="s2">10</span><span class="dl">"</span><span class="p">,</span>
+            <span class="dl">"</span><span class="s2">to_accout</span><span class="dl">"</span><span class="p">:</span><span class="dl">"</span><span class="s2">12</span><span class="dl">"</span><span class="p">,</span>
+            <span class="dl">"</span><span class="s2">third_id</span><span class="dl">"</span><span class="p">:</span><span class="dl">"</span><span class="s2">1</span><span class="dl">"</span><span class="p">,</span>
+            <span class="dl">"</span><span class="s2">token</span><span class="dl">"</span><span class="p">:</span><span class="dl">"</span><span class="s2">hui</span><span class="dl">"</span><span class="p">,</span>
+            <span class="dl">"</span><span class="s2">amount</span><span class="dl">"</span><span class="p">:</span><span class="dl">"</span><span class="s2">1</span><span class="dl">"</span><span class="p">,</span>
+            <span class="dl">"</span><span class="s2">call_back</span><span class="dl">"</span><span class="p">:</span><span class="dl">""</span><span class="p">,</span>
+            <span class="dl">"</span><span class="s2">ext</span><span class="dl">"</span><span class="p">:</span><span class="dl">""</span>
+        <span class="p">},</span>
+         <span class="p">{</span>
+            <span class="dl">"</span><span class="s2">from_accout</span><span class="dl">"</span><span class="p">:</span><span class="dl">"</span><span class="s2">10</span><span class="dl">"</span><span class="p">,</span>
+            <span class="dl">"</span><span class="s2">to_accout</span><span class="dl">"</span><span class="p">:</span><span class="dl">"</span><span class="s2">12</span><span class="dl">"</span><span class="p">,</span>
+            <span class="dl">"</span><span class="s2">third_id</span><span class="dl">"</span><span class="p">:</span><span class="dl">"</span><span class="s2">3</span><span class="dl">"</span><span class="p">,</span>
+            <span class="dl">"</span><span class="s2">token</span><span class="dl">"</span><span class="p">:</span><span class="dl">"</span><span class="s2">hui</span><span class="dl">"</span><span class="p">,</span>
+            <span class="dl">"</span><span class="s2">amount</span><span class="dl">"</span><span class="p">:</span><span class="dl">"</span><span class="s2">2</span><span class="dl">"</span><span class="p">,</span>
+            <span class="dl">"</span><span class="s2">call_back</span><span class="dl">"</span><span class="p">:</span><span class="dl">""</span><span class="p">,</span>
+            <span class="dl">"</span><span class="s2">ext</span><span class="dl">"</span><span class="p">:</span><span class="dl">""</span>
+        <span class="p">}</span>
+    <span class="p">],</span>
+    <span class="dl">"</span><span class="s2">is_sync</span><span class="dl">"</span><span class="p">:</span><span class="kc">false</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">is_transaction</span><span class="dl">"</span><span class="p">:</span><span class="kc">true</span>
+<span class="p">}</span>
+</code></pre></div>
+<p><strong>返回参数</strong></p>
+
+<table><thead>
+<tr>
+<th><strong>参数名</strong></th>
+<th><strong>参数类型</strong></th>
+<th><strong>描述说明</strong></th>
+</tr>
+</thead><tbody>
+<tr>
+<td>code</td>
+<td>Integer</td>
+<td>状态码0为处理成功其余为错误</td>
+</tr>
+<tr>
+<td>msg</td>
+<td>String</td>
+<td>错误信息提示</td>
+</tr>
+<tr>
+<td>data</td>
+<td>Array</td>
+<td>结果数组</td>
+</tr>
+<tr>
+<td>dataOrderId</td>
+<td>String</td>
+<td>内部订单id</td>
+</tr>
+<tr>
+<td>dataThirdId</td>
+<td>String</td>
+<td>三方订单id</td>
+</tr>
+<tr>
+<td>dataSuccess</td>
+<td>Boolean</td>
+<td>是否成功</td>
+</tr>
+</tbody></table>
+<div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="p">{</span>
+    <span class="dl">"</span><span class="s2">code</span><span class="dl">"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">msg</span><span class="dl">"</span><span class="p">:</span> <span class="dl">""</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">data</span><span class="dl">"</span><span class="p">:</span> <span class="p">[</span>
+        <span class="p">{</span>
+            <span class="dl">"</span><span class="s2">order_id</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">H02167628366229400160</span><span class="dl">"</span><span class="p">,</span>
+            <span class="dl">"</span><span class="s2">third_id</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">1</span><span class="dl">"</span><span class="p">,</span>
+            <span class="dl">"</span><span class="s2">sucess</span><span class="dl">"</span><span class="p">:</span> <span class="kc">true</span>
+        <span class="p">},</span>
+        <span class="p">{</span>
+            <span class="dl">"</span><span class="s2">order_id</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">H02167628366229500161</span><span class="dl">"</span><span class="p">,</span>
+            <span class="dl">"</span><span class="s2">third_id</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">3</span><span class="dl">"</span><span class="p">,</span>
+            <span class="dl">"</span><span class="s2">sucess</span><span class="dl">"</span><span class="p">:</span> <span class="kc">true</span>
+        <span class="p">}</span>
+    <span class="p">]</span>
+<span class="p">}</span>
+</code></pre></div><h2 id='a67844d19d'>充值提现转账历史记录</h2>
+<p><code>POST /v1/internalTransferHistory</code></p>
+
+<p><strong>请求参数</strong></p>
+
+<table><thead>
+<tr>
+<th><strong>参数名</strong></th>
+<th><strong>是否必填</strong></th>
+<th><strong>参数类型</strong></th>
+<th><strong>描述说明</strong></th>
+</tr>
+</thead><tbody>
+<tr>
+<td>params</td>
+<td>是</td>
+<td>Array</td>
+<td>查询数组一次最多支持查询100条</td>
+</tr>
+<tr>
+<td>paramsThirdId</td>
+<td>是</td>
+<td>String</td>
+<td>三方订单id</td>
+</tr>
+<tr>
+<td>paramsOrderId</td>
+<td>是</td>
+<td>String</td>
+<td>内部订单id</td>
+</tr>
+</tbody></table>
+<div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="p">{</span>
+    <span class="dl">"</span><span class="s2">params</span><span class="dl">"</span><span class="p">:</span> <span class="p">[</span>
+        <span class="p">{</span>
+            <span class="dl">"</span><span class="s2">third_id</span><span class="dl">"</span><span class="p">:</span> <span class="dl">""</span><span class="p">,</span>
+            <span class="dl">"</span><span class="s2">order_id</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">H01167636933905400036</span><span class="dl">"</span>
+        <span class="p">},</span>
+        <span class="p">{</span>
+            <span class="dl">"</span><span class="s2">third_id</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">0x3b70684aa49092608c339043907e60eba24afafa2f6745e4a84d45343436c868</span><span class="dl">"</span><span class="p">,</span>
+            <span class="dl">"</span><span class="s2">order_id</span><span class="dl">"</span><span class="p">:</span> <span class="dl">""</span>
+        <span class="p">}</span>
+    <span class="p">]</span>
+<span class="p">}</span>
+</code></pre></div>
+<p><strong>返回参数</strong></p>
+
+<table><thead>
+<tr>
+<th><strong>名</strong></th>
+<th><strong>是否必填</strong></th>
+<th><strong>参数类型</strong></th>
+<th><strong>描述说明</strong></th>
+</tr>
+</thead><tbody>
+<tr>
+<td>code</td>
+<td>是</td>
+<td>Integer</td>
+<td>状态码0为正常</td>
+</tr>
+<tr>
+<td>msg</td>
+<td>是</td>
+<td>String</td>
+<td>信息</td>
+</tr>
+<tr>
+<td>Data</td>
+<td>是</td>
+<td>Array</td>
+<td></td>
+</tr>
+<tr>
+<td>DataOrderId</td>
+<td>是</td>
+<td>String</td>
+<td>订单id</td>
+</tr>
+<tr>
+<td>DataOrderType</td>
+<td>是</td>
+<td>Integer</td>
+<td>订单类型1充值订单2转账订单3提现订单</td>
+</tr>
+<tr>
+<td>DataFrom</td>
+<td>是</td>
+<td>String</td>
+<td>链上转出地址</td>
+</tr>
+<tr>
+<td>DataTo</td>
+<td>是</td>
+<td>String</td>
+<td>链上转入地址</td>
+</tr>
+<tr>
+<td>DataTxHash</td>
+<td>是</td>
+<td>String</td>
+<td>链上交易hash</td>
+</tr>
+<tr>
+<td>DataStatus</td>
+<td>是</td>
+<td>Integer</td>
+<td>0处理中1处理成功 2处理出错3处理中</td>
+</tr>
+<tr>
+<td>DataMessage</td>
+<td>是</td>
+<td>String</td>
+<td></td>
+</tr>
+<tr>
+<td>DataThirdId</td>
+<td>是</td>
+<td>String</td>
+<td>三方订单id</td>
+</tr>
+<tr>
+<td>DataCreateTime</td>
+<td>是</td>
+<td>Integer</td>
+<td>创建时间</td>
+</tr>
+<tr>
+<td>DataUpdateTime</td>
+<td>是</td>
+<td>Integer</td>
+<td>更新时间</td>
+</tr>
+<tr>
+<td>DataCallBack</td>
+<td>是</td>
+<td>String</td>
+<td>回调url</td>
+</tr>
+<tr>
+<td>DataExt</td>
+<td>是</td>
+<td>String</td>
+<td>透传参数</td>
+</tr>
+<tr>
+<td>DataFromUid</td>
+<td>是</td>
+<td>String</td>
+<td>转出内部id</td>
+</tr>
+<tr>
+<td>DataToUid</td>
+<td>是</td>
+<td>String</td>
+<td>转入内部id</td>
+</tr>
+<tr>
+<td>DataAmount</td>
+<td>是</td>
+<td>String</td>
+<td>金额</td>
+</tr>
+<tr>
+<td>DataSymbol</td>
+<td>是</td>
+<td>String</td>
+<td>代币名称</td>
+</tr>
+<tr>
+<td>DataChain</td>
+<td>是</td>
+<td>String</td>
+<td>链名称</td>
+</tr>
+</tbody></table>
+<div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="p">{</span>
+    <span class="dl">"</span><span class="s2">code</span><span class="dl">"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">msg</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">ok</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">Data</span><span class="dl">"</span><span class="p">:</span> <span class="p">[</span>
+        <span class="p">{</span>
+            <span class="dl">"</span><span class="s2">order_id</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">H01167636933905400036</span><span class="dl">"</span><span class="p">,</span>
+            <span class="dl">"</span><span class="s2">order_type</span><span class="dl">"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+            <span class="dl">"</span><span class="s2">from</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">0xee3feff2b426c118c7878be4ff16d11ba894e344</span><span class="dl">"</span><span class="p">,</span>
+            <span class="dl">"</span><span class="s2">to</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">0xcca6461cfee45e103ad261427de459657190c616</span><span class="dl">"</span><span class="p">,</span>
+            <span class="dl">"</span><span class="s2">tx_hash</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">0x9bd5181cec46cd36f9c27fde0144c70c477e32c89f3998a17b37c233864e3d37</span><span class="dl">"</span><span class="p">,</span>
+            <span class="dl">"</span><span class="s2">status</span><span class="dl">"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+            <span class="dl">"</span><span class="s2">message</span><span class="dl">"</span><span class="p">:</span> <span class="dl">""</span><span class="p">,</span>
+            <span class="dl">"</span><span class="s2">third_id</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">0x9bd5181cec46cd36f9c27fde0144c70c477e32c89f3998a17b37c233864e3d37</span><span class="dl">"</span><span class="p">,</span>
+            <span class="dl">"</span><span class="s2">create_time</span><span class="dl">"</span><span class="p">:</span> <span class="mi">1676369339055</span><span class="p">,</span>
+            <span class="dl">"</span><span class="s2">update_time</span><span class="dl">"</span><span class="p">:</span> <span class="mi">1676369339066</span><span class="p">,</span>
+            <span class="dl">"</span><span class="s2">call_back</span><span class="dl">"</span><span class="p">:</span> <span class="dl">""</span><span class="p">,</span>
+            <span class="dl">"</span><span class="s2">ext</span><span class="dl">"</span><span class="p">:</span> <span class="dl">""</span><span class="p">,</span>
+            <span class="dl">"</span><span class="s2">from_uid</span><span class="dl">"</span><span class="p">:</span> <span class="dl">""</span><span class="p">,</span>
+            <span class="dl">"</span><span class="s2">to_uid</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">638844470107</span><span class="dl">"</span><span class="p">,</span>
+            <span class="dl">"</span><span class="s2">amount</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">2000000000000000000</span><span class="dl">"</span><span class="p">,</span>
+            <span class="dl">"</span><span class="s2">symbol</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">hui</span><span class="dl">"</span><span class="p">,</span>
+            <span class="dl">"</span><span class="s2">chain</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">HUI</span><span class="dl">"</span>
+        <span class="p">},</span>
+        <span class="p">{</span>
+            <span class="dl">"</span><span class="s2">order_id</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">H01167636934007600037</span><span class="dl">"</span><span class="p">,</span>
+            <span class="dl">"</span><span class="s2">order_type</span><span class="dl">"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+            <span class="dl">"</span><span class="s2">from</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">0xee3feff2b426c118c7878be4ff16d11ba894e344</span><span class="dl">"</span><span class="p">,</span>
+            <span class="dl">"</span><span class="s2">to</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">0xcca6461cfee45e103ad261427de459657190c616</span><span class="dl">"</span><span class="p">,</span>
+            <span class="dl">"</span><span class="s2">tx_hash</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">0x3b70684aa49092608c339043907e60eba24afafa2f6745e4a84d45343436c868</span><span class="dl">"</span><span class="p">,</span>
+            <span class="dl">"</span><span class="s2">status</span><span class="dl">"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+            <span class="dl">"</span><span class="s2">message</span><span class="dl">"</span><span class="p">:</span> <span class="dl">""</span><span class="p">,</span>
+            <span class="dl">"</span><span class="s2">third_id</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">0x3b70684aa49092608c339043907e60eba24afafa2f6745e4a84d45343436c868</span><span class="dl">"</span><span class="p">,</span>
+            <span class="dl">"</span><span class="s2">create_time</span><span class="dl">"</span><span class="p">:</span> <span class="mi">1676369340076</span><span class="p">,</span>
+            <span class="dl">"</span><span class="s2">update_time</span><span class="dl">"</span><span class="p">:</span> <span class="mi">1676369340084</span><span class="p">,</span>
+            <span class="dl">"</span><span class="s2">call_back</span><span class="dl">"</span><span class="p">:</span> <span class="dl">""</span><span class="p">,</span>
+            <span class="dl">"</span><span class="s2">ext</span><span class="dl">"</span><span class="p">:</span> <span class="dl">""</span><span class="p">,</span>
+            <span class="dl">"</span><span class="s2">from_uid</span><span class="dl">"</span><span class="p">:</span> <span class="dl">""</span><span class="p">,</span>
+            <span class="dl">"</span><span class="s2">to_uid</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">638844470107</span><span class="dl">"</span><span class="p">,</span>
+            <span class="dl">"</span><span class="s2">amount</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">2</span><span class="dl">"</span><span class="p">,</span>
+            <span class="dl">"</span><span class="s2">symbol</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">hui</span><span class="dl">"</span><span class="p">,</span>
+            <span class="dl">"</span><span class="s2">chain</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">HUI</span><span class="dl">"</span>
+        <span class="p">}</span>
+    <span class="p">]</span>
+<span class="p">}</span>
 </code></pre></div><h1 id='token'>代币管理 token</h1><h2 id='e63d65c2dc'>查询已发代币列表</h2>
 <p>查询某个账户 ID 下所发代币的代币列表</p>
 
