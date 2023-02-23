@@ -393,12 +393,6 @@
                   <li>
                     <a href="#b3114995fd" class="toc-h2 toc-link" data-title="获取充值地址">获取充值地址</a>
                   </li>
-                  <li>
-                    <a href="#1520c05623" class="toc-h2 toc-link" data-title="获取充值历史">获取充值历史</a>
-                  </li>
-                  <li>
-                    <a href="#9d225d178c" class="toc-h2 toc-link" data-title="查询最小充值金额">查询最小充值金额</a>
-                  </li>
               </ul>
           </li>
           <li>
@@ -411,10 +405,10 @@
                     <a href="#41d5971960" class="toc-h2 toc-link" data-title="获取所有币">获取所有币</a>
                   </li>
                   <li>
-                    <a href="#3" class="toc-h2 toc-link" data-title="3.所有币配置">3.所有币配置</a>
+                    <a href="#3cf16b6adf" class="toc-h2 toc-link" data-title="所有币配置">所有币配置</a>
                   </li>
                   <li>
-                    <a href="#4" class="toc-h2 toc-link" data-title="4.获取提现手续费">4.获取提现手续费</a>
+                    <a href="#f0f756b6c3" class="toc-h2 toc-link" data-title="获取提现手续费">获取提现手续费</a>
                   </li>
               </ul>
           </li>
@@ -1905,9 +1899,7 @@
 </tr>
 </tbody></table>
 <h1 id='82526d367f'>充值功能</h1><h2 id='b3114995fd'>获取充值地址</h2>
-<p>api/v1/assets/deposit/address</p>
-
-<p>GET</p>
+<p><code>GET api/v1/account/depositAddress</code></p>
 
 <p><strong>请求参数</strong></p>
 
@@ -1920,22 +1912,10 @@
 </tr>
 </thead><tbody>
 <tr>
-<td>apiID</td>
-<td>true</td>
-<td></td>
-<td>APIID 具有唯一性</td>
-</tr>
-<tr>
 <td>accountId</td>
 <td>true</td>
 <td></td>
 <td>账户 id，具有唯一性</td>
-</tr>
-<tr>
-<td>coin</td>
-<td>true</td>
-<td></td>
-<td>币种</td>
 </tr>
 <tr>
 <td>network</td>
@@ -1960,134 +1940,10 @@
 <td>地址</td>
 </tr>
 </tbody></table>
-<h2 id='1520c05623'>获取充值历史</h2>
-<p>api/v1/assets/deposit/history</p>
-
-<p>GET</p>
-
-<p><strong>请求参数</strong></p>
-
-<table><thead>
-<tr>
-<th><strong>参数</strong></th>
-<th><strong>是否必须</strong></th>
-<th><strong>类型</strong></th>
-<th><strong>说明</strong></th>
-</tr>
-</thead><tbody>
-<tr>
-<td>apiID</td>
-<td>true</td>
-<td></td>
-<td>APIID 具有唯一性</td>
-</tr>
-<tr>
-<td>accountId</td>
-<td>true</td>
-<td></td>
-<td>账户 ID，具有唯一性</td>
-</tr>
-<tr>
-<td>coin</td>
-<td>false</td>
-<td></td>
-<td>币种</td>
-</tr>
-<tr>
-<td>status</td>
-<td>false</td>
-<td></td>
-<td>状态：success</td>
-</tr>
-<tr>
-<td>startTime</td>
-<td>false</td>
-<td></td>
-<td>开始时间（秒）</td>
-</tr>
-<tr>
-<td>endTime</td>
-<td>false</td>
-<td></td>
-<td>结束时间（秒）</td>
-</tr>
-<tr>
-<td>txid</td>
-<td>false</td>
-<td></td>
-<td>交易哈希</td>
-</tr>
-</tbody></table>
-
-<p><strong>返回参数</strong></p>
-
-<table><thead>
-<tr>
-<th><strong>参数</strong></th>
-<th><strong>类型</strong></th>
-<th><strong>说明</strong></th>
-</tr>
-</thead><tbody>
-<tr>
-<td>list&gt;coin</td>
-<td></td>
-<td>币种</td>
-</tr>
-<tr>
-<td>list&gt;qty</td>
-<td></td>
-<td>数量</td>
-</tr>
-<tr>
-<td>list&gt;chainAddress</td>
-<td></td>
-<td>充值地址</td>
-</tr>
-<tr>
-<td>list&gt;txid</td>
-<td></td>
-<td>交易哈希</td>
-</tr>
-<tr>
-<td>list&gt;status</td>
-<td></td>
-<td>状态</td>
-</tr>
-</tbody></table>
-<h2 id='9d225d178c'>查询最小充值金额</h2>
-<p>小于最小金额的充值将不会上账</p>
-
-<p>api/v1/assets/deposit/minsize</p>
-
-<p>GET</p>
-
-<p><strong>请求参数</strong></p>
-
-<table><thead>
-<tr>
-<th><strong>参数</strong></th>
-<th><strong>是否必须</strong></th>
-<th><strong>类型</strong></th>
-<th><strong>说明</strong></th>
-</tr>
-</thead><tbody>
-<tr>
-<td>token</td>
-<td>true</td>
-<td></td>
-<td>代币</td>
-</tr>
-<tr>
-<td>network</td>
-<td>true</td>
-<td></td>
-<td>网络</td>
-</tr>
-</tbody></table>
 <h1 id='6c2fd6e7fd'>所有链-所有币</h1><h2 id='483a1a428c'>获取所有链</h2>
 <p><code>GET api/v1/config/chain/list</code></p>
 
-<p>返回参数:</p>
+<p><strong>返回参数:</strong></p>
 
 <table><thead>
 <tr>
@@ -2109,26 +1965,24 @@
 </tbody></table>
 
 <blockquote>
-<p>返回示例:
-<code>javascript
-{
-  &quot;code&quot;: 0,
-    &quot;message&quot;: &quot;&quot;,
-    &quot;data&quot;: [
-    {
-      &quot;chain&quot;: &quot;hui&quot;,
-      &quot;confirmationNumber&quot;: 6
-    }
-  ]
-}
-</code></p>
+<p>返回示例:</p>
 </blockquote>
-<h2 id='41d5971960'>获取所有币</h2>
-<p>请求方式: </p>
+<div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="p">{</span>
+  <span class="dl">"</span><span class="s2">code</span><span class="dl">"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">message</span><span class="dl">"</span><span class="p">:</span> <span class="dl">""</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">data</span><span class="dl">"</span><span class="p">:</span> <span class="p">[</span>
+    <span class="p">{</span>
+      <span class="dl">"</span><span class="s2">chain</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">hui</span><span class="dl">"</span><span class="p">,</span>
+      <span class="dl">"</span><span class="s2">confirmationNumber</span><span class="dl">"</span><span class="p">:</span> <span class="mi">6</span>
+    <span class="p">}</span>
+  <span class="p">]</span>
+<span class="p">}</span>
+</code></pre></div><h2 id='41d5971960'>获取所有币</h2>
+<p>请求方式:</p>
 
 <p><code>GET api/v1/config/token/list?chain=</code></p>
 
-<p>请求参数:</p>
+<p><strong>请求参数:</strong></p>
 
 <table><thead>
 <tr>
@@ -2144,7 +1998,7 @@
 </tr>
 </tbody></table>
 
-<p>返回参数:</p>
+<p><strong>返回参数:</strong></p>
 
 <table><thead>
 <tr>
@@ -2166,7 +2020,7 @@
 <tr>
 <td>mappedSymbol</td>
 <td>string</td>
-<td>huione链内代币符号</td>
+<td>huione 链内代币符号</td>
 </tr>
 <tr>
 <td>symbol</td>
@@ -2196,10 +2050,10 @@
     <span class="p">}</span>
   <span class="p">]</span>
 <span class="p">}</span>
-</code></pre></div><h2 id='3'>3.所有币配置</h2>
+</code></pre></div><h2 id='3cf16b6adf'>所有币配置</h2>
 <p><code>GET api/v1/config/token/config</code></p>
 
-<p>返回参数:</p>
+<p><strong>返回参数:</strong></p>
 
 <table><thead>
 <tr>
@@ -2263,10 +2117,10 @@
     <span class="p">}</span>
   <span class="p">]</span>
 <span class="p">}</span>
-</code></pre></div><h2 id='4'>4.获取提现手续费</h2>
+</code></pre></div><h2 id='f0f756b6c3'>获取提现手续费</h2>
 <p><code>POST api/v1/config/token/fee</code></p>
 
-<p>请求参数:</p>
+<p><strong>请求参数:</strong></p>
 
 <table><thead>
 <tr>
@@ -2292,7 +2146,7 @@
 </tr>
 </tbody></table>
 
-<p>返回参数:</p>
+<p><strong>返回参数:</strong></p>
 
 <table><thead>
 <tr>
