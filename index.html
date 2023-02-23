@@ -2187,13 +2187,13 @@
 <td>thirdId</td>
 <td>是</td>
 <td>String</td>
-<td>三方订单id</td>
+<td>三方订单 id</td>
 </tr>
 <tr>
 <td>accout</td>
 <td>是</td>
 <td>String</td>
-<td>提现账户id</td>
+<td>提现账户 id</td>
 </tr>
 <tr>
 <td>symbol</td>
@@ -2228,20 +2228,18 @@
 </tbody></table>
 
 <blockquote>
-<p>示例请求
-<code>JavaScript
-{
-    &quot;thirdId&quot;: &quot;11111&quot;,
-    &quot;accout&quot;: &quot;123&quot;,
-    &quot;symbol&quot;: &quot;HUI&quot;,
-    &quot;amount&quot;: &quot;20&quot;,
-    &quot;chain&quot;: &quot;hui&quot;,
-    &quot;addr&quot;: &quot;0xAb41dEdC0B7333fD76A0619A145a4Aa3492cB017&quot;,
-    &quot;isSync&quot;: true
-}
-</code></p>
+<p>示例请求</p>
 </blockquote>
-
+<div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="p">{</span>
+    <span class="dl">"</span><span class="s2">thirdId</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">11111</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">accout</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">123</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">symbol</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">HUI</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">amount</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">20</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">chain</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">hui</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">addr</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">0xAb41dEdC0B7333fD76A0619A145a4Aa3492cB017</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">isSync</span><span class="dl">"</span><span class="p">:</span> <span class="kc">true</span>
+<span class="p">}</span>
+</code></pre></div>
 <p><strong>返回参数</strong></p>
 
 <table><thead>
@@ -2256,7 +2254,7 @@
 <td>code</td>
 <td>是</td>
 <td>Integer</td>
-<td>0为ok 其余为错误</td>
+<td>0 为 ok 其余为错误</td>
 </tr>
 <tr>
 <td>msg</td>
@@ -2274,13 +2272,13 @@
 <td>dataOrderId</td>
 <td>是</td>
 <td>String</td>
-<td>订单id</td>
+<td>订单 id</td>
 </tr>
 <tr>
 <td>dataThirdId</td>
 <td>是</td>
 <td>String</td>
-<td>三方订单id</td>
+<td>三方订单 id</td>
 </tr>
 <tr>
 <td>dataSucess</td>
@@ -2293,7 +2291,7 @@
 <blockquote>
 <p>返回示例</p>
 </blockquote>
-<div class="highlight"><pre class="highlight plaintext"><code>{"code":-1000,"msg":"notify withdrawl fail","data":{"orderId":"","thirdId":"11111","sucess":false}}
+<div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="p">{</span><span class="dl">"</span><span class="s2">code</span><span class="dl">"</span><span class="p">:</span><span class="o">-</span><span class="mi">1000</span><span class="p">,</span><span class="dl">"</span><span class="s2">msg</span><span class="dl">"</span><span class="p">:</span><span class="dl">"</span><span class="s2">notify withdrawl fail</span><span class="dl">"</span><span class="p">,</span><span class="dl">"</span><span class="s2">data</span><span class="dl">"</span><span class="p">:{</span><span class="dl">"</span><span class="s2">orderId</span><span class="dl">"</span><span class="p">:</span><span class="dl">""</span><span class="p">,</span><span class="dl">"</span><span class="s2">thirdId</span><span class="dl">"</span><span class="p">:</span><span class="dl">"</span><span class="s2">11111</span><span class="dl">"</span><span class="p">,</span><span class="dl">"</span><span class="s2">sucess</span><span class="dl">"</span><span class="p">:</span><span class="kc">false</span><span class="p">}}</span>
 </code></pre></div><h1 id='token'>代币管理 token</h1><h2 id='e63d65c2dc'>查询已发代币列表</h2>
 <p>查询某个账户 ID 下所发代币的代币列表</p>
 
