@@ -311,15 +311,44 @@
       <ul id="toc" class="toc-list-h1">
           <li>
             <a href="#45fa4e00db" class="toc-h1 toc-link" data-title="介绍">介绍</a>
-          </li>
-          <li>
-            <a href="#api-key" class="toc-h1 toc-link" data-title="API Key">API Key</a>
               <ul class="toc-list-h2">
                   <li>
-                    <a href="#api-key-2" class="toc-h2 toc-link" data-title="创建 API Key">创建 API Key</a>
+                    <a href="#api-key" class="toc-h2 toc-link" data-title="API Key 设置">API Key 设置</a>
                   </li>
                   <li>
-                    <a href="#api-key-3" class="toc-h2 toc-link" data-title="API Key 状态查询">API Key 状态查询</a>
+                    <a href="#api-key-2" class="toc-h2 toc-link" data-title="API Key 权限设置">API Key 权限设置</a>
+                  </li>
+                  <li>
+                    <a href="#c3d92b20c8" class="toc-h2 toc-link" data-title="账户">账户</a>
+                  </li>
+                  <li>
+                    <a href="#dd9ed0ac54" class="toc-h2 toc-link" data-title="调用方式">调用方式</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#api-key" class="toc-h1 toc-link" data-title="API Key 管理">API Key 管理</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#api-key-2" class="toc-h2 toc-link" data-title="三方自助申请 API Key">三方自助申请 API Key</a>
+                  </li>
+                  <li>
+                    <a href="#api-key-3" class="toc-h2 toc-link" data-title="三方自助 API Key 状态查询">三方自助 API Key 状态查询</a>
+                  </li>
+                  <li>
+                    <a href="#api" class="toc-h2 toc-link" data-title="三方自助 API 密钥重新生成">三方自助 API 密钥重新生成</a>
+                  </li>
+                  <li>
+                    <a href="#api-2" class="toc-h2 toc-link" data-title="平台批准 API 申请">平台批准 API 申请</a>
+                  </li>
+                  <li>
+                    <a href="#api-3" class="toc-h2 toc-link" data-title="平台暂停三方 API 功能">平台暂停三方 API 功能</a>
+                  </li>
+                  <li>
+                    <a href="#api-4" class="toc-h2 toc-link" data-title="平台重启三方 API 功能">平台重启三方 API 功能</a>
+                  </li>
+                  <li>
+                    <a href="#api-5" class="toc-h2 toc-link" data-title="平台列表 api 请求">平台列表 api 请求</a>
                   </li>
               </ul>
           </li>
@@ -331,6 +360,12 @@
                   </li>
                   <li>
                     <a href="#bb195dacf4" class="toc-h2 toc-link" data-title="账户地址查询">账户地址查询</a>
+                  </li>
+                  <li>
+                    <a href="#f2650e5a04" class="toc-h2 toc-link" data-title="账户查询(通过用户名）">账户查询(通过用户名）</a>
+                  </li>
+                  <li>
+                    <a href="#5b538c8e6c" class="toc-h2 toc-link" data-title="账户列表（翻页）">账户列表（翻页）</a>
                   </li>
                   <li>
                     <a href="#c3374f539c" class="toc-h2 toc-link" data-title="账户冻结">账户冻结</a>
@@ -405,68 +440,50 @@
     <div class="page-wrapper">
       <div class="dark-box"></div>
       <div class="content">
-        <h1 id='45fa4e00db'>介绍</h1>
-<p>Hello 1.0</p>
+        <h1 id='45fa4e00db'>介绍</h1><h2 id='api-key'>API Key 设置</h2>
+<ul>
+<li>所有接口需要 API Key 才可以访问.</li>
+<li><strong>永远不要把你的 API key/secret 告诉给任何人</strong></li>
+</ul>
+<h2 id='api-key-2'>API Key 权限设置</h2>
+<ul>
+<li>目前新创建的 API 的默认权限是全部 API 功能。</li>
+</ul>
+<h2 id='c3d92b20c8'>账户</h2>
+<p>平台测不区分机构账户、普通账户，业务层通过用户 ID 创建账户。</p>
+<h2 id='dd9ed0ac54'>调用方式</h2>
+<p>所有 Api 调用都需要在业务字段之外附加三个握手字段</p>
 
-<p>Welcome to the Kittn API! You can use our API to access Kittn API endpoints, which can get information on various cats, kittens, and breeds in our database.</p>
-
-<p>We have language bindings in Shell, Ruby, Python, and JavaScript! You can view code examples in the dark area to the right, and you can switch the programming language of the examples with the tabs in the top right.</p>
-
-<p>This example API documentation page was created with <a href="https://github.com/slatedocs/slate">Slate</a>. Feel free to edit it and use it as a base for your own API&#39;s documentation.</p>
-<h1 id='api-key'>API Key</h1><h2 id='api-key-2'>创建 API Key</h2>
-<p>提交创建后，需平台方审核通过后才能获得 API Key</p>
-
-<p><code>POST api/v1/apikey/create</code></p>
+<blockquote>
+<p>go 代码如下</p>
+</blockquote>
+<div class="highlight"><pre class="highlight go tab-go"><code><span class="n">ApiKey</span>   <span class="kt">string</span> <span class="s">`json:"apiKey" binding:"required" example:"1233210123"`</span>
+<span class="n">Nonce</span>    <span class="kt">string</span> <span class="s">`json:"nonce" binding:"required" example:"198964"`</span>
+<span class="n">Verified</span> <span class="kt">string</span> <span class="s">`json:"verified" binding:"required" example:"BASE198964"`</span>
+</code></pre></div>
+<blockquote>
+<p>json 数据示例</p>
+</blockquote>
 <div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="p">{</span>
-  <span class="dl">"</span><span class="s2">timezone</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">UTC</span><span class="dl">"</span><span class="p">,</span>
-  <span class="dl">"</span><span class="s2">serverTime</span><span class="dl">"</span><span class="p">:</span> <span class="mi">1565246363776</span><span class="p">,</span>
-  <span class="dl">"</span><span class="s2">rateLimits</span><span class="dl">"</span><span class="p">:</span> <span class="p">[</span>
-    <span class="p">{</span>
-      <span class="c1">//这些在"限制种类 (rateLimitType)"下的"枚举定义"部分中定义</span>
-      <span class="c1">//所有限制都是可选的</span>
-    <span class="p">}</span>
-  <span class="p">],</span>
-  <span class="dl">"</span><span class="s2">exchangeFilters</span><span class="dl">"</span><span class="p">:</span> <span class="p">[</span>
-    <span class="c1">//这些是"过滤器"部分中定义的过滤器</span>
-    <span class="c1">//所有限制都是可选的</span>
-  <span class="p">],</span>
-  <span class="dl">"</span><span class="s2">symbols</span><span class="dl">"</span><span class="p">:</span> <span class="p">[</span>
-    <span class="p">{</span>
-      <span class="dl">"</span><span class="s2">symbol</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">ETHBTC</span><span class="dl">"</span><span class="p">,</span>
-      <span class="dl">"</span><span class="s2">status</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">TRADING</span><span class="dl">"</span><span class="p">,</span>
-      <span class="dl">"</span><span class="s2">baseAsset</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">ETH</span><span class="dl">"</span><span class="p">,</span>
-      <span class="dl">"</span><span class="s2">baseAssetPrecision</span><span class="dl">"</span><span class="p">:</span> <span class="mi">8</span><span class="p">,</span>
-      <span class="dl">"</span><span class="s2">quoteAsset</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">BTC</span><span class="dl">"</span><span class="p">,</span>
-      <span class="dl">"</span><span class="s2">quotePrecision</span><span class="dl">"</span><span class="p">:</span> <span class="mi">8</span><span class="p">,</span>
-      <span class="dl">"</span><span class="s2">quoteAssetPrecision</span><span class="dl">"</span><span class="p">:</span> <span class="mi">8</span><span class="p">,</span>
-      <span class="dl">"</span><span class="s2">orderTypes</span><span class="dl">"</span><span class="p">:</span> <span class="p">[</span>
-        <span class="dl">"</span><span class="s2">LIMIT</span><span class="dl">"</span><span class="p">,</span>
-        <span class="dl">"</span><span class="s2">LIMIT_MAKER</span><span class="dl">"</span><span class="p">,</span>
-        <span class="dl">"</span><span class="s2">MARKET</span><span class="dl">"</span><span class="p">,</span>
-        <span class="dl">"</span><span class="s2">STOP_LOSS</span><span class="dl">"</span><span class="p">,</span>
-        <span class="dl">"</span><span class="s2">STOP_LOSS_LIMIT</span><span class="dl">"</span><span class="p">,</span>
-        <span class="dl">"</span><span class="s2">TAKE_PROFIT</span><span class="dl">"</span><span class="p">,</span>
-        <span class="dl">"</span><span class="s2">TAKE_PROFIT_LIMIT</span><span class="dl">"</span>
-      <span class="p">],</span>
-      <span class="dl">"</span><span class="s2">icebergAllowed</span><span class="dl">"</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
-      <span class="dl">"</span><span class="s2">ocoAllowed</span><span class="dl">"</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
-      <span class="dl">"</span><span class="s2">quoteOrderQtyMarketAllowed</span><span class="dl">"</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
-      <span class="dl">"</span><span class="s2">allowTrailingStop</span><span class="dl">"</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
-      <span class="dl">"</span><span class="s2">isSpotTradingAllowed</span><span class="dl">"</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
-      <span class="dl">"</span><span class="s2">isMarginTradingAllowed</span><span class="dl">"</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
-      <span class="dl">"</span><span class="s2">cancelReplaceAllowed</span><span class="dl">"</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
-      <span class="dl">"</span><span class="s2">filters</span><span class="dl">"</span><span class="p">:</span> <span class="p">[</span>
-        <span class="c1">//这些在"过滤器"部分中定义</span>
-        <span class="c1">//所有限制都是可选的</span>
-      <span class="p">],</span>
-      <span class="dl">"</span><span class="s2">permissions</span><span class="dl">"</span><span class="p">:</span> <span class="p">[</span><span class="dl">"</span><span class="s2">SPOT</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">MARGIN</span><span class="dl">"</span><span class="p">],</span>
-      <span class="dl">"</span><span class="s2">defaultSelfTradePreventionMode</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">NONE</span><span class="dl">"</span><span class="p">,</span>
-      <span class="dl">"</span><span class="s2">allowedSelfTradePreventionModes</span><span class="dl">"</span><span class="p">:</span> <span class="p">[</span><span class="dl">"</span><span class="s2">NONE</span><span class="dl">"</span><span class="p">]</span>
-    <span class="p">}</span>
-  <span class="p">]</span>
+<span class="dl">"</span><span class="s2">apiKey</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">gX3bWaCYWXx7</span><span class="dl">"</span><span class="p">,</span>
+<span class="dl">"</span><span class="s2">nonce</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">123123</span><span class="dl">"</span><span class="p">,</span>
+<span class="dl">"</span><span class="s2">verified</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">ABCD09123</span><span class="dl">"</span><span class="p">,</span>
+<span class="dl">"</span><span class="s2">otherBusinessFields</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">...</span><span class="dl">"</span>
 <span class="p">}</span>
 </code></pre></div>
-<p><strong>参数</strong></p>
+<p>apiKey 就是您的申请到的 ApiKey</p>
+
+<p>nonce 代表唯一的请求，避免被抓包重放。您可以用自增数字，也可以随便用随机数，只要保证近期不重复即可。即使业务上需要重试操作，nonce 也要变，认证握手和业务无关</p>
+
+<p>verified 是校验字段，需要用到申请时给的 ApiSecret 来加密，具体的加密方式有提供 Javascript/Java 系列/Python/Go/Rust 等各种语言的样例可供参考</p>
+<h1 id='api-key'>API Key 管理</h1><h2 id='api-key-2'>三方自助申请 API Key</h2>
+<p>不对外暴露，必须由内部模块发起。</p>
+
+<p>提交申请后，需平台方审核通过，才能获得 API Key</p>
+
+<p><code>POST /api/v1/api-key/request</code></p>
+
+<p><strong>请求参数</strong></p>
 
 <table><thead>
 <tr>
@@ -477,10 +494,22 @@
 </tr>
 </thead><tbody>
 <tr>
-<td><code>restrictions</code></td>
+<td>restrictions</td>
 <td>false</td>
-<td></td>
-<td>新建 API Key 权限，账户（Account）、充值（Deposit）、提现（Withdraw）、外部资产（externalAssets）、发币（externalAssets）、内部代币管理（tokenManagement）、所有权限（All）；默认所有权限</td>
+<td>int</td>
+<td>新建 API Key 权限 0 = 所有权限（All）；默认所有权限</td>
+</tr>
+<tr>
+<td>email</td>
+<td>true</td>
+<td>string</td>
+<td>邮箱</td>
+</tr>
+<tr>
+<td>name</td>
+<td>true</td>
+<td>string</td>
+<td>名称</td>
 </tr>
 </tbody></table>
 
@@ -499,30 +528,370 @@
 <td>API Key</td>
 </tr>
 <tr>
-<td>permissions</td>
+<td>apiSecret</td>
+<td></td>
+<td>API 密钥(只在申请时返回一次，无法通过接口查询，所有 api 接口需要通过此 key 来加密，请妥善保管，不展示与其他人</td>
+</tr>
+<tr>
+<td>restrictions</td>
 <td></td>
 <td>API Key 拥有权限</td>
 </tr>
 <tr>
 <td>status</td>
 <td></td>
-<td>API Key 状态，0（可用）、1（不可用）</td>
-</tr>
-<tr>
-<td>secretKey</td>
-<td></td>
-<td>API 密钥</td>
-</tr>
-<tr>
-<td>apiId</td>
-<td></td>
-<td>ID 具有唯一性</td>
+<td>API Key 状态，0（申请中）、-1（关闭）、1（使用中）</td>
 </tr>
 </tbody></table>
-<h2 id='api-key-3'>API Key 状态查询</h2>
+<div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="c1">// 因为需要配置的权限并不多，我们暂时用 2 的 exponent 来标志</span>
+<span class="c1">// 账户（Account）    2^0</span>
+<span class="c1">// 资产（Assets）    2^1</span>
+<span class="c1">// 发币（IssueAssets）   2^2</span>
+<span class="c1">// 代币管理（TokenManagement） 2^3</span>
+</code></pre></div>
+<table><thead>
+<tr>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+</tr>
+</thead><tbody>
+<tr>
+<td><strong>权限</strong></td>
+<td><strong>模块内容</strong></td>
+<td><strong>功能</strong></td>
+<td><strong>url</strong></td>
+</tr>
+<tr>
+<td><code>2^0</code></td>
+<td>账户（account）</td>
+<td>创建账户</td>
+<td>api/v1/account/create</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>账户地址查询</td>
+<td>api/v1/account/query</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>根据用户名查询账户</td>
+<td>api/v1/account/queryUser</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>列表本渠道下的用户</td>
+<td>api/v1/account/list</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>账户冻结</td>
+<td>api/v1/assets/frozen</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>账户解封</td>
+<td>api/v1/assets/unfrozen</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>冻结账户资产</td>
+<td>api/v1/assets/frozen-assets</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>解冻账户资产</td>
+<td>api/v1/assets/unfrozen-assets</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>账户状态查询</td>
+<td>api/v1/assets/status</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>账户资产查询</td>
+<td>api/v1/assets/assets</td>
+</tr>
+<tr>
+<td><code>2^1</code></td>
+<td>资产（Assets）</td>
+<td>获取充值地址</td>
+<td>api/v1/account/depositAddress</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>执行提现</td>
+<td>api/v1/assets/withdraw/apply</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>执行内部转账</td>
+<td>api/v1/hw-order/order/inline_transfer</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>充值提现转账历史记录查询</td>
+<td>api/v1/hw-order/order/inline_transfer_history</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>获取所有链</td>
+<td>api/v1/assets/chain/list</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>获取所有币</td>
+<td>api/v1/assets/token/list?chain=</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>所有币配置</td>
+<td>api/v1/assets/token/config</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>获取提现手续费</td>
+<td>api/v1/assets/token/fee</td>
+</tr>
+<tr>
+<td><code>2^2</code></td>
+<td>发币<code>IssueAssets</code></td>
+<td>发币</td>
+<td>api/v1/token/create</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>查询发币状态</td>
+<td>api/v1/token/status</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>查询发币订单详情</td>
+<td>api/v1/token/order/detail</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>查询发币记录</td>
+<td>api/v1/token/order/list</td>
+</tr>
+<tr>
+<td><code>2^3</code></td>
+<td>代币管理</td>
+<td>查询代币详情列表</td>
+<td>api/v1/token/list</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>查询代币详情</td>
+<td>api/v1/coin-manage/tokenDetail</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>查询账户下所有代币的持币地址数</td>
+<td>api/v1/coin-manage/accountCount</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>查询代币的持有者信息</td>
+<td>api/v1/coin-manage/holderInfos</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>地址代币余额查询</td>
+<td>api/v1/coin-manage/tokenBalance</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>代币的持有者数量查询</td>
+<td>api/v1/coin-manage/holderCount</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>查询地址下代币的状态</td>
+<td>api/v1/coin-manage/tokenStatus</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>代币模型查询</td>
+<td>api/v1/coin-manage/tokenModel</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>代币的交易费比例查询</td>
+<td>api/v1/coin-manage/taxFee</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>代币的奖励分红比例查询</td>
+<td>api/v1/coin-manage/bonusFee</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>地址代币交易记录查询</td>
+<td>api/v1/coin-manage/txHistory</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>账户的代币销毁数量查询</td>
+<td>api/v1/coin-manage/burnAmount</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>链的区块高度查询</td>
+<td>api/v1/coin-manage/height</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>代币的初始供应量和增发历史查询</td>
+<td>api/v1/coin-manage/tokenHistory</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>禁止账户交易-交易黑名单</td>
+<td>api/v1/coin-manage/addBlack</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>允许账户交易-移出黑名单</td>
+<td>api/v1/coin-manage/removeBlack</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>禁止账户转入</td>
+<td>api/v1/coin-manage/addBlackIn</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>允许账户转入</td>
+<td>api/v1/coin-manage/removeBlackIn</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>禁止账户转出</td>
+<td>api/v1/coin-manage/addBlackOut</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>允许账户转出</td>
+<td>api/v1/coin-manage/removeBlackOut</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>冻结</td>
+<td>api/v1/coin-manage/frozen</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>解冻</td>
+<td>api/v1/coin-manage/unfrozen</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>禁止区块高度区间交易</td>
+<td>api/v1/coin-manage/addBlackRange</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>允许区块高度区间交易</td>
+<td>api/v1/coin-manage/removeBlackRange</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>铸造（增发）</td>
+<td>api/v1/coin-manage/mint</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>销毁</td>
+<td>api/v1/coin-manage/burn</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>销毁指定账户下的代币</td>
+<td>api/v1/coin-manage/burnFrom</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>查询账户的冻结代币数量</td>
+<td>api/v1/coin-manage/forzenAmount</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>查询代币的总容量</td>
+<td>api/v1/coin-manage/cap</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>查询代币的闪电贷费用比例</td>
+<td>api/v1/coin-manage/flashFee</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>查询代币的禁止交易区间</td>
+<td>api/v1/coin-manage/blackRange</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>查询合约交易的状态</td>
+<td>api/v1/coin-manage/txStatus</td>
+</tr>
+</tbody></table>
+<h2 id='api-key-3'>三方自助 API Key 状态查询</h2>
 <p>查询 API Key 是否可用</p>
 
-<p><code>GET api/v1/apikey/status</code></p>
+<p><code>POST /api/v1/api-key/info</code></p>
 
 <p><strong>请求参数</strong></p>
 
@@ -535,19 +904,298 @@
 </tr>
 </thead><tbody>
 <tr>
-<td>apiId</td>
-<td>false</td>
-<td></td>
-<td>ID 具有唯一性</td>
-</tr>
-<tr>
 <td>apiKey</td>
-<td>false</td>
-<td></td>
+<td>true</td>
+<td>string</td>
 <td>API Key</td>
 </tr>
 </tbody></table>
-<h1 id='account'>账户(account)</h1><h2 id='9ec360d41d'>创建账户</h2>
+
+<p><strong>返回参数</strong></p>
+
+<table><thead>
+<tr>
+<th><strong>参数</strong></th>
+<th><strong>类型</strong></th>
+<th><strong>说明</strong></th>
+</tr>
+</thead><tbody>
+<tr>
+<td>status</td>
+<td>int</td>
+<td>API Key 状态，0（申请中）、-1（关闭）、1（使用中）</td>
+</tr>
+<tr>
+<td>name</td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td>email</td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td>permission</td>
+<td>int</td>
+<td></td>
+</tr>
+</tbody></table>
+<h2 id='api'>三方自助 API 密钥重新生成</h2>
+<p>因密钥泄露或者其他原因，需要重新生成握手密钥</p>
+
+<p><code>POST /api/v1/api-key/re-gen-sec</code></p>
+
+<p><strong>请求参数</strong></p>
+
+<table><thead>
+<tr>
+<th>参数</th>
+<th>是否必须</th>
+<th>类型</th>
+<th><strong>说明</strong></th>
+</tr>
+</thead><tbody>
+<tr>
+<td>apiKey</td>
+<td>true</td>
+<td>string</td>
+<td>API Key</td>
+</tr>
+</tbody></table>
+
+<p><strong>返回参数</strong></p>
+
+<table><thead>
+<tr>
+<th><strong>参数</strong></th>
+<th><strong>类型</strong></th>
+<th><strong>说明</strong></th>
+</tr>
+</thead><tbody>
+<tr>
+<td>apiSecret</td>
+<td>string</td>
+<td></td>
+</tr>
+</tbody></table>
+<h2 id='api-2'>平台批准 API 申请</h2>
+<p>由平台管理员批准，并且可以重置权限和状态</p>
+
+<p><code>POST /api/v1/api-key/approve</code></p>
+
+<p><strong>请求参数</strong></p>
+
+<table><thead>
+<tr>
+<th>参数</th>
+<th>是否必须</th>
+<th>类型</th>
+<th><strong>说明</strong></th>
+</tr>
+</thead><tbody>
+<tr>
+<td>apiKey</td>
+<td>true</td>
+<td>string</td>
+<td>API Key</td>
+</tr>
+<tr>
+<td>permission</td>
+<td>true</td>
+<td>int</td>
+<td></td>
+</tr>
+<tr>
+<td>status</td>
+<td>true</td>
+<td>int</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<p><strong>返回参数</strong></p>
+
+<table><thead>
+<tr>
+<th><strong>参数</strong></th>
+<th><strong>类型</strong></th>
+<th><strong>说明</strong></th>
+</tr>
+</thead><tbody>
+<tr>
+<td></td>
+<td>string</td>
+<td></td>
+</tr>
+</tbody></table>
+<h2 id='api-3'>平台暂停三方 API 功能</h2>
+<p>由平台管理员操作，禁用三方，置其状态为-1</p>
+
+<p><code>POST /api/v1/api-key/disable</code></p>
+
+<p><strong>请求参数</strong></p>
+
+<table><thead>
+<tr>
+<th>参数</th>
+<th>是否必须</th>
+<th>类型</th>
+<th><strong>说明</strong></th>
+</tr>
+</thead><tbody>
+<tr>
+<td>apiKey</td>
+<td>true</td>
+<td>string</td>
+<td>API Key</td>
+</tr>
+</tbody></table>
+
+<p><strong>返回参数</strong></p>
+
+<table><thead>
+<tr>
+<th><strong>参数</strong></th>
+<th><strong>类型</strong></th>
+<th><strong>说明</strong></th>
+</tr>
+</thead><tbody>
+<tr>
+<td></td>
+<td>string</td>
+<td></td>
+</tr>
+</tbody></table>
+<h2 id='api-4'>平台重启三方 API 功能</h2>
+<p>由平台管理员操作，重启三方，置其状态为 1。如果不修改三方权限，可用此方法代替 Approve</p>
+
+<p><code>POST /api/v1/api-key/enable</code></p>
+
+<p><strong>请求参数</strong></p>
+
+<table><thead>
+<tr>
+<th>参数</th>
+<th>是否必须</th>
+<th>类型</th>
+<th><strong>说明</strong></th>
+</tr>
+</thead><tbody>
+<tr>
+<td>apiKey</td>
+<td>true</td>
+<td>string</td>
+<td>API Key</td>
+</tr>
+</tbody></table>
+
+<p><strong>返回参数</strong></p>
+
+<table><thead>
+<tr>
+<th><strong>参数</strong></th>
+<th><strong>类型</strong></th>
+<th><strong>说明</strong></th>
+</tr>
+</thead><tbody>
+<tr>
+<td></td>
+<td>string</td>
+<td></td>
+</tr>
+</tbody></table>
+<h2 id='api-5'>平台列表 api 请求</h2>
+<p>由平台管理员操作，查询 apiKey</p>
+
+<p><code>POST /api/v1/api-key/list</code></p>
+
+<p><strong>请求参数</strong></p>
+
+<table><thead>
+<tr>
+<th><strong>参数</strong></th>
+<th><strong>是否必须</strong></th>
+<th><strong>类型</strong></th>
+<th><strong>说明</strong></th>
+</tr>
+</thead><tbody>
+<tr>
+<td>start</td>
+<td>true</td>
+<td>timestamp</td>
+<td>秒级时间戳</td>
+</tr>
+<tr>
+<td>end</td>
+<td>true</td>
+<td>timestamp</td>
+<td>秒级时间戳</td>
+</tr>
+<tr>
+<td>page</td>
+<td>false</td>
+<td>int</td>
+<td>第几页</td>
+</tr>
+<tr>
+<td>limit</td>
+<td>false</td>
+<td>int</td>
+<td>页面行数</td>
+</tr>
+<tr>
+<td>status</td>
+<td>false</td>
+<td>int</td>
+<td>-99 代表全部</td>
+</tr>
+</tbody></table>
+
+<p><strong>返回参数</strong>
+对象列表</p>
+
+<table><thead>
+<tr>
+<th><strong>参数</strong></th>
+<th><strong>类型</strong></th>
+<th><strong>说明</strong></th>
+</tr>
+</thead><tbody>
+<tr>
+<td>apiKey</td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td>permission</td>
+<td>int</td>
+<td></td>
+</tr>
+<tr>
+<td>status</td>
+<td>int</td>
+<td></td>
+</tr>
+<tr>
+<td>name</td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td>email</td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td>createdAt</td>
+<td>time</td>
+<td>申请时间</td>
+</tr>
+</tbody></table>
+<h1 id='account'>账户(account)</h1>
+<p>账户模块遵循<a href="#45fa4e00db">Api 调用规范</a>，所以此处只提供调用需要的业务字段</p>
+<h2 id='9ec360d41d'>创建账户</h2>
 <p><code>POST api/v1/account/create</code></p>
 
 <p><strong>请求参数</strong></p>
@@ -561,16 +1209,16 @@
 </tr>
 </thead><tbody>
 <tr>
-<td>apiID</td>
+<td>apiKey</td>
 <td>true</td>
+<td>string</td>
 <td></td>
-<td>ID 具有唯一性</td>
 </tr>
 <tr>
 <td>userId</td>
 <td>true</td>
-<td></td>
-<td>用户 ID，业务方自己生成</td>
+<td>string</td>
+<td>用户 ID，业务方自己生成并控制在自己范围内唯一，可以是手机或者邮箱等，但需要保持一致（始终用手机或者始终用邮箱）</td>
 </tr>
 </tbody></table>
 
@@ -584,30 +1232,33 @@
 </tr>
 </thead><tbody>
 <tr>
-<td>accountId</td>
+<td>userId</td>
+<td>string</td>
 <td></td>
+</tr>
+<tr>
+<td>accountId</td>
+<td>string</td>
 <td>账户 ID，具有唯一性</td>
 </tr>
 <tr>
-<td>coin</td>
-<td></td>
-<td>代币</td>
+<td>eth</td>
+<td>string</td>
+<td>eth 系链地址</td>
 </tr>
 <tr>
-<td>network</td>
-<td></td>
-<td>地址网络</td>
+<td>btc</td>
+<td>string</td>
+<td>btc 链地址</td>
 </tr>
 <tr>
-<td>chainAdress</td>
-<td></td>
-<td>地址</td>
+<td>trx</td>
+<td>string</td>
+<td>trx 系链地址</td>
 </tr>
 </tbody></table>
 <h2 id='bb195dacf4'>账户地址查询</h2>
-<p>api/v1/account/address</p>
-
-<p>GET</p>
+<p><code>GET api/v1/account/address</code></p>
 
 <p><strong>请求参数</strong></p>
 
@@ -620,16 +1271,10 @@
 </tr>
 </thead><tbody>
 <tr>
-<td>apiID</td>
-<td>true</td>
-<td></td>
-<td>ID 具有唯一性</td>
-</tr>
-<tr>
 <td>accountId</td>
 <td>true</td>
-<td></td>
-<td>账户 ID，具有唯一性</td>
+<td>string</td>
+<td>账户 ID，具有全局唯一性</td>
 </tr>
 </tbody></table>
 
@@ -643,25 +1288,33 @@
 </tr>
 </thead><tbody>
 <tr>
-<td>coin</td>
-<td></td>
-<td>代币</td>
+<td>userId</td>
+<td>string</td>
+<td>用户信息</td>
 </tr>
 <tr>
-<td>network</td>
-<td></td>
-<td>地址网络</td>
+<td>accountId</td>
+<td>string</td>
+<td>账户 ID</td>
 </tr>
 <tr>
-<td>chainAdress</td>
-<td></td>
-<td>地址</td>
+<td>eth</td>
+<td>string</td>
+<td>链地址</td>
+</tr>
+<tr>
+<td>btc</td>
+<td>string</td>
+<td>链地址</td>
+</tr>
+<tr>
+<td>trx</td>
+<td>string</td>
+<td>链地址</td>
 </tr>
 </tbody></table>
-<h2 id='c3374f539c'>账户冻结</h2>
-<p>api/v1/account/frozen/function</p>
-
-<p>POST</p>
+<h2 id='f2650e5a04'>账户查询(通过用户名）</h2>
+<p><code>GET api/v1/account/queryUser</code></p>
 
 <p><strong>请求参数</strong></p>
 
@@ -674,25 +1327,167 @@
 </tr>
 </thead><tbody>
 <tr>
-<td>apiID</td>
+<td>apiKey</td>
 <td>true</td>
+<td>string</td>
 <td></td>
-<td>ID 具有唯一性</td>
+</tr>
+<tr>
+<td>userId</td>
+<td>true</td>
+<td>string</td>
+<td>用户 ID</td>
+</tr>
+</tbody></table>
+
+<p><strong>返回参数</strong></p>
+
+<table><thead>
+<tr>
+<th><strong>参数</strong></th>
+<th><strong>类型</strong></th>
+<th><strong>说明</strong></th>
+</tr>
+</thead><tbody>
+<tr>
+<td>userId</td>
+<td>string</td>
+<td>用户信息</td>
+</tr>
+<tr>
+<td>accountId</td>
+<td>string</td>
+<td>账户 ID</td>
+</tr>
+<tr>
+<td>eth</td>
+<td>string</td>
+<td>链地址</td>
+</tr>
+<tr>
+<td>btc</td>
+<td>string</td>
+<td>链地址</td>
+</tr>
+<tr>
+<td>trx</td>
+<td>string</td>
+<td>链地址</td>
+</tr>
+</tbody></table>
+<h2 id='5b538c8e6c'>账户列表（翻页）</h2>
+<p><code>GET api/v1/account/list</code></p>
+
+<p><strong>请求参数</strong></p>
+
+<table><thead>
+<tr>
+<th><strong>参数</strong></th>
+<th><strong>是否必须</strong></th>
+<th><strong>类型</strong></th>
+<th><strong>说明</strong></th>
+</tr>
+</thead><tbody>
+<tr>
+<td>apiKey</td>
+<td>true</td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td>start</td>
+<td>true</td>
+<td>int</td>
+<td>账户注册的时间范围之起始时间</td>
+</tr>
+<tr>
+<td>end</td>
+<td>true</td>
+<td>int</td>
+<td>账户注册的时间范围之结束时间</td>
+</tr>
+<tr>
+<td>page</td>
+<td></td>
+<td>int</td>
+<td>页号</td>
+</tr>
+<tr>
+<td>limit</td>
+<td></td>
+<td>int</td>
+<td>一页多少条记录</td>
+</tr>
+</tbody></table>
+
+<p><strong>返回参数</strong></p>
+
+<table><thead>
+<tr>
+<th><strong>参数</strong></th>
+<th><strong>类型</strong></th>
+<th><strong>说明</strong></th>
+</tr>
+</thead><tbody>
+<tr>
+<td>list&gt;userId</td>
+<td>string</td>
+<td>用户信息</td>
+</tr>
+<tr>
+<td>list&gt;accountId</td>
+<td>string</td>
+<td>账户 ID</td>
+</tr>
+<tr>
+<td>list&gt;eth</td>
+<td>string</td>
+<td>链地址</td>
+</tr>
+<tr>
+<td>list&gt;btc</td>
+<td>string</td>
+<td>链地址</td>
+</tr>
+<tr>
+<td>list&gt;trx</td>
+<td>string</td>
+<td>链地址</td>
+</tr>
+</tbody></table>
+<h2 id='c3374f539c'>账户冻结</h2>
+<p><code>POST api/v1/account/frozen/function</code></p>
+
+<p><strong>请求参数</strong></p>
+
+<table><thead>
+<tr>
+<th><strong>参数</strong></th>
+<th><strong>是否必须</strong></th>
+<th><strong>类型</strong></th>
+<th><strong>说明</strong></th>
+</tr>
+</thead><tbody>
+<tr>
+<td>apiKey</td>
+<td>true</td>
+<td>string</td>
+<td></td>
 </tr>
 <tr>
 <td>accountId</td>
 <td>true</td>
-<td></td>
-<td>账户 ID，具有唯一性</td>
+<td>string</td>
+<td>账户 ID，具有唯一性性</td>
 </tr>
 <tr>
 <td>function</td>
 <td>false</td>
-<td></td>
+<td>int</td>
 <td>账户功能：1（充值）、2（提现）、3（转账）、0（所有功能）；默认 3</td>
 </tr>
 <tr>
-<td>coin</td>
+<td>symbol</td>
 <td>false</td>
 <td></td>
 <td>代币名称，默认所有代币</td>
@@ -722,9 +1517,7 @@
 </thead><tbody>
 </tbody></table>
 <h2 id='4cb21fcc74'>账户解封</h2>
-<p>api/v1/account/unfrozen/function</p>
-
-<p>POST</p>
+<p><code>POST api/v1/account/unfrozen/function</code></p>
 
 <p><strong>请求参数</strong></p>
 
@@ -737,10 +1530,10 @@
 </tr>
 </thead><tbody>
 <tr>
-<td>apiID</td>
+<td>apiKey</td>
 <td>true</td>
+<td>string</td>
 <td></td>
-<td>ID 具有唯一性</td>
 </tr>
 <tr>
 <td>accountId</td>
@@ -785,9 +1578,7 @@
 </thead><tbody>
 </tbody></table>
 <h2 id='6bde6cd88d'>冻结账户资产</h2>
-<p>api/v1/account/frozen/assets</p>
-
-<p>POST</p>
+<p><code>POST api/v1/account/frozen/assets</code></p>
 
 <p><strong>请求参数</strong></p>
 
@@ -800,19 +1591,19 @@
 </tr>
 </thead><tbody>
 <tr>
-<td>apiID</td>
+<td>apiKey</td>
 <td>true</td>
+<td>string</td>
 <td></td>
-<td>ID 具有唯一性</td>
 </tr>
 <tr>
 <td>accountId</td>
 <td>true</td>
-<td></td>
+<td>string</td>
 <td>账户 ID，具有唯一性</td>
 </tr>
 <tr>
-<td>coin</td>
+<td>symbol</td>
 <td>false</td>
 <td></td>
 <td>代币名称，默认所有代币</td>
@@ -848,9 +1639,7 @@
 </thead><tbody>
 </tbody></table>
 <h2 id='e9e9bc1fd1'>解冻账户资产</h2>
-<p>api/v1/account/unfrozen/assets</p>
-
-<p>POST</p>
+<p><code>POST api/v1/account/unfrozen/assets</code></p>
 
 <p><strong>请求参数</strong></p>
 
@@ -863,10 +1652,10 @@
 </tr>
 </thead><tbody>
 <tr>
-<td>apiID</td>
+<td>apiKey</td>
 <td>true</td>
+<td>string</td>
 <td></td>
-<td>ID 具有唯一性</td>
 </tr>
 <tr>
 <td>accountId</td>
@@ -875,7 +1664,7 @@
 <td>账户 ID，具有唯一性</td>
 </tr>
 <tr>
-<td>coin</td>
+<td>symbol</td>
 <td>false</td>
 <td></td>
 <td>代币名称，默认所有代币</td>
@@ -911,9 +1700,7 @@
 </thead><tbody>
 </tbody></table>
 <h2 id='97478d5ec5'>账户状态查询</h2>
-<p>api/v1/account/status</p>
-
-<p>GET</p>
+<p><code>GET api/v1/account/status</code></p>
 
 <p><strong>请求参数</strong></p>
 
@@ -926,15 +1713,15 @@
 </tr>
 </thead><tbody>
 <tr>
-<td>apiID</td>
+<td>apiKey</td>
 <td>true</td>
+<td>string</td>
 <td></td>
-<td>ID 具有唯一性</td>
 </tr>
 <tr>
 <td>accountId</td>
 <td>true</td>
-<td></td>
+<td>string</td>
 <td>账户 ID，具有唯一性</td>
 </tr>
 </tbody></table>
@@ -970,9 +1757,7 @@
 </tr>
 </tbody></table>
 <h2 id='ad99019139'>账户资产查询</h2>
-<p>api/v1/account/assets</p>
-
-<p>GET</p>
+<p><code>GET api/v1/account/assets</code></p>
 
 <p><strong>请求参数</strong></p>
 
@@ -985,15 +1770,15 @@
 </tr>
 </thead><tbody>
 <tr>
-<td>apiID</td>
+<td>apiKey</td>
 <td>true</td>
+<td>string</td>
 <td></td>
-<td>ID 具有唯一性</td>
 </tr>
 <tr>
 <td>accountId</td>
 <td>true</td>
-<td></td>
+<td>string</td>
 <td>账户 ID，具有唯一性</td>
 </tr>
 </tbody></table>
@@ -1008,7 +1793,7 @@
 </tr>
 </thead><tbody>
 <tr>
-<td>list&gt;coin</td>
+<td>list&gt;symbol</td>
 <td></td>
 <td>代币名称</td>
 </tr>
