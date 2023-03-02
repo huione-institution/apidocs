@@ -8,13 +8,13 @@
 
 | **参数** | **是否必填** | **参数类型** | **描述说明** |
 | -------- | ------------ | ------------ | ------------ |
-| thirdId  | 是           | String       | 三方订单 id  |
-| accout   | 是           | String       | 提现账户 id  |
-| symbol   | 是           | String       | token        |
-| amount   | 是           | String       | 数量         |
-| chain    | 是           | String       | 链名称       |
-| addr     | 是           | String       | 提现地址     |
-| isSync   | 是           | Boolean      | 是否同步执行 |
+| thirdId  | true         | String       | 三方订单 id  |
+| accout   | true         | String       | 提现账户 id  |
+| symbol   | true         | String       | token        |
+| amount   | true         | String       | 数量         |
+| chain    | true         | String       | 链名称       |
+| addr     | true         | String       | 提现地址     |
+| isSync   | true         | Boolean      | 是否同步执行 |
 
 > 示例请求
 
@@ -34,12 +34,12 @@
 
 | **参数**    | **是否必填** | **参数类型** | **描述说明**       |
 | ----------- | ------------ | ------------ | ------------------ |
-| code        | 是           | Integer      | 0 为 ok 其余为错误 |
-| msg         | 是           | String       | 错误描述           |
-| data        | 是           | Object       |                    |
-| dataOrderId | 是           | String       | 订单 id            |
-| dataThirdId | 是           | String       | 三方订单 id        |
-| dataSucess  | 是           | Boolean      | 是否成功           |
+| code        | true         | Integer      | 0 为 ok 其余为错误 |
+| msg         | true         | String       | 错误描述           |
+| data        | true         | Object       |                    |
+| dataOrderId | true         | String       | 订单 id            |
+| dataThirdId | true         | String       | 三方订单 id        |
+| dataSucess  | true         | Boolean      | 是否成功           |
 
 > 返回示例
 

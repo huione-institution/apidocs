@@ -1,5 +1,15 @@
 # 代币管理 token
 
+> GET 请求的 body 中要有：
+
+```javascript
+{
+    "apiKey": "gX3bWaCYWXx7",
+    "nonce": "{{nonce}}",
+    "verified": "{{verify}}"
+}
+```
+
 ## 查询已发代币列表
 
 查询某个账户 ID 下所发代币的代币列表
@@ -14,13 +24,20 @@
 
 **返回参数：**
 
-| **参数** | **是否必须** | **类型** | **说明**                                                          |
-| -------- | ------------ | -------- | ----------------------------------------------------------------- |
-| code     | true         | string   | http 错误码，200 为正确                                           |
-| message  | true         | string   | 成功或错误信息                                                    |
-| data     | true         | string   | json 字符串，可转化为代币详情数组，数组中每个元素是代币详情结构体 |
+| **参数** | **是否必须** | **类型** | **说明**                                                  |
+| -------- | ------------ | -------- | --------------------------------------------------------- |
+| code     | true         | string   | 0 为正确                                                  |
+| message  | true         | string   | 成功或错误信息                                            |
+| data     | true         | string   | json 字符串，可转化为代币数组，数组中每个元素是代币结构体 |
 
-代币详情结构体如下定义
+代币结构体如下定义
+
+| BaseInfo    | struct | 代币基础详情                                      |
+| ----------- | ------ | ------------------------------------------------- |
+| HolderCount | int    | 代币持有者数量                                    |
+| Status      | int    | 代币状态，是否被禁止交易（0-暂停交易 1-正常交易） |
+
+代币基础详情结构体如下定义
 
 | **参数**      | **类型** | **说明**     |
 | ------------- | -------- | ------------ |
@@ -29,6 +46,28 @@
 | Symbol        | string   | 代币符号     |
 | Decimals      | string   | 代币精度     |
 | Totoal_Supply | string   | 代币总供应量 |
+
+> 返回的数据示例如下
+
+```javascript
+{
+    "code": 0,
+    "message": "success",
+    "data":[{
+        "BaseInfo": {
+            "Id": "407",
+            "Addr": "0x14b9f3762a6a99e02bf3032b6b4f494f4ba54e60",  //地址
+            "Name": "3月1日基础代币01",  //名称
+            "Symbol": "thira",
+            "Decimals": "7",
+            "Totoal_Supply": "1000010000000",
+            "Create_Time": "2023-03-01 02:42:12"
+        },
+        "HolderCount": 1,
+        "Status": 1
+    }]
+  }
+```
 
 ## 查询代币详情
 
@@ -44,13 +83,31 @@
 
 **返回参数:**
 
-| **参数** | **是否必须** | **类型** | **说明**                            |
-| -------- | ------------ | -------- | ----------------------------------- |
-| code     | true         | string   | http 错误码，200 为正确             |
-| message  | true         | string   | 成功或错误信息                      |
-| data     | true         | string   | json 字符串，可转化为代币详情结构体 |
+| **参数** | **是否必须** | **类型** | **说明**                                |
+| -------- | ------------ | -------- | --------------------------------------- |
+| code     | true         | string   | 0 为正确                                |
+| message  | true         | string   | 成功或错误信息                          |
+| data     | true         | string   | json 字符串，可转化为代币基础详情结构体 |
 
-代币详情结构体同上
+代币基础详情结构体同上
+
+> 返回示例如下：
+
+```javascript
+{
+    "code": 0,
+    "message": "success",
+    "data"{
+        "Id": "413",
+        "Addr": "0x610e2ac7849720c9e89a5c50f81c3370987451c7",
+        "Name": "3月1日通缩代币07",
+        "Symbol": "thirdf",
+        "Decimals": "11",
+        "Totoal_Supply": "10000700000000000",
+        "Create_Time": "2023-03-01 02:59:47"
+  }
+}
+```
 
 ## 查询代币的持有者信息
 
@@ -66,9 +123,22 @@
 
 | **参数** | **是否必须** | **类型** | **说明**                            |
 | -------- | ------------ | -------- | ----------------------------------- |
-| code     | true         | string   | http 错误码，200 为正确             |
+| code     | true         | string   | 0 为正确                            |
 | message  | true         | string   | 成功或错误信息                      |
 | data     | true         | string   | json 字符串，可以转换为持有者结构体 |
+
+```javascript
+[
+  {
+    Id: "1063",
+    Addr: "0x8e93ed5792a279dc3ac72c5bc24fe24da7d9b5d0",
+    ContractAddr: "0x610e2ac7849720c9e89a5c50f81c3370987451c7",
+    Balance: "10000700000000000",
+    Height: "3534742",
+    Balance_Origin: "",
+  },
+];
+```
 
 持有者结构体如下定义
 
@@ -92,11 +162,19 @@
 
 **返回参数:**
 
-| **参数** | **类型** | **说明**                |
-| -------- | -------- | ----------------------- |
-| code     | string   | http 错误码，200 为正确 |
-| message  | string   | 成功或错误信息          |
-| data     | string   | 代币余额（带精度截断）  |
+| **参数** | **类型** | **说明**               |
+| -------- | -------- | ---------------------- |
+| code     | string   | 0 为正确               |
+| message  | string   | 成功或错误信息         |
+| data     | string   | 代币余额（带精度截断） |
+
+```javascript
+{
+    "code": 0,
+    "message": "success",
+    "data": "10000700000000000"
+}
+```
 
 ## 查询账户下代币的状态
 
@@ -109,13 +187,33 @@
 | contractAddr | true         | string   | 代币地址 |
 | accountId    | true         | string   | 账户 ID  |
 
+```javascript
+{
+    "contractAddr":"0x610e2ac7849720c9e89a5c50f81c3370987451c7",
+    "accountId":"LDgtR1ZQdFiCbBY",
+    "apiKey": "gX3bWaCYWXx7",
+    "nonce": "{{nonce}}",
+    "verified": "{{verify}}"
+}
+```
+
 **返回参数:**
 
 | **参数** | **类型** | **说明**                        |
 | -------- | -------- | ------------------------------- |
-| code     | string   | http 错误码，200 为正确         |
+| code     | string   | 0 为正确                        |
 | message  | string   | 成功或错误信息                  |
 | data     | string   | json 字符串，可转化为状态结构体 |
+
+```javascript
+{
+    "IsBlack": false,
+    "IsBlackIn": false,
+    "IsBlackOut": false,
+    "NowFrozenAmount": 0,
+    "WaitFrozenAmount": 0
+}
+```
 
 状态结构体如下定义
 
@@ -137,13 +235,30 @@
 | ------------ | ------------ | -------- | -------- |
 | contractAddr | true         | string   | 代币地址 |
 
+```javascript
+{
+    "contractAddr":"0x610e2ac7849720c9e89a5c50f81c3370987451c7",
+    "apiKey": "gX3bWaCYWXx7",
+    "nonce": "{{nonce}}",
+    "verified": "{{verify}}"
+}
+```
+
 **返回参数:**
 
-| **参数** | **是否必须** | **类型** | **说明**                |
-| -------- | ------------ | -------- | ----------------------- |
-| code     | true         | string   | http 错误码，200 为正确 |
-| message  | true         | string   | 成功或错误信息          |
-| data     | true         | string   | 模型枚举值              |
+| **参数** | **是否必须** | **类型** | **说明**       |
+| -------- | ------------ | -------- | -------------- |
+| code     | true         | string   | 0 为正确       |
+| message  | true         | string   | 成功或错误信息 |
+| data     | true         | string   | 模型枚举值     |
+
+```javascript
+{
+    "code": 0,
+    "message": "success",
+    "data": "7"
+}
+```
 
 模型枚举值定义如下：
 
@@ -167,13 +282,30 @@
 | ------------ | ------------ | -------- | -------- |
 | contractAddr | true         | string   | 代币地址 |
 
+```javascript
+{
+    "contractAddr":"0x610e2ac7849720c9e89a5c50f81c3370987451c7",
+    "apiKey": "gX3bWaCYWXx7",
+    "nonce": "{{nonce}}",
+    "verified": "{{verify}}"
+}
+```
+
 **返回参数:**
 
 | **参数** | **是否必须** | **类型** | **说明**                       |
 | -------- | ------------ | -------- | ------------------------------ |
-| code     | true         | string   | http 错误码，200 为正确        |
+| code     | true         | string   | 0 为正确                       |
 | message  | true         | string   | 成功或错误信息                 |
 | data     | true         | string   | 返回值除以一万，就是交易费比例 |
+
+```javascript
+{
+    "code": 0,
+    "message": "success",
+    "data": "35500"
+}
+```
 
 ## 查询代币的奖励分红比例
 
@@ -185,13 +317,30 @@
 | ------------ | ------------ | -------- | -------- |
 | contractAddr | true         | string   | 代币地址 |
 
+```javascript
+{
+    "contractAddr":"0x610e2ac7849720c9e89a5c50f81c3370987451c7",
+    "apiKey": "gX3bWaCYWXx7",
+    "nonce": "{{nonce}}",
+    "verified": "{{verify}}"
+}
+```
+
 **返回参数:**
 
 | **参数** | **是否必须** | **类型** | **说明**                         |
 | -------- | ------------ | -------- | -------------------------------- |
-| code     | true         | string   | http 错误码，200 为正确          |
+| code     | true         | string   | 0 为正确                         |
 | message  | true         | string   | 成功或错误信息                   |
 | data     | true         | string   | 返回值除以一万，就是奖励分红比例 |
+
+```javascript
+{
+    "code": 0,
+    "message": "success",
+    "data": "0"
+}
+```
 
 ## 账户的代币交易记录查询
 
@@ -210,9 +359,56 @@
 
 | **参数** | **是否必须** | **类型** | **说明**                          |
 | -------- | ------------ | -------- | --------------------------------- |
-| code     | true         | string   | http 错误码，200 为正确           |
+| code     | true         | string   | 0 为正确                          |
 | message  | true         | string   | 成功或错误信息                    |
 | data     | true         | string   | json 字符串，可以转化为交易结构体 |
+
+```javascript
+{
+    "code": 0,
+    "message": "success",
+    "data": [
+        {
+            "Hash": "0x0e2c1ce50d07a61616fa63154b9aa4c17b73b4c75392c2d294ae2ee33faf17bc",
+            "OpParams": {
+                "op": "UnFrozen",
+                "addr1": "0x8E93ed5792a279DC3Ac72C5bC24FE24Da7d9B5d0",
+                "addr2": "",
+                "value1": "20000700000000000",
+                "value2": "10100699999998002",
+                "value3": ""
+            },
+            "Amount": 0,
+            "TxGeneral": {
+                "Id": "5805",
+                "TxType": "0",
+                "From": "0x8e93ed5792a279dc3ac72c5bc24fe24da7d9b5d0",
+                "To": "0x610e2ac7849720c9e89a5c50f81c3370987451c7",
+                "Hash": "0x0e2c1ce50d07a61616fa63154b9aa4c17b73b4c75392c2d294ae2ee33faf17bc",
+                "Index": "0",
+                "Value": "0",
+                "Input": "0xe5df3dd00000000000000000000000008e93ed5792a279dc3ac72c5bc24fe24da7d9b5d000000000000000000000000000000000000000000000000000470e87dac25800",
+                "Nonce": "32",
+                "GasPrice": "7430083743",
+                "GasLimit": "8000000",
+                "GasUsed": "59267",
+                "IsContract": "1",
+                "IsContractCreate": "0",
+                "BlockTime": "1677654630",
+                "BlockNum": "3542264",
+                "BlockHash": "0x63114bc8b390ddca5f9f1537717c2931217c7c37291ccad11dbb44f00f0dd96c",
+                "ExecStatus": "1",
+                "CreateTime": "2023-03-01 07:10:43",
+                "BlockState": "0",
+                "MaxFeePerGas": "0",
+                "BaseFee": "0",
+                "MaxPriorityFeePerGas": "0",
+                "BurntFees": "0"
+            }
+        }
+    ]
+}
+```
 
 交易结构体定义如下
 
@@ -270,13 +466,21 @@
 | contractAddr | true         | string   | 代币地址 |
 | accountId    | true         | string   | 账户 ID  |
 
+```javascript
+{
+    "code": 0,
+    "message": "success",
+    "data": "0"
+}
+```
+
 **返回参数:**
 
-| **参数** | **是否必须** | **类型** | **说明**                |
-| -------- | ------------ | -------- | ----------------------- |
-| code     | true         | string   | http 错误码，200 为正确 |
-| message  | true         | string   | 成功或错误信息          |
-| data     | true         | string   | 销毁数量                |
+| **参数** | **是否必须** | **类型** | **说明**       |
+| -------- | ------------ | -------- | -------------- |
+| code     | true         | string   | 0 为正确       |
+| message  | true         | string   | 成功或错误信息 |
+| data     | true         | string   | 销毁数量       |
 
 ## 链的区块高度查询
 
@@ -286,11 +490,19 @@
 
 **返回参数:**
 
-| **参数** | **是否必须** | **类型** | **说明**                |
-| -------- | ------------ | -------- | ----------------------- |
-| code     | true         | string   | http 错误码，200 为正确 |
-| message  | true         | string   | 成功或错误信息          |
-| data     | true         | string   | 区块高度                |
+```javascript
+{
+    "code": 0,
+    "message": "success",
+    "data": "3536048"
+}
+```
+
+| **参数** | **是否必须** | **类型** | **说明**       |
+| -------- | ------------ | -------- | -------------- |
+| code     | true         | string   | 0 为正确       |
+| message  | true         | string   | 成功或错误信息 |
+| data     | true         | string   | 区块高度       |
 
 ## 查询代币的初始供应量和增发历史
 
@@ -306,9 +518,16 @@
 
 | **参数** | **是否必须** | **类型** | **说明**                                                                                                   |
 | -------- | ------------ | -------- | ---------------------------------------------------------------------------------------------------------- |
-| code     | true         | string   | http 错误码，200 为正确                                                                                    |
+| code     | true         | string   | 0 为正确                                                                                                   |
 | message  | true         | string   | 成功或错误信息                                                                                             |
 | data     | true         | string   | json 字符串，含有初始供应量和增发历史的键值对，例如：'{"init_coin_supply":"xxx","add_coin_history":"xxx"}' |
+
+```javascript
+{
+    "init_coin_supply": "10000700000000000",
+    "add_coin_history": ""
+}
+```
 
 ## 加入黑名单
 
@@ -322,15 +541,39 @@
 | operatorId   | true         | string   | 操作者账户 ID |
 | targetId     | true         | string   | 目标账户 ID   |
 
+```javascript
+{
+    "contractAddr":"0x610e2ac7849720c9e89a5c50f81c3370987451c7",
+    "operatorId":"LDgtR1ZQdFiCbBY",
+    "targetId":"LDgtR1ZQdFiCbBY",
+    "apiKey": "gX3bWaCYWXx7",
+    "nonce": "{{nonce}}",
+    "verified": "{{verify}}"
+}
+```
+
 **返回参数:**
 
 | **参数** | **是否必须** | **类型** | **说明**                                           |
 | -------- | ------------ | -------- | -------------------------------------------------- |
-| code     | true         | string   | http 错误码，200 为正确                            |
+| code     | true         | string   | 0 为正确                                           |
 | message  | true         | string   | 成功或错误信息                                     |
 | data     | true         | string   | json 字符串，类似{"requestId":"xxx","uuid": "xxx"} |
 
-**备注**：返回成功表示成功调用了合约交易，需要用返回的 data 中的 uuid 调用本页面的最后一个接口：查询合约交易的状态
+**备注**：返回成功表示成功调用了合约交易，需要用返回的 data 中的 requestId 调用本页面的最后一个接口：
+
+```javascript
+{
+    "from": "0x8E93ed5792a279DC3Ac72C5bC24FE24Da7d9B5d0",
+    "to": "0x610e2ac7849720c9e89a5c50f81c3370987451c7",
+    "data": "0xeb794dd70000000000000000000000008e93ed5792a279dc3ac72c5bc24fe24da7d9b5d0",
+    "chainId": "0x22B8",
+    "value": "0x0",
+    "requestId": "1677642609",
+    "uid": "LDgtR1ZQdFiCbBY",
+    "uuid": "1677642609"
+}
+```
 
 ## 移出黑名单
 
@@ -344,15 +587,39 @@
 | operatorId   | true         | string   | 操作者账户 ID |
 | targetId     | true         | string   | 目标账户 ID   |
 
+```javascript
+{
+    "contractAddr":"0x610e2ac7849720c9e89a5c50f81c3370987451c7",
+    "operatorId":"LDgtR1ZQdFiCbBY",
+    "targetId":"LDgtR1ZQdFiCbBY",
+    "apiKey": "gX3bWaCYWXx7",
+    "nonce": "{{nonce}}",
+    "verified": "{{verify}}"
+}
+```
+
 **返回参数:**
 
 | **参数** | **是否必须** | **类型** | **说明**                                           |
 | -------- | ------------ | -------- | -------------------------------------------------- |
-| code     | true         | string   | http 错误码，200 为正确                            |
+| code     | true         | string   | 0 为正确                                           |
 | message  | true         | string   | 成功或错误信息                                     |
 | data     | true         | string   | json 字符串，类似{"requestId":"xxx","uuid": "xxx"} |
 
-**备注**：返回成功表示成功调用了合约交易，需要用返回的 data 中的 uuid 调用本页面的最后一个接口：查询合约交易的状态
+**备注**：返回成功表示成功调用了合约交易，需要用返回的 data 中的 requestId 调用本页面的最后一个接口：查询合约交易的状态
+
+```javascript
+{
+    "from": "0x8E93ed5792a279DC3Ac72C5bC24FE24Da7d9B5d0",
+    "to": "0x610e2ac7849720c9e89a5c50f81c3370987451c7",
+    "data": "0xd283859d0000000000000000000000008e93ed5792a279dc3ac72c5bc24fe24da7d9b5d0",
+    "chainId": "0x22B8",
+    "value": "0x0",
+    "requestId": "1677642805",
+    "uid": "LDgtR1ZQdFiCbBY",
+    "uuid": "1677642805"
+}
+```
 
 ## 添加转入黑名单
 
@@ -366,15 +633,39 @@
 | operatorId   | true         | string   | 操作者账户 ID |
 | targetId     | true         | string   | 目标账户 ID   |
 
+```javascript
+{
+    "contractAddr":"0x610e2ac7849720c9e89a5c50f81c3370987451c7",
+    "operatorId":"LDgtR1ZQdFiCbBY",
+    "targetId":"LDgtR1ZQdFiCbBY",
+    "apiKey": "gX3bWaCYWXx7",
+    "nonce": "{{nonce}}",
+    "verified": "{{verify}}"
+}
+```
+
 **返回参数:**
 
 | **参数** | **是否必须** | **类型** | **说明**                                           |
 | -------- | ------------ | -------- | -------------------------------------------------- |
-| code     | true         | string   | http 错误码，200 为正确                            |
+| code     | true         | string   | 0 为正确                                           |
 | message  | true         | string   | 成功或错误信息                                     |
 | data     | true         | string   | json 字符串，类似{"requestId":"xxx","uuid": "xxx"} |
 
-**备注**：返回成功表示成功调用了合约交易，需要用返回的 data 中的 uuid 调用本页面的最后一个接口：查询合约交易的状态
+**备注**：返回成功表示成功调用了合约交易，需要用返回的 data 中的 requestId 调用本页面的最后一个接口：查询合约交易的状态
+
+```javascript
+{
+    "from": "0x8E93ed5792a279DC3Ac72C5bC24FE24Da7d9B5d0",
+    "to": "0x610e2ac7849720c9e89a5c50f81c3370987451c7",
+    "data": "0xf62554350000000000000000000000008e93ed5792a279dc3ac72c5bc24fe24da7d9b5d0",
+    "chainId": "0x22B8",
+    "value": "0x0",
+    "requestId": "1677643029",
+    "uid": "LDgtR1ZQdFiCbBY",
+    "uuid": "1677643029"
+}
+```
 
 ## 移出转入黑名单
 
@@ -388,15 +679,39 @@
 | operatorId   | true         | string   | 操作者账户 ID |
 | targetId     | true         | string   | 目标账户 ID   |
 
+```javascript
+{
+    "contractAddr":"0x610e2ac7849720c9e89a5c50f81c3370987451c7",
+    "operatorId":"LDgtR1ZQdFiCbBY",
+    "targetId":"LDgtR1ZQdFiCbBY",
+    "apiKey": "gX3bWaCYWXx7",
+    "nonce": "{{nonce}}",
+    "verified": "{{verify}}"
+}
+```
+
 **返回参数:**
 
 | **参数** | **是否必须** | **类型** | **说明**                                           |
 | -------- | ------------ | -------- | -------------------------------------------------- |
-| code     | true         | string   | http 错误码，200 为正确                            |
+| code     | true         | string   | 0 为正确                                           |
 | message  | true         | string   | 成功或错误信息                                     |
 | data     | true         | string   | json 字符串，类似{"requestId":"xxx","uuid": "xxx"} |
 
-**备注**：返回成功表示成功调用了合约交易，需要用返回的 data 中的 uuid 调用本页面的最后一个接口：查询合约交易的状态
+**备注**：返回成功表示成功调用了合约交易，需要用返回的 data 中的 requestId 调用本页面的最后一个接口：查询合约交易的状态
+
+```javascript
+{
+    "from": "0x8E93ed5792a279DC3Ac72C5bC24FE24Da7d9B5d0",
+    "to": "0x610e2ac7849720c9e89a5c50f81c3370987451c7",
+    "data": "0x409de8910000000000000000000000008e93ed5792a279dc3ac72c5bc24fe24da7d9b5d0",
+    "chainId": "0x22B8",
+    "value": "0x0",
+    "requestId": "1677643129",
+    "uid": "LDgtR1ZQdFiCbBY",
+    "uuid": "1677643129"
+}
+```
 
 ## 添加转出黑名单
 
@@ -410,15 +725,39 @@
 | operatorId   | true         | string   | 操作者账户 ID |
 | targetId     | true         | string   | 目标账户 ID   |
 
+```javascript
+{
+    "contractAddr":"0x610e2ac7849720c9e89a5c50f81c3370987451c7",
+    "operatorId":"LDgtR1ZQdFiCbBY",
+    "targetId":"LDgtR1ZQdFiCbBY",
+    "apiKey": "gX3bWaCYWXx7",
+    "nonce": "{{nonce}}",
+    "verified": "{{verify}}"
+}
+```
+
 **返回参数:**
 
 | **参数** | **是否必须** | **类型** | **说明**                                           |
 | -------- | ------------ | -------- | -------------------------------------------------- |
-| code     | true         | string   | http 错误码，200 为正确                            |
+| code     | true         | string   | 0 为正确                                           |
 | message  | true         | string   | 成功或错误信息                                     |
 | data     | true         | string   | json 字符串，类似{"requestId":"xxx","uuid": "xxx"} |
 
-**备注**：返回成功表示成功调用了合约交易，需要用返回的 data 中的 uuid 调用本页面的最后一个接口：查询合约交易的状态
+**备注**：返回成功表示成功调用了合约交易，需要用返回的 data 中的 requestId 调用本页面的最后一个接口：查询合约交易的状态
+
+```javascript
+{
+    "from": "0x8E93ed5792a279DC3Ac72C5bC24FE24Da7d9B5d0",
+    "to": "0x610e2ac7849720c9e89a5c50f81c3370987451c7",
+    "data": "0xd0dba9440000000000000000000000008e93ed5792a279dc3ac72c5bc24fe24da7d9b5d0",
+    "chainId": "0x22B8",
+    "value": "0x0",
+    "requestId": "1677643214",
+    "uid": "LDgtR1ZQdFiCbBY",
+    "uuid": "1677643214"
+}
+```
 
 ## 移出转出黑名单
 
@@ -432,15 +771,39 @@
 | operatorId   | true         | string   | 操作者账户 ID |
 | targetId     | true         | string   | 目标账户 ID   |
 
+```javascript
+{
+    "contractAddr":"0x610e2ac7849720c9e89a5c50f81c3370987451c7",
+    "operatorId":"LDgtR1ZQdFiCbBY",
+    "targetId":"LDgtR1ZQdFiCbBY",
+    "apiKey": "gX3bWaCYWXx7",
+    "nonce": "{{nonce}}",
+    "verified": "{{verify}}"
+}
+```
+
 **返回参数:**
 
 | **参数** | **是否必须** | **类型** | **说明**                                           |
 | -------- | ------------ | -------- | -------------------------------------------------- |
-| code     | true         | string   | http 错误码，200 为正确                            |
+| code     | true         | string   | 0 为正确                                           |
 | message  | true         | string   | 成功或错误信息                                     |
 | data     | true         | string   | json 字符串，类似{"requestId":"xxx","uuid": "xxx"} |
 
-**备注**：返回成功表示成功调用了合约交易，需要用返回的 data 中的 uuid 调用本页面的最后一个接口：查询合约交易的状态
+**备注**：返回成功表示成功调用了合约交易，需要用返回的 data 中的 requestId 调用本页面的最后一个接口：查询合约交易的状态
+
+```javascript
+{
+    "from": "0x8E93ed5792a279DC3Ac72C5bC24FE24Da7d9B5d0",
+    "to": "0x610e2ac7849720c9e89a5c50f81c3370987451c7",
+    "data": "0x8f9abdf90000000000000000000000008e93ed5792a279dc3ac72c5bc24fe24da7d9b5d0",
+    "chainId": "0x22B8",
+    "value": "0x0",
+    "requestId": "1677643287",
+    "uid": "LDgtR1ZQdFiCbBY",
+    "uuid": "1677643287"
+}
+```
 
 ## 冻结
 
@@ -455,15 +818,40 @@
 | operatorId   | true         | string   | 操作者账户 ID          |
 | targetId     | true         | string   | 目标账户 ID            |
 
+```javascript
+{
+    "amount":"1000",
+    "contractAddr":"0x610e2ac7849720c9e89a5c50f81c3370987451c7",
+    "operatorId":"LDgtR1ZQdFiCbBY",
+    "targetId":"LDgtR1ZQdFiCbBY",
+    "apiKey": "gX3bWaCYWXx7",
+    "nonce": "{{nonce}}",
+    "verified": "{{verify}}"
+}
+```
+
 **返回参数:**
 
 | **参数** | **是否必须** | **类型** | **说明**                                           |
 | -------- | ------------ | -------- | -------------------------------------------------- |
-| code     | true         | string   | http 错误码，200 为正确                            |
+| code     | true         | string   | 0 为正确                                           |
 | message  | true         | string   | 成功或错误信息                                     |
 | data     | true         | string   | json 字符串，类似{"requestId":"xxx","uuid": "xxx"} |
 
-**备注**：返回成功表示成功调用了合约交易，需要用返回的 data 中的 uuid 调用本页面的最后一个接口：查询合约交易的状态
+**备注**：返回成功表示成功调用了合约交易，需要用返回的 data 中的 requestId 调用本页面的最后一个接口：查询合约交易的状态
+
+```javascript
+{
+    "from": "0x8E93ed5792a279DC3Ac72C5bC24FE24Da7d9B5d0",
+    "to": "0x610e2ac7849720c9e89a5c50f81c3370987451c7",
+    "data": "0x361737640000000000000000000000008e93ed5792a279dc3ac72c5bc24fe24da7d9b5d000000000000000000000000000000000000000000000000000000000000003e8",
+    "chainId": "0x22B8",
+    "value": "0x0",
+    "requestId": "1677643398",
+    "uid": "LDgtR1ZQdFiCbBY",
+    "uuid": "1677643398"
+}
+```
 
 ## 解冻
 
@@ -478,15 +866,40 @@
 | operatorId   | true         | string   | 操作者账户 ID          |
 | targetId     | true         | string   | 目标账户 ID            |
 
+```javascript
+{
+    "amount":"1",
+    "contractAddr":"0x610e2ac7849720c9e89a5c50f81c3370987451c7",
+    "operatorId":"LDgtR1ZQdFiCbBY",
+    "targetId":"LDgtR1ZQdFiCbBY",
+    "apiKey": "gX3bWaCYWXx7",
+    "nonce": "{{nonce}}",
+    "verified": "{{verify}}"
+}
+```
+
 **返回参数:**
 
 | **参数** | **是否必须** | **类型** | **说明**                                                           |
 | -------- | ------------ | -------- | ------------------------------------------------------------------ |
-| code     | true         | string   | http 错误码，200 为正确                                            |
+| code     | true         | string   | 0 为正确                                                           |
 | message  | true         | string   | 成功或错误信息                                                     |
 | data     | true         | string   | json 字符串，类似{"requestId":"xxx","uuid": "xxx"}交易发出成功提示 |
 
-**备注**：返回成功表示成功调用了合约交易，需要用返回的 data 中的 uuid 调用本页面的最后一个接口：查询合约交易的状态
+**备注**：返回成功表示成功调用了合约交易，需要用返回的 data 中的 requestId 调用本页面的最后一个接口：查询合约交易的状态
+
+```javascript
+{
+    "from": "0x8E93ed5792a279DC3Ac72C5bC24FE24Da7d9B5d0",
+    "to": "0x610e2ac7849720c9e89a5c50f81c3370987451c7",
+    "data": "0xe5df3dd00000000000000000000000008e93ed5792a279dc3ac72c5bc24fe24da7d9b5d00000000000000000000000000000000000000000000000000000000000000001",
+    "chainId": "0x22B8",
+    "value": "0x0",
+    "requestId": "1677643485",
+    "uid": "LDgtR1ZQdFiCbBY",
+    "uuid": "1677643485"
+}
+```
 
 ## 添加区块高度间交易黑名单
 
@@ -501,15 +914,40 @@
 | contractAddr | true         | string   | 代币地址      |
 | operatorId   | true         | string   | 操作者账户 ID |
 
+```javascript
+{
+    "startblock":"200",
+    "endblock":"3000",
+    "contractAddr":"0x610e2ac7849720c9e89a5c50f81c3370987451c7",
+    "operatorId":"LDgtR1ZQdFiCbBY",
+    "apiKey": "gX3bWaCYWXx7",
+    "nonce": "{{nonce}}",
+    "verified": "{{verify}}"
+}
+```
+
 **返回参数:**
 
 | **参数** | **是否必须** | **类型** | **说明**                                           |
 | -------- | ------------ | -------- | -------------------------------------------------- |
-| code     | true         | string   | http 错误码，200 为正确                            |
+| code     | true         | string   | 0 为正确                                           |
 | message  | true         | string   | 成功或错误信息                                     |
 | data     | true         | string   | json 字符串，类似{"requestId":"xxx","uuid": "xxx"} |
 
-**备注**：返回成功表示成功调用了合约交易，需要用返回的 data 中的 uuid 调用本页面的最后一个接口：查询合约交易的状态
+**备注**：返回成功表示成功调用了合约交易，需要用返回的 data 中的 requestId 调用本页面的最后一个接口：查询合约交易的状态
+
+```javascript
+{
+    "from": "0x8E93ed5792a279DC3Ac72C5bC24FE24Da7d9B5d0",
+    "to": "0x610e2ac7849720c9e89a5c50f81c3370987451c7",
+    "data": "0x46f903c600000000000000000000000000000000000000000000000000000000000000c80000000000000000000000000000000000000000000000000000000000000bb8",
+    "chainId": "0x22B8",
+    "value": "0x0",
+    "requestId": "1677643619",
+    "uid": "LDgtR1ZQdFiCbBY",
+    "uuid": "1677643619"
+}
+```
 
 ## 移出区块高度间交易黑名单
 
@@ -523,15 +961,39 @@
 | contractAddr | true         | string   | 代币地址      |
 | operatorId   | true         | string   | 操作者账户 ID |
 
+```javascript
+{
+    "index":"0",
+    "contractAddr":"0x610e2ac7849720c9e89a5c50f81c3370987451c7",
+    "operatorId":"LDgtR1ZQdFiCbBY",
+    "apiKey": "gX3bWaCYWXx7",
+    "nonce": "{{nonce}}",
+    "verified": "{{verify}}"
+}
+```
+
 **返回参数:**
 
 | **参数** | **是否必须** | **类型** | **说明**                                           |
 | -------- | ------------ | -------- | -------------------------------------------------- |
-| code     | true         | string   | http 错误码，200 为正确                            |
+| code     | true         | string   | 0 为正确                                           |
 | message  | true         | string   | 成功或错误信息                                     |
 | data     | true         | string   | json 字符串，类似{"requestId":"xxx","uuid": "xxx"} |
 
-**备注**：返回成功表示成功调用了合约交易，需要用返回的 data 中的 uuid 调用本页面的最后一个接口：查询合约交易的状态
+**备注**：返回成功表示成功调用了合约交易，需要用返回的 data 中的 requestId 调用本页面的最后一个接口：查询合约交易的状态
+
+```javascript
+{
+    "from": "0x8E93ed5792a279DC3Ac72C5bC24FE24Da7d9B5d0",
+    "to": "0x610e2ac7849720c9e89a5c50f81c3370987451c7",
+    "data": "0x254cf7950000000000000000000000000000000000000000000000000000000000000000",
+    "chainId": "0x22B8",
+    "value": "0x0",
+    "requestId": "1677643699",
+    "uid": "LDgtR1ZQdFiCbBY",
+    "uuid": "1677643699"
+}
+```
 
 ## 铸造（增发）
 
@@ -545,15 +1007,39 @@
 | contractAddr | true         | string   | 代币地址      |
 | operatorId   | true         | string   | 操作者账户 ID |
 
+```javascript
+{
+    "amount":"1000",
+    "contractAddr":"0x610e2ac7849720c9e89a5c50f81c3370987451c7",
+    "operatorId":"LDgtR1ZQdFiCbBY",
+    "apiKey": "gX3bWaCYWXx7",
+    "nonce": "{{nonce}}",
+    "verified": "{{verify}}"
+}
+```
+
 **返回参数:**
 
 | **参数** | **是否必须** | **类型** | **说明**                                           |
 | -------- | ------------ | -------- | -------------------------------------------------- |
-| code     | true         | string   | http 错误码，200 为正确                            |
+| code     | true         | string   | 0 为正确                                           |
 | message  | true         | string   | 成功或错误信息                                     |
 | data     | true         | string   | json 字符串，类似{"requestId":"xxx","uuid": "xxx"} |
 
-**备注**：返回成功表示成功调用了合约交易，需要用返回的 data 中的 uuid 调用本页面的最后一个接口：查询合约交易的状态
+**备注**：返回成功表示成功调用了合约交易，需要用返回的 data 中的 requestId 调用本页面的最后一个接口：查询合约交易的状态
+
+```javascript
+{
+    "from": "0x8E93ed5792a279DC3Ac72C5bC24FE24Da7d9B5d0",
+    "to": "0x610e2ac7849720c9e89a5c50f81c3370987451c7",
+    "data": "0x40c10f190000000000000000000000008e93ed5792a279dc3ac72c5bc24fe24da7d9b5d000000000000000000000000000000000000000000000000000005af3107a4000",
+    "chainId": "0x22B8",
+    "value": "0x0",
+    "requestId": "1677651290",
+    "uid": "LDgtR1ZQdFiCbBY",
+    "uuid": "1677651290"
+}
+```
 
 ## 销毁
 
@@ -567,15 +1053,39 @@
 | contractAddr | true         | string   | 代币地址      |
 | operatorId   | true         | string   | 操作者账户 ID |
 
+```javascript
+{
+    "amount":"10",
+    "contractAddr":"0x610e2ac7849720c9e89a5c50f81c3370987451c7",
+    "operatorId":"LDgtR1ZQdFiCbBY",
+    "apiKey": "gX3bWaCYWXx7",
+    "nonce": "{{nonce}}",
+    "verified": "{{verify}}"
+}
+```
+
 **返回参数:**
 
 | **参数** | **是否必须** | **类型** | **说明**                                           |
 | -------- | ------------ | -------- | -------------------------------------------------- |
-| code     | true         | string   | http 错误码，200 为正确                            |
+| code     | true         | string   | 0 为正确                                           |
 | message  | true         | string   | 成功或错误信息                                     |
 | data     | true         | string   | json 字符串，类似{"requestId":"xxx","uuid": "xxx"} |
 
-**备注**：返回成功表示成功调用了合约交易，需要用返回的 data 中的 uuid 调用本页面的最后一个接口：查询合约交易的状态
+**备注**：返回成功表示成功调用了合约交易，需要用返回的 data 中的 requestId 调用本页面的最后一个接口：查询合约交易的状态
+
+```javascript
+{
+    "from": "0x8E93ed5792a279DC3Ac72C5bC24FE24Da7d9B5d0",
+    "to": "0x610e2ac7849720c9e89a5c50f81c3370987451c7",
+    "data": "0x42966c68000000000000000000000000000000000000000000000000000000000000000a",
+    "chainId": "0x22B8",
+    "value": "0x0",
+    "requestId": "1677651387",
+    "uid": "LDgtR1ZQdFiCbBY",
+    "uuid": "1677651387"
+}
+```
 
 ## 销毁指定账户下的代币
 
@@ -590,15 +1100,40 @@
 | operatorId   | true         | string   | 操作者账户 ID          |
 | targetId     | true         | string   | 目标账户 ID            |
 
+```javascript
+{
+    "amount":"10",
+    "contractAddr":"0x610e2ac7849720c9e89a5c50f81c3370987451c7",
+    "operatorId":"LDgtR1ZQdFiCbBY",
+    "targetId":"LDgtR1ZQdFiCbBY",
+    "apiKey": "gX3bWaCYWXx7",
+    "nonce": "{{nonce}}",
+    "verified": "{{verify}}"
+}
+```
+
 **返回参数:**
 
 | **参数** | **是否必须** | **类型** | **说明**                                           |
 | -------- | ------------ | -------- | -------------------------------------------------- |
-| code     | true         | string   | http 错误码，200 为正确                            |
+| code     | true         | string   | 0 为正确                                           |
 | message  | true         | string   | 成功或错误信息                                     |
 | data     | true         | string   | json 字符串，类似{"requestId":"xxx","uuid": "xxx"} |
 
-**备注**：返回成功表示成功调用了合约交易，需要用返回的 data 中的 uuid 调用本页面的最后一个接口：查询合约交易的状态
+**备注**：返回成功表示成功调用了合约交易，需要用返回的 data 中的 requestId 调用本页面的最后一个接口：查询合约交易的状态
+
+```javascript
+{
+    "from": "0x8E93ed5792a279DC3Ac72C5bC24FE24Da7d9B5d0",
+    "to": "0x610e2ac7849720c9e89a5c50f81c3370987451c7",
+    "data": "0x79cc67900000000000000000000000008e93ed5792a279dc3ac72c5bc24fe24da7d9b5d0000000000000000000000000000000000000000000000000000000000000000a",
+    "chainId": "0x22B8",
+    "value": "0x0",
+    "requestId": "1677651477",
+    "uid": "LDgtR1ZQdFiCbBY",
+    "uuid": "1677651477"
+}
+```
 
 ## 查询账户的冻结代币数量
 
@@ -611,13 +1146,31 @@
 | contractAddr | true         | string   | 代币地址      |
 | accountId    | true         | string   | 操作者账户 ID |
 
+```javascript
+{
+    "contractAddr":"0x610e2ac7849720c9e89a5c50f81c3370987451c7",
+    "accountId":"LDgtR1ZQdFiCbBY",
+    "apiKey": "gX3bWaCYWXx7",
+    "nonce": "{{nonce}}",
+    "verified": "{{verify}}"
+}
+```
+
 **返回参数:**
 
-| **参数** | **是否必须** | **类型** | **说明**                |
-| -------- | ------------ | -------- | ----------------------- |
-| code     | true         | string   | http 错误码，200 为正确 |
-| message  | true         | string   | 成功或错误信息          |
-| data     | true         | string   | 冻结数量                |
+| **参数** | **是否必须** | **类型** | **说明**       |
+| -------- | ------------ | -------- | -------------- |
+| code     | true         | string   | 0 为正确       |
+| message  | true         | string   | 成功或错误信息 |
+| data     | true         | string   | 冻结数量       |
+
+```javascript
+{
+    "code": 0,
+    "message": "success",
+    "data": "999"
+}
+```
 
 ## 查询代币的总容量
 
@@ -629,13 +1182,30 @@
 | ------------ | ------------ | -------- | -------- |
 | contractAddr | true         | string   | 代币地址 |
 
+```javascript
+{
+    "contractAddr":"0x610e2ac7849720c9e89a5c50f81c3370987451c7",
+    "apiKey": "gX3bWaCYWXx7",
+    "nonce": "{{nonce}}",
+    "verified": "{{verify}}"
+}
+```
+
 **返回参数:**
 
-| **参数** | **是否必须** | **类型** | **说明**                |
-| -------- | ------------ | -------- | ----------------------- |
-| code     | true         | string   | http 错误码，200 为正确 |
-| message  | true         | string   | 成功或错误信息          |
-| data     | true         | string   | 总容量                  |
+| **参数** | **是否必须** | **类型** | **说明**       |
+| -------- | ------------ | -------- | -------------- |
+| code     | true         | string   | 0 为正确       |
+| message  | true         | string   | 成功或错误信息 |
+| data     | true         | string   | 总容量         |
+
+```javascript
+{
+    "code": 0,
+    "message": "success",
+    "data": "10000700000000000"
+}
+```
 
 ## 查询代币的闪电费用比例
 
@@ -647,13 +1217,30 @@
 | ------------ | ------------ | -------- | -------- |
 | contractAddr | true         | string   | 代币地址 |
 
+```javascript
+{
+    "contractAddr":"0xa97a7e49930c91d7bba6a115f01a5c41a6218676",
+    "apiKey": "gX3bWaCYWXx7",
+    "nonce": "{{nonce}}",
+    "verified": "{{verify}}"
+}
+```
+
 **返回参数:**
 
-| **参数** | **是否必须** | **类型** | **说明**                |
-| -------- | ------------ | -------- | ----------------------- |
-| code     | true         | string   | http 错误码，200 为正确 |
-| message  | true         | string   | 成功或错误信息          |
-| data     | true         | string   | 代币的闪电费比例        |
+| **参数** | **是否必须** | **类型** | **说明**         |
+| -------- | ------------ | -------- | ---------------- |
+| code     | true         | string   | 0 为正确         |
+| message  | true         | string   | 成功或错误信息   |
+| data     | true         | string   | 代币的闪电费比例 |
+
+```javascript
+{
+    "code": 0,
+    "message": "success",
+    "data": "20"
+}
+```
 
 ## 查询代币的禁止交易区间
 
@@ -665,11 +1252,20 @@
 | ------------ | ------------ | -------- | -------- |
 | contractAddr | true         | string   | 代币地址 |
 
+```javascript
+{
+    "contractAddr":"0x610e2ac7849720c9e89a5c50f81c3370987451c7",
+    "apiKey": "gX3bWaCYWXx7",
+    "nonce": "{{nonce}}",
+    "verified": "{{verify}}"
+}
+```
+
 **返回参数:**
 
 | **参数** | **是否必须** | **类型** | **说明**                                |
 | -------- | ------------ | -------- | --------------------------------------- |
-| code     | true         | string   | http 错误码，200 为正确                 |
+| code     | true         | string   | 0 为正确                                |
 | message  | true         | string   | 成功或错误信息                          |
 | data     | true         | string   | jaon 字符串，可转化为交易区间结构体数组 |
 
@@ -686,16 +1282,36 @@
 
 **请求参数：**
 
-| **参数**     | **是否必须** | **类型** | **说明**                              |
-| ------------ | ------------ | -------- | ------------------------------------- |
-| contractAddr | true         | string   | 代币地址                              |
-| accountId    | true         | string   | 账户 ID                               |
-| uuid         | true         | string   | 合约交易成功发出后返回的字串中的 uuid |
+| **参数**  | **是否必须** | **类型** | **说明**                                   |
+| --------- | ------------ | -------- | ------------------------------------------ |
+| accountId | true         | string   | 账户 ID                                    |
+| requestId | true         | string   | 合约交易成功发出后返回的字串中的 requestId |
+
+```javascript
+{
+    "accountId":"LDgtR1ZQdFiCbBY",
+    "requestId":"1677643398",
+    "apiKey": "gX3bWaCYWXx7",
+    "nonce": "{{nonce}}",
+    "verified": "{{verify}}"
+}
+```
 
 **返回参数:**
 
-| **参数** | **是否必须** | **类型** | **说明**                |
-| -------- | ------------ | -------- | ----------------------- |
-| code     | true         | string   | http 错误码，200 为正确 |
-| message  | true         | string   | 成功或错误信息          |
-| data     | true         | string   | 任务的状态              |
+| **参数** | **是否必须** | **类型** | **说明**                                                                                                                                                                                                                                                     |
+| -------- | ------------ | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| code     | true         | string   | 0 为正确                                                                                                                                                                                                                                                     |
+| message  | true         | string   | 成功或错误信息(succes 或 fail)                                                                                                                                                                                                                               |
+| data     | true         | string   | 任务的详情（"{\"requestId\":\"1677491187\",\"hash\":\"0x6c7308c10c9be1c43c212161fc2a84df3f8e79c374857032e71120cb25ab4d13\",\"code\":0,\"message\":\"ok\",\"status\":1,\"tx_hash\":\"0x6c7308c10c9be1c43c212161fc2a84df3f8e79c374857032e71120cb25ab4d13\"}"） |
+
+```javascript
+{
+    "requestId": "1677643398",
+    "hash": "0xa6530534ecc35f04f45002a27e112d4f14641f466868fa9542d555dfe2638ba0",
+    "code": 0,
+    "message": "ok",
+    "status": 1,
+    "tx_hash": "0xa6530534ecc35f04f45002a27e112d4f14641f466868fa9542d555dfe2638ba0"
+}
+```
