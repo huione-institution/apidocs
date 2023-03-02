@@ -286,8 +286,8 @@
   color: #859900;
 }
     </style>
-    <link href="stylesheets/screen-10b64820.css" rel="stylesheet" media="screen" />
-    <link href="stylesheets/print-966d6edc.css" rel="stylesheet" media="print" />
+    <link href="stylesheets/screen-09e7b5d2.css" rel="stylesheet" media="screen" />
+    <link href="stylesheets/print-f0d8ea3d.css" rel="stylesheet" media="print" />
       <script src="javascripts/all-b12a2749.js"></script>
 
     <script>
@@ -352,24 +352,6 @@
                   </li>
                   <li>
                     <a href="#5b538c8e6c" class="toc-h2 toc-link" data-title="账户列表（翻页）">账户列表（翻页）</a>
-                  </li>
-                  <li>
-                    <a href="#c3374f539c" class="toc-h2 toc-link" data-title="账户冻结">账户冻结</a>
-                  </li>
-                  <li>
-                    <a href="#4cb21fcc74" class="toc-h2 toc-link" data-title="账户解封">账户解封</a>
-                  </li>
-                  <li>
-                    <a href="#6bde6cd88d" class="toc-h2 toc-link" data-title="冻结账户资产">冻结账户资产</a>
-                  </li>
-                  <li>
-                    <a href="#e9e9bc1fd1" class="toc-h2 toc-link" data-title="解冻账户资产">解冻账户资产</a>
-                  </li>
-                  <li>
-                    <a href="#97478d5ec5" class="toc-h2 toc-link" data-title="账户状态查询">账户状态查询</a>
-                  </li>
-                  <li>
-                    <a href="#ad99019139" class="toc-h2 toc-link" data-title="账户资产查询">账户资产查询</a>
                   </li>
               </ul>
           </li>
@@ -626,368 +608,23 @@
 </thead><tbody>
 <tr>
 <td>apiKey</td>
-<td></td>
+<td>string</td>
 <td>API Key</td>
 </tr>
 <tr>
 <td>apiSecret</td>
-<td></td>
+<td>string</td>
 <td>API 密钥(只在申请时返回一次，无法通过接口查询，所有 api 接口需要通过此 key 来加密，请妥善保管，不展示与其他人</td>
 </tr>
 <tr>
 <td>restrictions</td>
-<td></td>
+<td>int</td>
 <td>API Key 拥有权限</td>
 </tr>
 <tr>
 <td>status</td>
-<td></td>
+<td>int</td>
 <td>API Key 状态，0（申请中）、-1（关闭）、1（使用中）</td>
-</tr>
-</tbody></table>
-<div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="c1">// 因为需要配置的权限并不多，我们暂时用 2 的 exponent 来标志</span>
-<span class="c1">// 账户（Account）    2^0</span>
-<span class="c1">// 资产（Assets）    2^1</span>
-<span class="c1">// 发币（IssueAssets）   2^2</span>
-<span class="c1">// 代币管理（TokenManagement） 2^3</span>
-</code></pre></div>
-<table><thead>
-<tr>
-<th></th>
-<th></th>
-<th></th>
-<th></th>
-</tr>
-</thead><tbody>
-<tr>
-<td><strong>权限</strong></td>
-<td><strong>模块内容</strong></td>
-<td><strong>功能</strong></td>
-<td><strong>url</strong></td>
-</tr>
-<tr>
-<td><code>2^0</code></td>
-<td>账户（account）</td>
-<td>创建账户</td>
-<td>api/v1/account/create</td>
-</tr>
-<tr>
-<td></td>
-<td></td>
-<td>账户地址查询</td>
-<td>api/v1/account/query</td>
-</tr>
-<tr>
-<td></td>
-<td></td>
-<td>根据用户名查询账户</td>
-<td>api/v1/account/queryUser</td>
-</tr>
-<tr>
-<td></td>
-<td></td>
-<td>列表本渠道下的用户</td>
-<td>api/v1/account/list</td>
-</tr>
-<tr>
-<td></td>
-<td></td>
-<td>账户冻结</td>
-<td>api/v1/assets/frozen</td>
-</tr>
-<tr>
-<td></td>
-<td></td>
-<td>账户解封</td>
-<td>api/v1/assets/unfrozen</td>
-</tr>
-<tr>
-<td></td>
-<td></td>
-<td>冻结账户资产</td>
-<td>api/v1/assets/frozen-assets</td>
-</tr>
-<tr>
-<td></td>
-<td></td>
-<td>解冻账户资产</td>
-<td>api/v1/assets/unfrozen-assets</td>
-</tr>
-<tr>
-<td></td>
-<td></td>
-<td>账户状态查询</td>
-<td>api/v1/assets/status</td>
-</tr>
-<tr>
-<td></td>
-<td></td>
-<td>账户资产查询</td>
-<td>api/v1/assets/assets</td>
-</tr>
-<tr>
-<td><code>2^1</code></td>
-<td>资产（Assets）</td>
-<td>获取充值地址</td>
-<td>api/v1/account/depositAddress</td>
-</tr>
-<tr>
-<td></td>
-<td></td>
-<td>执行提现</td>
-<td>api/v1/assets/withdraw/apply</td>
-</tr>
-<tr>
-<td></td>
-<td></td>
-<td>执行内部转账</td>
-<td>api/v1/hw-order/order/inline_transfer</td>
-</tr>
-<tr>
-<td></td>
-<td></td>
-<td>充值提现转账历史记录查询</td>
-<td>api/v1/hw-order/order/inline_transfer_history</td>
-</tr>
-<tr>
-<td></td>
-<td></td>
-<td>获取所有链</td>
-<td>api/v1/assets/chain/list</td>
-</tr>
-<tr>
-<td></td>
-<td></td>
-<td>获取所有币</td>
-<td>api/v1/assets/token/list?chain=</td>
-</tr>
-<tr>
-<td></td>
-<td></td>
-<td>所有币配置</td>
-<td>api/v1/assets/token/config</td>
-</tr>
-<tr>
-<td></td>
-<td></td>
-<td>获取提现手续费</td>
-<td>api/v1/assets/token/fee</td>
-</tr>
-<tr>
-<td><code>2^2</code></td>
-<td>发币<code>IssueAssets</code></td>
-<td>发币</td>
-<td>api/v1/token/create</td>
-</tr>
-<tr>
-<td></td>
-<td></td>
-<td>查询发币状态</td>
-<td>api/v1/token/status</td>
-</tr>
-<tr>
-<td></td>
-<td></td>
-<td>查询发币订单详情</td>
-<td>api/v1/token/order/detail</td>
-</tr>
-<tr>
-<td></td>
-<td></td>
-<td>查询发币记录</td>
-<td>api/v1/token/order/list</td>
-</tr>
-<tr>
-<td><code>2^3</code></td>
-<td>代币管理</td>
-<td>查询代币详情列表</td>
-<td>api/v1/token/list</td>
-</tr>
-<tr>
-<td></td>
-<td></td>
-<td>查询代币详情</td>
-<td>api/v1/coin-manage/tokenDetail</td>
-</tr>
-<tr>
-<td></td>
-<td></td>
-<td>查询账户下所有代币的持币地址数</td>
-<td>api/v1/coin-manage/accountCount</td>
-</tr>
-<tr>
-<td></td>
-<td></td>
-<td>查询代币的持有者信息</td>
-<td>api/v1/coin-manage/holderInfos</td>
-</tr>
-<tr>
-<td></td>
-<td></td>
-<td>地址代币余额查询</td>
-<td>api/v1/coin-manage/tokenBalance</td>
-</tr>
-<tr>
-<td></td>
-<td></td>
-<td>代币的持有者数量查询</td>
-<td>api/v1/coin-manage/holderCount</td>
-</tr>
-<tr>
-<td></td>
-<td></td>
-<td>查询地址下代币的状态</td>
-<td>api/v1/coin-manage/tokenStatus</td>
-</tr>
-<tr>
-<td></td>
-<td></td>
-<td>代币模型查询</td>
-<td>api/v1/coin-manage/tokenModel</td>
-</tr>
-<tr>
-<td></td>
-<td></td>
-<td>代币的交易费比例查询</td>
-<td>api/v1/coin-manage/taxFee</td>
-</tr>
-<tr>
-<td></td>
-<td></td>
-<td>代币的奖励分红比例查询</td>
-<td>api/v1/coin-manage/bonusFee</td>
-</tr>
-<tr>
-<td></td>
-<td></td>
-<td>地址代币交易记录查询</td>
-<td>api/v1/coin-manage/txHistory</td>
-</tr>
-<tr>
-<td></td>
-<td></td>
-<td>账户的代币销毁数量查询</td>
-<td>api/v1/coin-manage/burnAmount</td>
-</tr>
-<tr>
-<td></td>
-<td></td>
-<td>链的区块高度查询</td>
-<td>api/v1/coin-manage/height</td>
-</tr>
-<tr>
-<td></td>
-<td></td>
-<td>代币的初始供应量和增发历史查询</td>
-<td>api/v1/coin-manage/tokenHistory</td>
-</tr>
-<tr>
-<td></td>
-<td></td>
-<td>禁止账户交易-交易黑名单</td>
-<td>api/v1/coin-manage/addBlack</td>
-</tr>
-<tr>
-<td></td>
-<td></td>
-<td>允许账户交易-移出黑名单</td>
-<td>api/v1/coin-manage/removeBlack</td>
-</tr>
-<tr>
-<td></td>
-<td></td>
-<td>禁止账户转入</td>
-<td>api/v1/coin-manage/addBlackIn</td>
-</tr>
-<tr>
-<td></td>
-<td></td>
-<td>允许账户转入</td>
-<td>api/v1/coin-manage/removeBlackIn</td>
-</tr>
-<tr>
-<td></td>
-<td></td>
-<td>禁止账户转出</td>
-<td>api/v1/coin-manage/addBlackOut</td>
-</tr>
-<tr>
-<td></td>
-<td></td>
-<td>允许账户转出</td>
-<td>api/v1/coin-manage/removeBlackOut</td>
-</tr>
-<tr>
-<td></td>
-<td></td>
-<td>冻结</td>
-<td>api/v1/coin-manage/frozen</td>
-</tr>
-<tr>
-<td></td>
-<td></td>
-<td>解冻</td>
-<td>api/v1/coin-manage/unfrozen</td>
-</tr>
-<tr>
-<td></td>
-<td></td>
-<td>禁止区块高度区间交易</td>
-<td>api/v1/coin-manage/addBlackRange</td>
-</tr>
-<tr>
-<td></td>
-<td></td>
-<td>允许区块高度区间交易</td>
-<td>api/v1/coin-manage/removeBlackRange</td>
-</tr>
-<tr>
-<td></td>
-<td></td>
-<td>铸造（增发）</td>
-<td>api/v1/coin-manage/mint</td>
-</tr>
-<tr>
-<td></td>
-<td></td>
-<td>销毁</td>
-<td>api/v1/coin-manage/burn</td>
-</tr>
-<tr>
-<td></td>
-<td></td>
-<td>销毁指定账户下的代币</td>
-<td>api/v1/coin-manage/burnFrom</td>
-</tr>
-<tr>
-<td></td>
-<td></td>
-<td>查询账户的冻结代币数量</td>
-<td>api/v1/coin-manage/forzenAmount</td>
-</tr>
-<tr>
-<td></td>
-<td></td>
-<td>查询代币的总容量</td>
-<td>api/v1/coin-manage/cap</td>
-</tr>
-<tr>
-<td></td>
-<td></td>
-<td>查询代币的闪电贷费用比例</td>
-<td>api/v1/coin-manage/flashFee</td>
-</tr>
-<tr>
-<td></td>
-<td></td>
-<td>查询代币的禁止交易区间</td>
-<td>api/v1/coin-manage/blackRange</td>
-</tr>
-<tr>
-<td></td>
-<td></td>
-<td>查询合约交易的状态</td>
-<td>api/v1/coin-manage/txStatus</td>
 </tr>
 </tbody></table>
 <h2 id='api-key-3'>三方自助 API Key 状态查询</h2>
@@ -1360,7 +997,7 @@
 </tr>
 </tbody></table>
 <h2 id='bb195dacf4'>账户地址查询</h2>
-<p><code>GET api/v1/account/address</code></p>
+<p><code>GET api/v1/account/query?accountId=XXX</code></p>
 
 <p><strong>请求参数</strong></p>
 
@@ -1510,13 +1147,13 @@
 </tr>
 <tr>
 <td>page</td>
-<td></td>
+<td>false</td>
 <td>int</td>
 <td>页号</td>
 </tr>
 <tr>
 <td>limit</td>
-<td></td>
+<td>false</td>
 <td>int</td>
 <td>一页多少条记录</td>
 </tr>
@@ -1557,369 +1194,6 @@
 <td>链地址</td>
 </tr>
 </tbody></table>
-<h2 id='c3374f539c'>账户冻结</h2>
-<p><code>POST api/v1/account/frozen/function</code></p>
-
-<p><strong>请求参数</strong></p>
-
-<table><thead>
-<tr>
-<th><strong>参数</strong></th>
-<th><strong>是否必须</strong></th>
-<th><strong>类型</strong></th>
-<th><strong>说明</strong></th>
-</tr>
-</thead><tbody>
-<tr>
-<td>apiKey</td>
-<td>true</td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td>accountId</td>
-<td>true</td>
-<td>string</td>
-<td>账户 ID，具有唯一性性</td>
-</tr>
-<tr>
-<td>function</td>
-<td>false</td>
-<td>int</td>
-<td>账户功能：1（充值）、2（提现）、3（转账）、0（所有功能）；默认 3</td>
-</tr>
-<tr>
-<td>symbol</td>
-<td>false</td>
-<td></td>
-<td>代币名称，默认所有代币</td>
-</tr>
-<tr>
-<td>startTime</td>
-<td>false</td>
-<td></td>
-<td>开始冻结时间（秒）</td>
-</tr>
-<tr>
-<td>endTime</td>
-<td>false</td>
-<td></td>
-<td>结束冻结时间（秒）</td>
-</tr>
-</tbody></table>
-
-<p><strong>返回参数</strong></p>
-
-<table><thead>
-<tr>
-<th><strong>参数</strong></th>
-<th><strong>类型</strong></th>
-<th><strong>说明</strong></th>
-</tr>
-</thead><tbody>
-</tbody></table>
-<h2 id='4cb21fcc74'>账户解封</h2>
-<p><code>POST api/v1/account/unfrozen/function</code></p>
-
-<p><strong>请求参数</strong></p>
-
-<table><thead>
-<tr>
-<th><strong>参数</strong></th>
-<th><strong>是否必须</strong></th>
-<th><strong>类型</strong></th>
-<th><strong>说明</strong></th>
-</tr>
-</thead><tbody>
-<tr>
-<td>apiKey</td>
-<td>true</td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td>accountId</td>
-<td>true</td>
-<td></td>
-<td>账户 ID，具有唯一性</td>
-</tr>
-<tr>
-<td>function</td>
-<td>false</td>
-<td></td>
-<td>账户功能：1（充值）、2（提现）、3（转账）、0（所有功能）；默认 3</td>
-</tr>
-<tr>
-<td>coin</td>
-<td>false</td>
-<td></td>
-<td>代币名称，默认所有代币</td>
-</tr>
-<tr>
-<td>startTime</td>
-<td>false</td>
-<td></td>
-<td>开始解封时间（秒）</td>
-</tr>
-<tr>
-<td>endTime</td>
-<td>false</td>
-<td></td>
-<td>结束解封时间（秒）</td>
-</tr>
-</tbody></table>
-
-<p><strong>返回参数</strong></p>
-
-<table><thead>
-<tr>
-<th><strong>参数</strong></th>
-<th><strong>类型</strong></th>
-<th><strong>说明</strong></th>
-</tr>
-</thead><tbody>
-</tbody></table>
-<h2 id='6bde6cd88d'>冻结账户资产</h2>
-<p><code>POST api/v1/account/frozen/assets</code></p>
-
-<p><strong>请求参数</strong></p>
-
-<table><thead>
-<tr>
-<th><strong>参数</strong></th>
-<th><strong>是否必须</strong></th>
-<th><strong>类型</strong></th>
-<th><strong>说明</strong></th>
-</tr>
-</thead><tbody>
-<tr>
-<td>apiKey</td>
-<td>true</td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td>accountId</td>
-<td>true</td>
-<td>string</td>
-<td>账户 ID，具有唯一性</td>
-</tr>
-<tr>
-<td>symbol</td>
-<td>false</td>
-<td></td>
-<td>代币名称，默认所有代币</td>
-</tr>
-<tr>
-<td>qty</td>
-<td>false</td>
-<td></td>
-<td>数量，默认全部</td>
-</tr>
-<tr>
-<td>startTime</td>
-<td>false</td>
-<td></td>
-<td>开始冻结时间（秒）</td>
-</tr>
-<tr>
-<td>endTime</td>
-<td>false</td>
-<td></td>
-<td>结束冻结时间（秒）</td>
-</tr>
-</tbody></table>
-
-<p><strong>返回参数</strong></p>
-
-<table><thead>
-<tr>
-<th><strong>参数</strong></th>
-<th><strong>类型</strong></th>
-<th><strong>说明</strong></th>
-</tr>
-</thead><tbody>
-</tbody></table>
-<h2 id='e9e9bc1fd1'>解冻账户资产</h2>
-<p><code>POST api/v1/account/unfrozen/assets</code></p>
-
-<p><strong>请求参数</strong></p>
-
-<table><thead>
-<tr>
-<th><strong>参数</strong></th>
-<th><strong>是否必须</strong></th>
-<th><strong>类型</strong></th>
-<th><strong>说明</strong></th>
-</tr>
-</thead><tbody>
-<tr>
-<td>apiKey</td>
-<td>true</td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td>accountId</td>
-<td>true</td>
-<td></td>
-<td>账户 ID，具有唯一性</td>
-</tr>
-<tr>
-<td>symbol</td>
-<td>false</td>
-<td></td>
-<td>代币名称，默认所有代币</td>
-</tr>
-<tr>
-<td>qty</td>
-<td>false</td>
-<td></td>
-<td>数量，默认全部</td>
-</tr>
-<tr>
-<td>startTime</td>
-<td>false</td>
-<td></td>
-<td>开始解冻时间（秒）</td>
-</tr>
-<tr>
-<td>endTime</td>
-<td>false</td>
-<td></td>
-<td>结束解冻时间（秒）</td>
-</tr>
-</tbody></table>
-
-<p><strong>返回参数</strong></p>
-
-<table><thead>
-<tr>
-<th><strong>参数</strong></th>
-<th><strong>类型</strong></th>
-<th><strong>说明</strong></th>
-</tr>
-</thead><tbody>
-</tbody></table>
-<h2 id='97478d5ec5'>账户状态查询</h2>
-<p><code>GET api/v1/account/status</code></p>
-
-<p><strong>请求参数</strong></p>
-
-<table><thead>
-<tr>
-<th><strong>参数</strong></th>
-<th><strong>是否必须</strong></th>
-<th><strong>类型</strong></th>
-<th><strong>说明</strong></th>
-</tr>
-</thead><tbody>
-<tr>
-<td>apiKey</td>
-<td>true</td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td>accountId</td>
-<td>true</td>
-<td>string</td>
-<td>账户 ID，具有唯一性</td>
-</tr>
-</tbody></table>
-
-<p><strong>返回参数</strong></p>
-
-<table><thead>
-<tr>
-<th><strong>参数</strong></th>
-<th><strong>类型</strong></th>
-<th><strong>说明</strong></th>
-</tr>
-</thead><tbody>
-<tr>
-<td>list&gt;function</td>
-<td></td>
-<td>账户功能：1（充值）、2（提现）、3（转账）、0（所有功能）；默认 3</td>
-</tr>
-<tr>
-<td>list&gt;functionStatus</td>
-<td></td>
-<td>功能状态：normal（正常）；frozen（冻结）</td>
-</tr>
-<tr>
-<td>list&gt;startTime</td>
-<td></td>
-<td>开始冻结时间（秒）</td>
-</tr>
-<tr>
-<td>list&gt;endTime</td>
-<td></td>
-<td>结束冻结时间（秒）</td>
-</tr>
-</tbody></table>
-<h2 id='ad99019139'>账户资产查询</h2>
-<p><code>GET api/v1/account/assets</code></p>
-
-<p><strong>请求参数</strong></p>
-
-<table><thead>
-<tr>
-<th><strong>参数</strong></th>
-<th><strong>是否必须</strong></th>
-<th><strong>类型</strong></th>
-<th><strong>说明</strong></th>
-</tr>
-</thead><tbody>
-<tr>
-<td>apiKey</td>
-<td>true</td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td>accountId</td>
-<td>true</td>
-<td>string</td>
-<td>账户 ID，具有唯一性</td>
-</tr>
-</tbody></table>
-
-<p><strong>返回参数</strong></p>
-
-<table><thead>
-<tr>
-<th><strong>参数</strong></th>
-<th><strong>类型</strong></th>
-<th><strong>说明</strong></th>
-</tr>
-</thead><tbody>
-<tr>
-<td>list&gt;symbol</td>
-<td></td>
-<td>代币名称</td>
-</tr>
-<tr>
-<td>list&gt;assetsStatus</td>
-<td></td>
-<td>代币状态：normal（正常）；frozen（冻结）</td>
-</tr>
-<tr>
-<td>list&gt;qty</td>
-<td></td>
-<td>冻结数量</td>
-</tr>
-<tr>
-<td>list&gt;StartTime</td>
-<td></td>
-<td>开始冻结时间（秒）</td>
-</tr>
-<tr>
-<td>list&gt;EndTime</td>
-<td></td>
-<td>结束冻结时间（秒）</td>
-</tr>
-</tbody></table>
 <h1 id='82526d367f'>充值功能</h1><h2 id='b3114995fd'>获取充值地址</h2>
 <p><code>GET api/v1/account/depositAddress</code></p>
 
@@ -1936,13 +1210,13 @@
 <tr>
 <td>accountId</td>
 <td>true</td>
-<td></td>
+<td>string</td>
 <td>账户 id，具有唯一性</td>
 </tr>
 <tr>
 <td>network</td>
 <td>true</td>
-<td></td>
+<td>string</td>
 <td>转账网络</td>
 </tr>
 </tbody></table>
@@ -1958,11 +1232,28 @@
 </thead><tbody>
 <tr>
 <td>chainAddress</td>
-<td></td>
+<td>string</td>
 <td>地址</td>
 </tr>
 </tbody></table>
-<h1 id='6c2fd6e7fd'>所有链-所有币</h1><h2 id='483a1a428c'>获取所有链</h2>
+
+<blockquote>
+<p>返回示例</p>
+</blockquote>
+<div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="p">{</span>
+    <span class="dl">"</span><span class="s2">code</span><span class="dl">"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">data</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">0xF976F480a1c4b6F082f6867870B906A1CbB10D16</span><span class="dl">"</span>
+<span class="p">}</span>
+
+</code></pre></div>
+<blockquote>
+</blockquote>
+<div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="p">{</span>
+    <span class="dl">"</span><span class="s2">code</span><span class="dl">"</span><span class="p">:</span> <span class="mi">6</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">message</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">该账户未注册或不属于您的机构</span><span class="dl">"</span>
+<span class="p">}</span>
+
+</code></pre></div><h1 id='6c2fd6e7fd'>所有链-所有币</h1><h2 id='483a1a428c'>获取所有链</h2>
 <p><code>GET api/v1/config/chain/list</code></p>
 
 <p><strong>返回参数:</strong></p>
@@ -2207,43 +1498,43 @@
 </thead><tbody>
 <tr>
 <td>thirdId</td>
-<td>是</td>
+<td>true</td>
 <td>String</td>
 <td>三方订单 id</td>
 </tr>
 <tr>
 <td>accout</td>
-<td>是</td>
+<td>true</td>
 <td>String</td>
 <td>提现账户 id</td>
 </tr>
 <tr>
 <td>symbol</td>
-<td>是</td>
+<td>true</td>
 <td>String</td>
 <td>token</td>
 </tr>
 <tr>
 <td>amount</td>
-<td>是</td>
+<td>true</td>
 <td>String</td>
 <td>数量</td>
 </tr>
 <tr>
 <td>chain</td>
-<td>是</td>
+<td>true</td>
 <td>String</td>
 <td>链名称</td>
 </tr>
 <tr>
 <td>addr</td>
-<td>是</td>
+<td>true</td>
 <td>String</td>
 <td>提现地址</td>
 </tr>
 <tr>
 <td>isSync</td>
-<td>是</td>
+<td>true</td>
 <td>Boolean</td>
 <td>是否同步执行</td>
 </tr>
@@ -2274,37 +1565,37 @@
 </thead><tbody>
 <tr>
 <td>code</td>
-<td>是</td>
+<td>true</td>
 <td>Integer</td>
 <td>0 为 ok 其余为错误</td>
 </tr>
 <tr>
 <td>msg</td>
-<td>是</td>
+<td>true</td>
 <td>String</td>
 <td>错误描述</td>
 </tr>
 <tr>
 <td>data</td>
-<td>是</td>
+<td>true</td>
 <td>Object</td>
 <td></td>
 </tr>
 <tr>
 <td>dataOrderId</td>
-<td>是</td>
+<td>true</td>
 <td>String</td>
 <td>订单 id</td>
 </tr>
 <tr>
 <td>dataThirdId</td>
-<td>是</td>
+<td>true</td>
 <td>String</td>
 <td>三方订单 id</td>
 </tr>
 <tr>
 <td>dataSucess</td>
-<td>是</td>
+<td>true</td>
 <td>Boolean</td>
 <td>是否成功</td>
 </tr>
@@ -2329,61 +1620,61 @@
 </thead><tbody>
 <tr>
 <td>transfers</td>
-<td>是</td>
-<td></td>
+<td>true</td>
+<td>String</td>
 <td>请求转账结构体数组</td>
 </tr>
 <tr>
 <td>transfersFromAccout</td>
-<td>是</td>
+<td>true</td>
 <td>String</td>
 <td>转出账户</td>
 </tr>
 <tr>
 <td>transfersToAccout</td>
-<td>是</td>
+<td>true</td>
 <td>String</td>
 <td>转入账户</td>
 </tr>
 <tr>
 <td>transfersThirdId</td>
-<td>是</td>
+<td>true</td>
 <td>String</td>
-<td>外部订单id(重复不处理)</td>
+<td>外部订单 id(重复不处理)</td>
 </tr>
 <tr>
 <td>transfersSymbol</td>
-<td>是</td>
+<td>true</td>
 <td>String</td>
 <td>代币名称</td>
 </tr>
 <tr>
 <td>transfersAmount</td>
-<td>是</td>
+<td>true</td>
 <td>String</td>
 <td>转账金额</td>
 </tr>
 <tr>
 <td>transfersCallBack</td>
-<td>否</td>
+<td>false</td>
 <td>String</td>
 <td>转账成功回调地址</td>
 </tr>
 <tr>
 <td>transfersExt</td>
-<td>否</td>
+<td>false</td>
 <td>String</td>
 <td>透传参数</td>
 </tr>
 <tr>
 <td>isSync</td>
-<td>是</td>
+<td>true</td>
 <td>Boolean</td>
 <td>是否同步执行</td>
 </tr>
 <tr>
 <td>isTransaction</td>
-<td>是</td>
+<td>true</td>
 <td>Boolean</td>
 <td>是否整体做为事务</td>
 </tr>
@@ -2426,7 +1717,7 @@
 <tr>
 <td>code</td>
 <td>Integer</td>
-<td>状态码0为处理成功其余为错误</td>
+<td>状态码 0 为处理成功其余为错误</td>
 </tr>
 <tr>
 <td>msg</td>
@@ -2441,12 +1732,12 @@
 <tr>
 <td>dataOrderId</td>
 <td>String</td>
-<td>内部订单id</td>
+<td>内部订单 id</td>
 </tr>
 <tr>
 <td>dataThirdId</td>
 <td>String</td>
-<td>三方订单id</td>
+<td>三方订单 id</td>
 </tr>
 <tr>
 <td>dataSuccess</td>
@@ -2485,21 +1776,21 @@
 </thead><tbody>
 <tr>
 <td>params</td>
-<td>是</td>
+<td>true</td>
 <td>Array</td>
-<td>查询数组一次最多支持查询100条</td>
+<td>查询数组一次最多支持查询 100 条</td>
 </tr>
 <tr>
 <td>paramsThirdId</td>
-<td>是</td>
+<td>true</td>
 <td>String</td>
-<td>三方订单id</td>
+<td>三方订单 id</td>
 </tr>
 <tr>
 <td>paramsOrderId</td>
-<td>是</td>
+<td>true</td>
 <td>String</td>
-<td>内部订单id</td>
+<td>内部订单 id</td>
 </tr>
 </tbody></table>
 <div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="p">{</span>
@@ -2527,121 +1818,121 @@
 </thead><tbody>
 <tr>
 <td>code</td>
-<td>是</td>
+<td>true</td>
 <td>Integer</td>
-<td>状态码0为正常</td>
+<td>状态码 0 为正常</td>
 </tr>
 <tr>
 <td>msg</td>
-<td>是</td>
+<td>true</td>
 <td>String</td>
 <td>信息</td>
 </tr>
 <tr>
 <td>Data</td>
-<td>是</td>
+<td>true</td>
 <td>Array</td>
 <td></td>
 </tr>
 <tr>
 <td>DataOrderId</td>
-<td>是</td>
+<td>true</td>
 <td>String</td>
-<td>订单id</td>
+<td>订单 id</td>
 </tr>
 <tr>
 <td>DataOrderType</td>
-<td>是</td>
+<td>true</td>
 <td>Integer</td>
-<td>订单类型1充值订单2转账订单3提现订单</td>
+<td>订单类型 1 充值订单 2 转账订单 3 提现订单</td>
 </tr>
 <tr>
 <td>DataFrom</td>
-<td>是</td>
+<td>true</td>
 <td>String</td>
 <td>链上转出地址</td>
 </tr>
 <tr>
 <td>DataTo</td>
-<td>是</td>
+<td>true</td>
 <td>String</td>
 <td>链上转入地址</td>
 </tr>
 <tr>
 <td>DataTxHash</td>
-<td>是</td>
+<td>true</td>
 <td>String</td>
-<td>链上交易hash</td>
+<td>链上交易 hash</td>
 </tr>
 <tr>
 <td>DataStatus</td>
-<td>是</td>
+<td>true</td>
 <td>Integer</td>
-<td>0处理中1处理成功 2处理出错3处理中</td>
+<td>0 处理中 1 处理成功 2 处理出错 3 处理中</td>
 </tr>
 <tr>
 <td>DataMessage</td>
-<td>是</td>
+<td>true</td>
 <td>String</td>
 <td></td>
 </tr>
 <tr>
 <td>DataThirdId</td>
-<td>是</td>
+<td>true</td>
 <td>String</td>
-<td>三方订单id</td>
+<td>三方订单 id</td>
 </tr>
 <tr>
 <td>DataCreateTime</td>
-<td>是</td>
+<td>true</td>
 <td>Integer</td>
 <td>创建时间</td>
 </tr>
 <tr>
 <td>DataUpdateTime</td>
-<td>是</td>
+<td>true</td>
 <td>Integer</td>
 <td>更新时间</td>
 </tr>
 <tr>
 <td>DataCallBack</td>
-<td>是</td>
+<td>true</td>
 <td>String</td>
-<td>回调url</td>
+<td>回调 url</td>
 </tr>
 <tr>
 <td>DataExt</td>
-<td>是</td>
+<td>true</td>
 <td>String</td>
 <td>透传参数</td>
 </tr>
 <tr>
 <td>DataFromUid</td>
-<td>是</td>
+<td>true</td>
 <td>String</td>
-<td>转出内部id</td>
+<td>转出内部 id</td>
 </tr>
 <tr>
 <td>DataToUid</td>
-<td>是</td>
+<td>true</td>
 <td>String</td>
-<td>转入内部id</td>
+<td>转入内部 id</td>
 </tr>
 <tr>
 <td>DataAmount</td>
-<td>是</td>
+<td>true</td>
 <td>String</td>
 <td>金额</td>
 </tr>
 <tr>
 <td>DataSymbol</td>
-<td>是</td>
+<td>true</td>
 <td>String</td>
 <td>代币名称</td>
 </tr>
 <tr>
 <td>DataChain</td>
-<td>是</td>
+<td>true</td>
 <td>String</td>
 <td>链名称</td>
 </tr>
@@ -2706,25 +1997,25 @@
 <tr>
 <td>accountId</td>
 <td>true</td>
-<td>String</td>
-<td>账户id，具有唯一性</td>
+<td>string</td>
+<td>账户 id，具有唯一性</td>
 </tr>
 <tr>
 <td>addr</td>
 <td>true</td>
-<td>String</td>
-<td>用户的HuiOne链地址</td>
+<td>string</td>
+<td>用户的 HuiOne 链地址</td>
 </tr>
 <tr>
 <td>name</td>
 <td>true</td>
-<td>String</td>
+<td>string</td>
 <td>代币名称</td>
 </tr>
 <tr>
 <td>symbol</td>
 <td>true</td>
-<td>String</td>
+<td>string</td>
 <td>代币标识</td>
 </tr>
 <tr>
@@ -2736,13 +2027,13 @@
 <tr>
 <td>minter</td>
 <td>true</td>
-<td>String</td>
-<td>minter地址</td>
+<td>string</td>
+<td>minter 地址</td>
 </tr>
 <tr>
 <td>operator</td>
 <td>true</td>
-<td>String</td>
+<td>string</td>
 <td>操作员地址</td>
 </tr>
 <tr>
@@ -2754,7 +2045,7 @@
 <tr>
 <td>receiver</td>
 <td>true</td>
-<td>String</td>
+<td>string</td>
 <td>接收地址</td>
 </tr>
 <tr>
@@ -2772,8 +2063,8 @@
 <tr>
 <td>iconAddress</td>
 <td>false</td>
-<td>String</td>
-<td>代币icon地址（完整url地址）</td>
+<td>string</td>
+<td>代币 icon 地址（完整 url 地址）</td>
 </tr>
 <tr>
 <td>taxFee</td>
@@ -2782,7 +2073,7 @@
 <td>手续费-百万分之（适用通缩、闪电贷两种代币模型）</td>
 </tr>
 <tr>
-<td>bonueFee</td>
+<td>bonusFee</td>
 <td>false</td>
 <td>int</td>
 <td>分红比例-百万分之（适用通缩模型）</td>
@@ -2821,13 +2112,13 @@
 <td>accountId</td>
 <td>true</td>
 <td>String</td>
-<td>账户id，具有唯一性</td>
+<td>账户 id，具有唯一性</td>
 </tr>
 <tr>
 <td>orderId</td>
 <td>true</td>
 <td>String</td>
-<td>订单ID</td>
+<td>订单 ID</td>
 </tr>
 </tbody></table>
 
@@ -2863,13 +2154,13 @@
 <td>accountId</td>
 <td>true</td>
 <td>String</td>
-<td>账户id，具有唯一性</td>
+<td>账户 id，具有唯一性</td>
 </tr>
 <tr>
 <td>orderId</td>
 <td>true</td>
 <td>String</td>
-<td>订单ID</td>
+<td>订单 ID</td>
 </tr>
 </tbody></table>
 
@@ -2885,7 +2176,7 @@
 <tr>
 <td>tokenType</td>
 <td>int</td>
-<td>代币标准；默认1:ERC20；2:ERC721；3:ERC1155</td>
+<td>代币标准；默认 1:ERC20；2:ERC721；3:ERC1155</td>
 </tr>
 <tr>
 <td>holders</td>
@@ -2895,7 +2186,7 @@
 <tr>
 <td>accountId</td>
 <td>String</td>
-<td>账户id，发币请求唯一ID</td>
+<td>账户 id，发币请求唯一 ID</td>
 </tr>
 <tr>
 <td>decimal</td>
@@ -2925,7 +2216,7 @@
 <tr>
 <td>icon</td>
 <td>String</td>
-<td>代币icon地址</td>
+<td>代币 icon 地址</td>
 </tr>
 <tr>
 <td>contract</td>
@@ -2965,7 +2256,7 @@
 <tr>
 <td>model</td>
 <td>int</td>
-<td>代币模型1:基础模型；2:快照模型；3:治理投票模型；4:闪电贷模型；5:燃烧模型；6:增发模型；7；通缩模型</td>
+<td>代币模型 1:基础模型；2:快照模型；3:治理投票模型；4:闪电贷模型；5:燃烧模型；6:增发模型；7；通缩模型</td>
 </tr>
 <tr>
 <td>taxFee</td>
@@ -3025,7 +2316,7 @@
 <td>accountId</td>
 <td>true</td>
 <td>String</td>
-<td>账户id，具有唯一性</td>
+<td>账户 id，具有唯一性</td>
 </tr>
 </tbody></table>
 
@@ -3041,7 +2332,7 @@
 <tr>
 <td>orderId</td>
 <td>String</td>
-<td>订单ID</td>
+<td>订单 ID</td>
 </tr>
 <tr>
 <td>name</td>
@@ -3064,7 +2355,16 @@
 <td>创建时间</td>
 </tr>
 </tbody></table>
-<h1 id='token'>代币管理 token</h1><h2 id='e63d65c2dc'>查询已发代币列表</h2>
+<h1 id='token'>代币管理 token</h1>
+<blockquote>
+<p>GET 请求的 body 中要有：</p>
+</blockquote>
+<div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="p">{</span>
+    <span class="dl">"</span><span class="s2">apiKey</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">gX3bWaCYWXx7</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">nonce</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">{{nonce}}</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">verified</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">{{verify}}</span><span class="dl">"</span>
+<span class="p">}</span>
+</code></pre></div><h2 id='e63d65c2dc'>查询已发代币列表</h2>
 <p>查询某个账户 ID 下所发代币的代币列表</p>
 
 <p><code>GET api/v1/coin-manage/tokenList</code></p>
@@ -3101,7 +2401,7 @@
 <td>code</td>
 <td>true</td>
 <td>string</td>
-<td>http 错误码，200 为正确</td>
+<td>0 为正确</td>
 </tr>
 <tr>
 <td>message</td>
@@ -3113,11 +2413,32 @@
 <td>data</td>
 <td>true</td>
 <td>string</td>
-<td>json 字符串，可转化为代币详情数组，数组中每个元素是代币详情结构体</td>
+<td>json 字符串，可转化为代币数组，数组中每个元素是代币结构体</td>
 </tr>
 </tbody></table>
 
-<p>代币详情结构体如下定义</p>
+<p>代币结构体如下定义</p>
+
+<table><thead>
+<tr>
+<th>BaseInfo</th>
+<th>struct</th>
+<th>代币基础详情</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>HolderCount</td>
+<td>int</td>
+<td>代币持有者数量</td>
+</tr>
+<tr>
+<td>Status</td>
+<td>int</td>
+<td>代币状态，是否被禁止交易（0-暂停交易 1-正常交易）</td>
+</tr>
+</tbody></table>
+
+<p>代币基础详情结构体如下定义</p>
 
 <table><thead>
 <tr>
@@ -3152,7 +2473,28 @@
 <td>代币总供应量</td>
 </tr>
 </tbody></table>
-<h2 id='efd247e805'>查询代币详情</h2>
+
+<blockquote>
+<p>返回的数据示例如下</p>
+</blockquote>
+<div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="p">{</span>
+    <span class="dl">"</span><span class="s2">code</span><span class="dl">"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">message</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">success</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">data</span><span class="dl">"</span><span class="p">:[{</span>
+        <span class="dl">"</span><span class="s2">BaseInfo</span><span class="dl">"</span><span class="p">:</span> <span class="p">{</span>
+            <span class="dl">"</span><span class="s2">Id</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">407</span><span class="dl">"</span><span class="p">,</span>
+            <span class="dl">"</span><span class="s2">Addr</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">0x14b9f3762a6a99e02bf3032b6b4f494f4ba54e60</span><span class="dl">"</span><span class="p">,</span>  <span class="c1">//地址</span>
+            <span class="dl">"</span><span class="s2">Name</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">3月1日基础代币01</span><span class="dl">"</span><span class="p">,</span>  <span class="c1">//名称</span>
+            <span class="dl">"</span><span class="s2">Symbol</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">thira</span><span class="dl">"</span><span class="p">,</span>
+            <span class="dl">"</span><span class="s2">Decimals</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">7</span><span class="dl">"</span><span class="p">,</span>
+            <span class="dl">"</span><span class="s2">Totoal_Supply</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">1000010000000</span><span class="dl">"</span><span class="p">,</span>
+            <span class="dl">"</span><span class="s2">Create_Time</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">2023-03-01 02:42:12</span><span class="dl">"</span>
+        <span class="p">},</span>
+        <span class="dl">"</span><span class="s2">HolderCount</span><span class="dl">"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+        <span class="dl">"</span><span class="s2">Status</span><span class="dl">"</span><span class="p">:</span> <span class="mi">1</span>
+    <span class="p">}]</span>
+  <span class="p">}</span>
+</code></pre></div><h2 id='efd247e805'>查询代币详情</h2>
 <p>查询某个代币的代币详情</p>
 
 <p><code>GET api/v1/coin-manage/tokenDetail</code></p>
@@ -3189,7 +2531,7 @@
 <td>code</td>
 <td>true</td>
 <td>string</td>
-<td>http 错误码，200 为正确</td>
+<td>0 为正确</td>
 </tr>
 <tr>
 <td>message</td>
@@ -3201,12 +2543,29 @@
 <td>data</td>
 <td>true</td>
 <td>string</td>
-<td>json 字符串，可转化为代币详情结构体</td>
+<td>json 字符串，可转化为代币基础详情结构体</td>
 </tr>
 </tbody></table>
 
-<p>代币详情结构体同上</p>
-<h2 id='f6b200063e'>查询代币的持有者信息</h2>
+<p>代币基础详情结构体同上</p>
+
+<blockquote>
+<p>返回示例如下：</p>
+</blockquote>
+<div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="p">{</span>
+    <span class="dl">"</span><span class="s2">code</span><span class="dl">"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">message</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">success</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">data</span><span class="dl">"</span><span class="p">{</span>
+        <span class="dl">"</span><span class="s2">Id</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">413</span><span class="dl">"</span><span class="p">,</span>
+        <span class="dl">"</span><span class="s2">Addr</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">0x610e2ac7849720c9e89a5c50f81c3370987451c7</span><span class="dl">"</span><span class="p">,</span>
+        <span class="dl">"</span><span class="s2">Name</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">3月1日通缩代币07</span><span class="dl">"</span><span class="p">,</span>
+        <span class="dl">"</span><span class="s2">Symbol</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">thirdf</span><span class="dl">"</span><span class="p">,</span>
+        <span class="dl">"</span><span class="s2">Decimals</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">11</span><span class="dl">"</span><span class="p">,</span>
+        <span class="dl">"</span><span class="s2">Totoal_Supply</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">10000700000000000</span><span class="dl">"</span><span class="p">,</span>
+        <span class="dl">"</span><span class="s2">Create_Time</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">2023-03-01 02:59:47</span><span class="dl">"</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div><h2 id='f6b200063e'>查询代币的持有者信息</h2>
 <p><code>GET api/v1/coin-manage/holderInfos</code></p>
 
 <p><strong>请求参数:</strong></p>
@@ -3241,7 +2600,7 @@
 <td>code</td>
 <td>true</td>
 <td>string</td>
-<td>http 错误码，200 为正确</td>
+<td>0 为正确</td>
 </tr>
 <tr>
 <td>message</td>
@@ -3256,7 +2615,17 @@
 <td>json 字符串，可以转换为持有者结构体</td>
 </tr>
 </tbody></table>
-
+<div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="p">[</span>
+  <span class="p">{</span>
+    <span class="na">Id</span><span class="p">:</span> <span class="dl">"</span><span class="s2">1063</span><span class="dl">"</span><span class="p">,</span>
+    <span class="na">Addr</span><span class="p">:</span> <span class="dl">"</span><span class="s2">0x8e93ed5792a279dc3ac72c5bc24fe24da7d9b5d0</span><span class="dl">"</span><span class="p">,</span>
+    <span class="na">ContractAddr</span><span class="p">:</span> <span class="dl">"</span><span class="s2">0x610e2ac7849720c9e89a5c50f81c3370987451c7</span><span class="dl">"</span><span class="p">,</span>
+    <span class="na">Balance</span><span class="p">:</span> <span class="dl">"</span><span class="s2">10000700000000000</span><span class="dl">"</span><span class="p">,</span>
+    <span class="na">Height</span><span class="p">:</span> <span class="dl">"</span><span class="s2">3534742</span><span class="dl">"</span><span class="p">,</span>
+    <span class="na">Balance_Origin</span><span class="p">:</span> <span class="dl">""</span><span class="p">,</span>
+  <span class="p">},</span>
+<span class="p">];</span>
+</code></pre></div>
 <p>持有者结构体如下定义</p>
 
 <table><thead>
@@ -3326,7 +2695,7 @@
 <tr>
 <td>code</td>
 <td>string</td>
-<td>http 错误码，200 为正确</td>
+<td>0 为正确</td>
 </tr>
 <tr>
 <td>message</td>
@@ -3339,7 +2708,12 @@
 <td>代币余额（带精度截断）</td>
 </tr>
 </tbody></table>
-<h2 id='9611f333da'>查询账户下代币的状态</h2>
+<div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="p">{</span>
+    <span class="dl">"</span><span class="s2">code</span><span class="dl">"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">message</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">success</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">data</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">10000700000000000</span><span class="dl">"</span>
+<span class="p">}</span>
+</code></pre></div><h2 id='9611f333da'>查询账户下代币的状态</h2>
 <p><code>POST api/v1/coin-manage/tokenStatus</code></p>
 
 <p><strong>请求参数:</strong></p>
@@ -3365,7 +2739,14 @@
 <td>账户 ID</td>
 </tr>
 </tbody></table>
-
+<div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="p">{</span>
+    <span class="dl">"</span><span class="s2">contractAddr</span><span class="dl">"</span><span class="p">:</span><span class="dl">"</span><span class="s2">0x610e2ac7849720c9e89a5c50f81c3370987451c7</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">accountId</span><span class="dl">"</span><span class="p">:</span><span class="dl">"</span><span class="s2">LDgtR1ZQdFiCbBY</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">apiKey</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">gX3bWaCYWXx7</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">nonce</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">{{nonce}}</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">verified</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">{{verify}}</span><span class="dl">"</span>
+<span class="p">}</span>
+</code></pre></div>
 <p><strong>返回参数:</strong></p>
 
 <table><thead>
@@ -3378,7 +2759,7 @@
 <tr>
 <td>code</td>
 <td>string</td>
-<td>http 错误码，200 为正确</td>
+<td>0 为正确</td>
 </tr>
 <tr>
 <td>message</td>
@@ -3391,7 +2772,14 @@
 <td>json 字符串，可转化为状态结构体</td>
 </tr>
 </tbody></table>
-
+<div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="p">{</span>
+    <span class="dl">"</span><span class="s2">IsBlack</span><span class="dl">"</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">IsBlackIn</span><span class="dl">"</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">IsBlackOut</span><span class="dl">"</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">NowFrozenAmount</span><span class="dl">"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">WaitFrozenAmount</span><span class="dl">"</span><span class="p">:</span> <span class="mi">0</span>
+<span class="p">}</span>
+</code></pre></div>
 <p>状态结构体如下定义</p>
 
 <table><thead>
@@ -3447,7 +2835,13 @@
 <td>代币地址</td>
 </tr>
 </tbody></table>
-
+<div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="p">{</span>
+    <span class="dl">"</span><span class="s2">contractAddr</span><span class="dl">"</span><span class="p">:</span><span class="dl">"</span><span class="s2">0x610e2ac7849720c9e89a5c50f81c3370987451c7</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">apiKey</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">gX3bWaCYWXx7</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">nonce</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">{{nonce}}</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">verified</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">{{verify}}</span><span class="dl">"</span>
+<span class="p">}</span>
+</code></pre></div>
 <p><strong>返回参数:</strong></p>
 
 <table><thead>
@@ -3462,7 +2856,7 @@
 <td>code</td>
 <td>true</td>
 <td>string</td>
-<td>http 错误码，200 为正确</td>
+<td>0 为正确</td>
 </tr>
 <tr>
 <td>message</td>
@@ -3477,7 +2871,12 @@
 <td>模型枚举值</td>
 </tr>
 </tbody></table>
-
+<div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="p">{</span>
+    <span class="dl">"</span><span class="s2">code</span><span class="dl">"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">message</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">success</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">data</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">7</span><span class="dl">"</span>
+<span class="p">}</span>
+</code></pre></div>
 <p>模型枚举值定义如下：</p>
 
 <table><thead>
@@ -3551,7 +2950,13 @@
 <td>代币地址</td>
 </tr>
 </tbody></table>
-
+<div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="p">{</span>
+    <span class="dl">"</span><span class="s2">contractAddr</span><span class="dl">"</span><span class="p">:</span><span class="dl">"</span><span class="s2">0x610e2ac7849720c9e89a5c50f81c3370987451c7</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">apiKey</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">gX3bWaCYWXx7</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">nonce</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">{{nonce}}</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">verified</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">{{verify}}</span><span class="dl">"</span>
+<span class="p">}</span>
+</code></pre></div>
 <p><strong>返回参数:</strong></p>
 
 <table><thead>
@@ -3566,7 +2971,7 @@
 <td>code</td>
 <td>true</td>
 <td>string</td>
-<td>http 错误码，200 为正确</td>
+<td>0 为正确</td>
 </tr>
 <tr>
 <td>message</td>
@@ -3581,7 +2986,12 @@
 <td>返回值除以一万，就是交易费比例</td>
 </tr>
 </tbody></table>
-<h2 id='b3581d7a8c'>查询代币的奖励分红比例</h2>
+<div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="p">{</span>
+    <span class="dl">"</span><span class="s2">code</span><span class="dl">"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">message</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">success</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">data</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">35500</span><span class="dl">"</span>
+<span class="p">}</span>
+</code></pre></div><h2 id='b3581d7a8c'>查询代币的奖励分红比例</h2>
 <p><code>POST api/v1/coin-manage/bonusFee</code></p>
 
 <p><strong>请求参数：</strong></p>
@@ -3601,7 +3011,13 @@
 <td>代币地址</td>
 </tr>
 </tbody></table>
-
+<div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="p">{</span>
+    <span class="dl">"</span><span class="s2">contractAddr</span><span class="dl">"</span><span class="p">:</span><span class="dl">"</span><span class="s2">0x610e2ac7849720c9e89a5c50f81c3370987451c7</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">apiKey</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">gX3bWaCYWXx7</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">nonce</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">{{nonce}}</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">verified</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">{{verify}}</span><span class="dl">"</span>
+<span class="p">}</span>
+</code></pre></div>
 <p><strong>返回参数:</strong></p>
 
 <table><thead>
@@ -3616,7 +3032,7 @@
 <td>code</td>
 <td>true</td>
 <td>string</td>
-<td>http 错误码，200 为正确</td>
+<td>0 为正确</td>
 </tr>
 <tr>
 <td>message</td>
@@ -3631,7 +3047,12 @@
 <td>返回值除以一万，就是奖励分红比例</td>
 </tr>
 </tbody></table>
-<h2 id='a05675a208'>账户的代币交易记录查询</h2>
+<div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="p">{</span>
+    <span class="dl">"</span><span class="s2">code</span><span class="dl">"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">message</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">success</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">data</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">0</span><span class="dl">"</span>
+<span class="p">}</span>
+</code></pre></div><h2 id='a05675a208'>账户的代币交易记录查询</h2>
 <p><code>GET api/v1/coin-manage/txHistory</code></p>
 
 <p><strong>请求参数：</strong></p>
@@ -3684,7 +3105,7 @@
 <td>code</td>
 <td>true</td>
 <td>string</td>
-<td>http 错误码，200 为正确</td>
+<td>0 为正确</td>
 </tr>
 <tr>
 <td>message</td>
@@ -3699,7 +3120,51 @@
 <td>json 字符串，可以转化为交易结构体</td>
 </tr>
 </tbody></table>
-
+<div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="p">{</span>
+    <span class="dl">"</span><span class="s2">code</span><span class="dl">"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">message</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">success</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">data</span><span class="dl">"</span><span class="p">:</span> <span class="p">[</span>
+        <span class="p">{</span>
+            <span class="dl">"</span><span class="s2">Hash</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">0x0e2c1ce50d07a61616fa63154b9aa4c17b73b4c75392c2d294ae2ee33faf17bc</span><span class="dl">"</span><span class="p">,</span>
+            <span class="dl">"</span><span class="s2">OpParams</span><span class="dl">"</span><span class="p">:</span> <span class="p">{</span>
+                <span class="dl">"</span><span class="s2">op</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">UnFrozen</span><span class="dl">"</span><span class="p">,</span>
+                <span class="dl">"</span><span class="s2">addr1</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">0x8E93ed5792a279DC3Ac72C5bC24FE24Da7d9B5d0</span><span class="dl">"</span><span class="p">,</span>
+                <span class="dl">"</span><span class="s2">addr2</span><span class="dl">"</span><span class="p">:</span> <span class="dl">""</span><span class="p">,</span>
+                <span class="dl">"</span><span class="s2">value1</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">20000700000000000</span><span class="dl">"</span><span class="p">,</span>
+                <span class="dl">"</span><span class="s2">value2</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">10100699999998002</span><span class="dl">"</span><span class="p">,</span>
+                <span class="dl">"</span><span class="s2">value3</span><span class="dl">"</span><span class="p">:</span> <span class="dl">""</span>
+            <span class="p">},</span>
+            <span class="dl">"</span><span class="s2">Amount</span><span class="dl">"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+            <span class="dl">"</span><span class="s2">TxGeneral</span><span class="dl">"</span><span class="p">:</span> <span class="p">{</span>
+                <span class="dl">"</span><span class="s2">Id</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">5805</span><span class="dl">"</span><span class="p">,</span>
+                <span class="dl">"</span><span class="s2">TxType</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">0</span><span class="dl">"</span><span class="p">,</span>
+                <span class="dl">"</span><span class="s2">From</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">0x8e93ed5792a279dc3ac72c5bc24fe24da7d9b5d0</span><span class="dl">"</span><span class="p">,</span>
+                <span class="dl">"</span><span class="s2">To</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">0x610e2ac7849720c9e89a5c50f81c3370987451c7</span><span class="dl">"</span><span class="p">,</span>
+                <span class="dl">"</span><span class="s2">Hash</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">0x0e2c1ce50d07a61616fa63154b9aa4c17b73b4c75392c2d294ae2ee33faf17bc</span><span class="dl">"</span><span class="p">,</span>
+                <span class="dl">"</span><span class="s2">Index</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">0</span><span class="dl">"</span><span class="p">,</span>
+                <span class="dl">"</span><span class="s2">Value</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">0</span><span class="dl">"</span><span class="p">,</span>
+                <span class="dl">"</span><span class="s2">Input</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">0xe5df3dd00000000000000000000000008e93ed5792a279dc3ac72c5bc24fe24da7d9b5d000000000000000000000000000000000000000000000000000470e87dac25800</span><span class="dl">"</span><span class="p">,</span>
+                <span class="dl">"</span><span class="s2">Nonce</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">32</span><span class="dl">"</span><span class="p">,</span>
+                <span class="dl">"</span><span class="s2">GasPrice</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">7430083743</span><span class="dl">"</span><span class="p">,</span>
+                <span class="dl">"</span><span class="s2">GasLimit</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">8000000</span><span class="dl">"</span><span class="p">,</span>
+                <span class="dl">"</span><span class="s2">GasUsed</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">59267</span><span class="dl">"</span><span class="p">,</span>
+                <span class="dl">"</span><span class="s2">IsContract</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">1</span><span class="dl">"</span><span class="p">,</span>
+                <span class="dl">"</span><span class="s2">IsContractCreate</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">0</span><span class="dl">"</span><span class="p">,</span>
+                <span class="dl">"</span><span class="s2">BlockTime</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">1677654630</span><span class="dl">"</span><span class="p">,</span>
+                <span class="dl">"</span><span class="s2">BlockNum</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">3542264</span><span class="dl">"</span><span class="p">,</span>
+                <span class="dl">"</span><span class="s2">BlockHash</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">0x63114bc8b390ddca5f9f1537717c2931217c7c37291ccad11dbb44f00f0dd96c</span><span class="dl">"</span><span class="p">,</span>
+                <span class="dl">"</span><span class="s2">ExecStatus</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">1</span><span class="dl">"</span><span class="p">,</span>
+                <span class="dl">"</span><span class="s2">CreateTime</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">2023-03-01 07:10:43</span><span class="dl">"</span><span class="p">,</span>
+                <span class="dl">"</span><span class="s2">BlockState</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">0</span><span class="dl">"</span><span class="p">,</span>
+                <span class="dl">"</span><span class="s2">MaxFeePerGas</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">0</span><span class="dl">"</span><span class="p">,</span>
+                <span class="dl">"</span><span class="s2">BaseFee</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">0</span><span class="dl">"</span><span class="p">,</span>
+                <span class="dl">"</span><span class="s2">MaxPriorityFeePerGas</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">0</span><span class="dl">"</span><span class="p">,</span>
+                <span class="dl">"</span><span class="s2">BurntFees</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">0</span><span class="dl">"</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">]</span>
+<span class="p">}</span>
+</code></pre></div>
 <p>交易结构体定义如下</p>
 
 <table><thead>
@@ -3908,7 +3373,12 @@
 <td>账户 ID</td>
 </tr>
 </tbody></table>
-
+<div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="p">{</span>
+    <span class="dl">"</span><span class="s2">code</span><span class="dl">"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">message</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">success</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">data</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">0</span><span class="dl">"</span>
+<span class="p">}</span>
+</code></pre></div>
 <p><strong>返回参数:</strong></p>
 
 <table><thead>
@@ -3923,7 +3393,7 @@
 <td>code</td>
 <td>true</td>
 <td>string</td>
-<td>http 错误码，200 为正确</td>
+<td>0 为正确</td>
 </tr>
 <tr>
 <td>message</td>
@@ -3944,7 +3414,12 @@
 <p><strong>请求参数：</strong>无</p>
 
 <p><strong>返回参数:</strong></p>
-
+<div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="p">{</span>
+    <span class="dl">"</span><span class="s2">code</span><span class="dl">"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">message</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">success</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">data</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">3536048</span><span class="dl">"</span>
+<span class="p">}</span>
+</code></pre></div>
 <table><thead>
 <tr>
 <th><strong>参数</strong></th>
@@ -3957,7 +3432,7 @@
 <td>code</td>
 <td>true</td>
 <td>string</td>
-<td>http 错误码，200 为正确</td>
+<td>0 为正确</td>
 </tr>
 <tr>
 <td>message</td>
@@ -4007,7 +3482,7 @@
 <td>code</td>
 <td>true</td>
 <td>string</td>
-<td>http 错误码，200 为正确</td>
+<td>0 为正确</td>
 </tr>
 <tr>
 <td>message</td>
@@ -4022,7 +3497,11 @@
 <td>json 字符串，含有初始供应量和增发历史的键值对，例如：&#39;{&quot;init_coin_supply&quot;:&quot;xxx&quot;,&quot;add_coin_history&quot;:&quot;xxx&quot;}&#39;</td>
 </tr>
 </tbody></table>
-<h2 id='093505f06a'>加入黑名单</h2>
+<div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="p">{</span>
+    <span class="dl">"</span><span class="s2">init_coin_supply</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">10000700000000000</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">add_coin_history</span><span class="dl">"</span><span class="p">:</span> <span class="dl">""</span>
+<span class="p">}</span>
+</code></pre></div><h2 id='093505f06a'>加入黑名单</h2>
 <p><code>POST api/v1/coin-manage/addBlack</code></p>
 
 <p><strong>请求参数：</strong></p>
@@ -4054,7 +3533,15 @@
 <td>目标账户 ID</td>
 </tr>
 </tbody></table>
-
+<div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="p">{</span>
+    <span class="dl">"</span><span class="s2">contractAddr</span><span class="dl">"</span><span class="p">:</span><span class="dl">"</span><span class="s2">0x610e2ac7849720c9e89a5c50f81c3370987451c7</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">operatorId</span><span class="dl">"</span><span class="p">:</span><span class="dl">"</span><span class="s2">LDgtR1ZQdFiCbBY</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">targetId</span><span class="dl">"</span><span class="p">:</span><span class="dl">"</span><span class="s2">LDgtR1ZQdFiCbBY</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">apiKey</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">gX3bWaCYWXx7</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">nonce</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">{{nonce}}</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">verified</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">{{verify}}</span><span class="dl">"</span>
+<span class="p">}</span>
+</code></pre></div>
 <p><strong>返回参数:</strong></p>
 
 <table><thead>
@@ -4069,7 +3556,7 @@
 <td>code</td>
 <td>true</td>
 <td>string</td>
-<td>http 错误码，200 为正确</td>
+<td>0 为正确</td>
 </tr>
 <tr>
 <td>message</td>
@@ -4085,8 +3572,18 @@
 </tr>
 </tbody></table>
 
-<p><strong>备注</strong>：返回成功表示成功调用了合约交易，需要用返回的 data 中的 uuid 调用本页面的最后一个接口：查询合约交易的状态</p>
-<h2 id='04eda59ff6'>移出黑名单</h2>
+<p><strong>备注</strong>：返回成功表示成功调用了合约交易，需要用返回的 data 中的 requestId 调用本页面的最后一个接口：</p>
+<div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="p">{</span>
+    <span class="dl">"</span><span class="s2">from</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">0x8E93ed5792a279DC3Ac72C5bC24FE24Da7d9B5d0</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">to</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">0x610e2ac7849720c9e89a5c50f81c3370987451c7</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">data</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">0xeb794dd70000000000000000000000008e93ed5792a279dc3ac72c5bc24fe24da7d9b5d0</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">chainId</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">0x22B8</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">value</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">0x0</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">requestId</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">1677642609</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">uid</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">LDgtR1ZQdFiCbBY</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">uuid</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">1677642609</span><span class="dl">"</span>
+<span class="p">}</span>
+</code></pre></div><h2 id='04eda59ff6'>移出黑名单</h2>
 <p><code>POST api/v1/coin-manage/removeBlack</code></p>
 
 <p><strong>请求参数：</strong></p>
@@ -4118,7 +3615,15 @@
 <td>目标账户 ID</td>
 </tr>
 </tbody></table>
-
+<div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="p">{</span>
+    <span class="dl">"</span><span class="s2">contractAddr</span><span class="dl">"</span><span class="p">:</span><span class="dl">"</span><span class="s2">0x610e2ac7849720c9e89a5c50f81c3370987451c7</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">operatorId</span><span class="dl">"</span><span class="p">:</span><span class="dl">"</span><span class="s2">LDgtR1ZQdFiCbBY</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">targetId</span><span class="dl">"</span><span class="p">:</span><span class="dl">"</span><span class="s2">LDgtR1ZQdFiCbBY</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">apiKey</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">gX3bWaCYWXx7</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">nonce</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">{{nonce}}</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">verified</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">{{verify}}</span><span class="dl">"</span>
+<span class="p">}</span>
+</code></pre></div>
 <p><strong>返回参数:</strong></p>
 
 <table><thead>
@@ -4133,7 +3638,7 @@
 <td>code</td>
 <td>true</td>
 <td>string</td>
-<td>http 错误码，200 为正确</td>
+<td>0 为正确</td>
 </tr>
 <tr>
 <td>message</td>
@@ -4149,8 +3654,18 @@
 </tr>
 </tbody></table>
 
-<p><strong>备注</strong>：返回成功表示成功调用了合约交易，需要用返回的 data 中的 uuid 调用本页面的最后一个接口：查询合约交易的状态</p>
-<h2 id='c00b8b25fb'>添加转入黑名单</h2>
+<p><strong>备注</strong>：返回成功表示成功调用了合约交易，需要用返回的 data 中的 requestId 调用本页面的最后一个接口：查询合约交易的状态</p>
+<div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="p">{</span>
+    <span class="dl">"</span><span class="s2">from</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">0x8E93ed5792a279DC3Ac72C5bC24FE24Da7d9B5d0</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">to</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">0x610e2ac7849720c9e89a5c50f81c3370987451c7</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">data</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">0xd283859d0000000000000000000000008e93ed5792a279dc3ac72c5bc24fe24da7d9b5d0</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">chainId</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">0x22B8</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">value</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">0x0</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">requestId</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">1677642805</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">uid</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">LDgtR1ZQdFiCbBY</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">uuid</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">1677642805</span><span class="dl">"</span>
+<span class="p">}</span>
+</code></pre></div><h2 id='c00b8b25fb'>添加转入黑名单</h2>
 <p><code>POST api/v1/coin-manage/addBlackIn</code></p>
 
 <p><strong>请求参数：</strong></p>
@@ -4182,7 +3697,15 @@
 <td>目标账户 ID</td>
 </tr>
 </tbody></table>
-
+<div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="p">{</span>
+    <span class="dl">"</span><span class="s2">contractAddr</span><span class="dl">"</span><span class="p">:</span><span class="dl">"</span><span class="s2">0x610e2ac7849720c9e89a5c50f81c3370987451c7</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">operatorId</span><span class="dl">"</span><span class="p">:</span><span class="dl">"</span><span class="s2">LDgtR1ZQdFiCbBY</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">targetId</span><span class="dl">"</span><span class="p">:</span><span class="dl">"</span><span class="s2">LDgtR1ZQdFiCbBY</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">apiKey</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">gX3bWaCYWXx7</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">nonce</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">{{nonce}}</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">verified</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">{{verify}}</span><span class="dl">"</span>
+<span class="p">}</span>
+</code></pre></div>
 <p><strong>返回参数:</strong></p>
 
 <table><thead>
@@ -4197,7 +3720,7 @@
 <td>code</td>
 <td>true</td>
 <td>string</td>
-<td>http 错误码，200 为正确</td>
+<td>0 为正确</td>
 </tr>
 <tr>
 <td>message</td>
@@ -4213,8 +3736,18 @@
 </tr>
 </tbody></table>
 
-<p><strong>备注</strong>：返回成功表示成功调用了合约交易，需要用返回的 data 中的 uuid 调用本页面的最后一个接口：查询合约交易的状态</p>
-<h2 id='fbd1e55926'>移出转入黑名单</h2>
+<p><strong>备注</strong>：返回成功表示成功调用了合约交易，需要用返回的 data 中的 requestId 调用本页面的最后一个接口：查询合约交易的状态</p>
+<div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="p">{</span>
+    <span class="dl">"</span><span class="s2">from</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">0x8E93ed5792a279DC3Ac72C5bC24FE24Da7d9B5d0</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">to</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">0x610e2ac7849720c9e89a5c50f81c3370987451c7</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">data</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">0xf62554350000000000000000000000008e93ed5792a279dc3ac72c5bc24fe24da7d9b5d0</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">chainId</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">0x22B8</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">value</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">0x0</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">requestId</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">1677643029</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">uid</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">LDgtR1ZQdFiCbBY</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">uuid</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">1677643029</span><span class="dl">"</span>
+<span class="p">}</span>
+</code></pre></div><h2 id='fbd1e55926'>移出转入黑名单</h2>
 <p><code>POST api/v1/coin-manage/removeBlackIn</code></p>
 
 <p><strong>请求参数：</strong></p>
@@ -4246,7 +3779,15 @@
 <td>目标账户 ID</td>
 </tr>
 </tbody></table>
-
+<div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="p">{</span>
+    <span class="dl">"</span><span class="s2">contractAddr</span><span class="dl">"</span><span class="p">:</span><span class="dl">"</span><span class="s2">0x610e2ac7849720c9e89a5c50f81c3370987451c7</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">operatorId</span><span class="dl">"</span><span class="p">:</span><span class="dl">"</span><span class="s2">LDgtR1ZQdFiCbBY</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">targetId</span><span class="dl">"</span><span class="p">:</span><span class="dl">"</span><span class="s2">LDgtR1ZQdFiCbBY</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">apiKey</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">gX3bWaCYWXx7</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">nonce</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">{{nonce}}</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">verified</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">{{verify}}</span><span class="dl">"</span>
+<span class="p">}</span>
+</code></pre></div>
 <p><strong>返回参数:</strong></p>
 
 <table><thead>
@@ -4261,7 +3802,7 @@
 <td>code</td>
 <td>true</td>
 <td>string</td>
-<td>http 错误码，200 为正确</td>
+<td>0 为正确</td>
 </tr>
 <tr>
 <td>message</td>
@@ -4277,8 +3818,18 @@
 </tr>
 </tbody></table>
 
-<p><strong>备注</strong>：返回成功表示成功调用了合约交易，需要用返回的 data 中的 uuid 调用本页面的最后一个接口：查询合约交易的状态</p>
-<h2 id='bfdd9ce398'>添加转出黑名单</h2>
+<p><strong>备注</strong>：返回成功表示成功调用了合约交易，需要用返回的 data 中的 requestId 调用本页面的最后一个接口：查询合约交易的状态</p>
+<div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="p">{</span>
+    <span class="dl">"</span><span class="s2">from</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">0x8E93ed5792a279DC3Ac72C5bC24FE24Da7d9B5d0</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">to</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">0x610e2ac7849720c9e89a5c50f81c3370987451c7</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">data</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">0x409de8910000000000000000000000008e93ed5792a279dc3ac72c5bc24fe24da7d9b5d0</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">chainId</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">0x22B8</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">value</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">0x0</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">requestId</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">1677643129</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">uid</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">LDgtR1ZQdFiCbBY</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">uuid</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">1677643129</span><span class="dl">"</span>
+<span class="p">}</span>
+</code></pre></div><h2 id='bfdd9ce398'>添加转出黑名单</h2>
 <p><code>POST api/v1/coin-manage/addBlackOut</code></p>
 
 <p><strong>请求参数：</strong></p>
@@ -4310,7 +3861,15 @@
 <td>目标账户 ID</td>
 </tr>
 </tbody></table>
-
+<div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="p">{</span>
+    <span class="dl">"</span><span class="s2">contractAddr</span><span class="dl">"</span><span class="p">:</span><span class="dl">"</span><span class="s2">0x610e2ac7849720c9e89a5c50f81c3370987451c7</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">operatorId</span><span class="dl">"</span><span class="p">:</span><span class="dl">"</span><span class="s2">LDgtR1ZQdFiCbBY</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">targetId</span><span class="dl">"</span><span class="p">:</span><span class="dl">"</span><span class="s2">LDgtR1ZQdFiCbBY</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">apiKey</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">gX3bWaCYWXx7</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">nonce</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">{{nonce}}</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">verified</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">{{verify}}</span><span class="dl">"</span>
+<span class="p">}</span>
+</code></pre></div>
 <p><strong>返回参数:</strong></p>
 
 <table><thead>
@@ -4325,7 +3884,7 @@
 <td>code</td>
 <td>true</td>
 <td>string</td>
-<td>http 错误码，200 为正确</td>
+<td>0 为正确</td>
 </tr>
 <tr>
 <td>message</td>
@@ -4341,8 +3900,18 @@
 </tr>
 </tbody></table>
 
-<p><strong>备注</strong>：返回成功表示成功调用了合约交易，需要用返回的 data 中的 uuid 调用本页面的最后一个接口：查询合约交易的状态</p>
-<h2 id='38d9702fe4'>移出转出黑名单</h2>
+<p><strong>备注</strong>：返回成功表示成功调用了合约交易，需要用返回的 data 中的 requestId 调用本页面的最后一个接口：查询合约交易的状态</p>
+<div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="p">{</span>
+    <span class="dl">"</span><span class="s2">from</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">0x8E93ed5792a279DC3Ac72C5bC24FE24Da7d9B5d0</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">to</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">0x610e2ac7849720c9e89a5c50f81c3370987451c7</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">data</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">0xd0dba9440000000000000000000000008e93ed5792a279dc3ac72c5bc24fe24da7d9b5d0</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">chainId</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">0x22B8</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">value</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">0x0</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">requestId</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">1677643214</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">uid</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">LDgtR1ZQdFiCbBY</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">uuid</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">1677643214</span><span class="dl">"</span>
+<span class="p">}</span>
+</code></pre></div><h2 id='38d9702fe4'>移出转出黑名单</h2>
 <p><code>POST api/v1/coin-manage/removeBlackOut</code></p>
 
 <p><strong>请求参数：</strong></p>
@@ -4374,7 +3943,15 @@
 <td>目标账户 ID</td>
 </tr>
 </tbody></table>
-
+<div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="p">{</span>
+    <span class="dl">"</span><span class="s2">contractAddr</span><span class="dl">"</span><span class="p">:</span><span class="dl">"</span><span class="s2">0x610e2ac7849720c9e89a5c50f81c3370987451c7</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">operatorId</span><span class="dl">"</span><span class="p">:</span><span class="dl">"</span><span class="s2">LDgtR1ZQdFiCbBY</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">targetId</span><span class="dl">"</span><span class="p">:</span><span class="dl">"</span><span class="s2">LDgtR1ZQdFiCbBY</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">apiKey</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">gX3bWaCYWXx7</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">nonce</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">{{nonce}}</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">verified</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">{{verify}}</span><span class="dl">"</span>
+<span class="p">}</span>
+</code></pre></div>
 <p><strong>返回参数:</strong></p>
 
 <table><thead>
@@ -4389,7 +3966,7 @@
 <td>code</td>
 <td>true</td>
 <td>string</td>
-<td>http 错误码，200 为正确</td>
+<td>0 为正确</td>
 </tr>
 <tr>
 <td>message</td>
@@ -4405,8 +3982,18 @@
 </tr>
 </tbody></table>
 
-<p><strong>备注</strong>：返回成功表示成功调用了合约交易，需要用返回的 data 中的 uuid 调用本页面的最后一个接口：查询合约交易的状态</p>
-<h2 id='2db8b3e888'>冻结</h2>
+<p><strong>备注</strong>：返回成功表示成功调用了合约交易，需要用返回的 data 中的 requestId 调用本页面的最后一个接口：查询合约交易的状态</p>
+<div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="p">{</span>
+    <span class="dl">"</span><span class="s2">from</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">0x8E93ed5792a279DC3Ac72C5bC24FE24Da7d9B5d0</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">to</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">0x610e2ac7849720c9e89a5c50f81c3370987451c7</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">data</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">0x8f9abdf90000000000000000000000008e93ed5792a279dc3ac72c5bc24fe24da7d9b5d0</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">chainId</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">0x22B8</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">value</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">0x0</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">requestId</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">1677643287</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">uid</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">LDgtR1ZQdFiCbBY</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">uuid</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">1677643287</span><span class="dl">"</span>
+<span class="p">}</span>
+</code></pre></div><h2 id='2db8b3e888'>冻结</h2>
 <p><code>POST api/v1/coin-manage/frozen</code></p>
 
 <p><strong>请求参数：</strong></p>
@@ -4444,7 +4031,16 @@
 <td>目标账户 ID</td>
 </tr>
 </tbody></table>
-
+<div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="p">{</span>
+    <span class="dl">"</span><span class="s2">amount</span><span class="dl">"</span><span class="p">:</span><span class="dl">"</span><span class="s2">1000</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">contractAddr</span><span class="dl">"</span><span class="p">:</span><span class="dl">"</span><span class="s2">0x610e2ac7849720c9e89a5c50f81c3370987451c7</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">operatorId</span><span class="dl">"</span><span class="p">:</span><span class="dl">"</span><span class="s2">LDgtR1ZQdFiCbBY</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">targetId</span><span class="dl">"</span><span class="p">:</span><span class="dl">"</span><span class="s2">LDgtR1ZQdFiCbBY</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">apiKey</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">gX3bWaCYWXx7</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">nonce</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">{{nonce}}</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">verified</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">{{verify}}</span><span class="dl">"</span>
+<span class="p">}</span>
+</code></pre></div>
 <p><strong>返回参数:</strong></p>
 
 <table><thead>
@@ -4459,7 +4055,7 @@
 <td>code</td>
 <td>true</td>
 <td>string</td>
-<td>http 错误码，200 为正确</td>
+<td>0 为正确</td>
 </tr>
 <tr>
 <td>message</td>
@@ -4475,8 +4071,18 @@
 </tr>
 </tbody></table>
 
-<p><strong>备注</strong>：返回成功表示成功调用了合约交易，需要用返回的 data 中的 uuid 调用本页面的最后一个接口：查询合约交易的状态</p>
-<h2 id='8f79810cee'>解冻</h2>
+<p><strong>备注</strong>：返回成功表示成功调用了合约交易，需要用返回的 data 中的 requestId 调用本页面的最后一个接口：查询合约交易的状态</p>
+<div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="p">{</span>
+    <span class="dl">"</span><span class="s2">from</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">0x8E93ed5792a279DC3Ac72C5bC24FE24Da7d9B5d0</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">to</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">0x610e2ac7849720c9e89a5c50f81c3370987451c7</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">data</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">0x361737640000000000000000000000008e93ed5792a279dc3ac72c5bc24fe24da7d9b5d000000000000000000000000000000000000000000000000000000000000003e8</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">chainId</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">0x22B8</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">value</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">0x0</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">requestId</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">1677643398</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">uid</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">LDgtR1ZQdFiCbBY</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">uuid</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">1677643398</span><span class="dl">"</span>
+<span class="p">}</span>
+</code></pre></div><h2 id='8f79810cee'>解冻</h2>
 <p><code>POST api/v1/coin-manage/unfrozen</code></p>
 
 <p><strong>请求参数：</strong></p>
@@ -4514,7 +4120,16 @@
 <td>目标账户 ID</td>
 </tr>
 </tbody></table>
-
+<div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="p">{</span>
+    <span class="dl">"</span><span class="s2">amount</span><span class="dl">"</span><span class="p">:</span><span class="dl">"</span><span class="s2">1</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">contractAddr</span><span class="dl">"</span><span class="p">:</span><span class="dl">"</span><span class="s2">0x610e2ac7849720c9e89a5c50f81c3370987451c7</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">operatorId</span><span class="dl">"</span><span class="p">:</span><span class="dl">"</span><span class="s2">LDgtR1ZQdFiCbBY</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">targetId</span><span class="dl">"</span><span class="p">:</span><span class="dl">"</span><span class="s2">LDgtR1ZQdFiCbBY</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">apiKey</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">gX3bWaCYWXx7</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">nonce</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">{{nonce}}</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">verified</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">{{verify}}</span><span class="dl">"</span>
+<span class="p">}</span>
+</code></pre></div>
 <p><strong>返回参数:</strong></p>
 
 <table><thead>
@@ -4529,7 +4144,7 @@
 <td>code</td>
 <td>true</td>
 <td>string</td>
-<td>http 错误码，200 为正确</td>
+<td>0 为正确</td>
 </tr>
 <tr>
 <td>message</td>
@@ -4545,8 +4160,18 @@
 </tr>
 </tbody></table>
 
-<p><strong>备注</strong>：返回成功表示成功调用了合约交易，需要用返回的 data 中的 uuid 调用本页面的最后一个接口：查询合约交易的状态</p>
-<h2 id='eef1c9851f'>添加区块高度间交易黑名单</h2>
+<p><strong>备注</strong>：返回成功表示成功调用了合约交易，需要用返回的 data 中的 requestId 调用本页面的最后一个接口：查询合约交易的状态</p>
+<div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="p">{</span>
+    <span class="dl">"</span><span class="s2">from</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">0x8E93ed5792a279DC3Ac72C5bC24FE24Da7d9B5d0</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">to</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">0x610e2ac7849720c9e89a5c50f81c3370987451c7</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">data</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">0xe5df3dd00000000000000000000000008e93ed5792a279dc3ac72c5bc24fe24da7d9b5d00000000000000000000000000000000000000000000000000000000000000001</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">chainId</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">0x22B8</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">value</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">0x0</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">requestId</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">1677643485</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">uid</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">LDgtR1ZQdFiCbBY</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">uuid</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">1677643485</span><span class="dl">"</span>
+<span class="p">}</span>
+</code></pre></div><h2 id='eef1c9851f'>添加区块高度间交易黑名单</h2>
 <p><code>POST api/v1/coin-manage/addBlackRange</code></p>
 
 <p><strong>请求参数：</strong></p>
@@ -4584,7 +4209,16 @@
 <td>操作者账户 ID</td>
 </tr>
 </tbody></table>
-
+<div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="p">{</span>
+    <span class="dl">"</span><span class="s2">startblock</span><span class="dl">"</span><span class="p">:</span><span class="dl">"</span><span class="s2">200</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">endblock</span><span class="dl">"</span><span class="p">:</span><span class="dl">"</span><span class="s2">3000</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">contractAddr</span><span class="dl">"</span><span class="p">:</span><span class="dl">"</span><span class="s2">0x610e2ac7849720c9e89a5c50f81c3370987451c7</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">operatorId</span><span class="dl">"</span><span class="p">:</span><span class="dl">"</span><span class="s2">LDgtR1ZQdFiCbBY</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">apiKey</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">gX3bWaCYWXx7</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">nonce</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">{{nonce}}</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">verified</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">{{verify}}</span><span class="dl">"</span>
+<span class="p">}</span>
+</code></pre></div>
 <p><strong>返回参数:</strong></p>
 
 <table><thead>
@@ -4599,7 +4233,7 @@
 <td>code</td>
 <td>true</td>
 <td>string</td>
-<td>http 错误码，200 为正确</td>
+<td>0 为正确</td>
 </tr>
 <tr>
 <td>message</td>
@@ -4615,8 +4249,18 @@
 </tr>
 </tbody></table>
 
-<p><strong>备注</strong>：返回成功表示成功调用了合约交易，需要用返回的 data 中的 uuid 调用本页面的最后一个接口：查询合约交易的状态</p>
-<h2 id='be5cf423cb'>移出区块高度间交易黑名单</h2>
+<p><strong>备注</strong>：返回成功表示成功调用了合约交易，需要用返回的 data 中的 requestId 调用本页面的最后一个接口：查询合约交易的状态</p>
+<div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="p">{</span>
+    <span class="dl">"</span><span class="s2">from</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">0x8E93ed5792a279DC3Ac72C5bC24FE24Da7d9B5d0</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">to</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">0x610e2ac7849720c9e89a5c50f81c3370987451c7</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">data</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">0x46f903c600000000000000000000000000000000000000000000000000000000000000c80000000000000000000000000000000000000000000000000000000000000bb8</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">chainId</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">0x22B8</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">value</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">0x0</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">requestId</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">1677643619</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">uid</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">LDgtR1ZQdFiCbBY</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">uuid</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">1677643619</span><span class="dl">"</span>
+<span class="p">}</span>
+</code></pre></div><h2 id='be5cf423cb'>移出区块高度间交易黑名单</h2>
 <p><code>POST api/v1/coin-manage/removeBlackRange</code></p>
 
 <p><strong>请求参数：</strong></p>
@@ -4648,7 +4292,15 @@
 <td>操作者账户 ID</td>
 </tr>
 </tbody></table>
-
+<div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="p">{</span>
+    <span class="dl">"</span><span class="s2">index</span><span class="dl">"</span><span class="p">:</span><span class="dl">"</span><span class="s2">0</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">contractAddr</span><span class="dl">"</span><span class="p">:</span><span class="dl">"</span><span class="s2">0x610e2ac7849720c9e89a5c50f81c3370987451c7</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">operatorId</span><span class="dl">"</span><span class="p">:</span><span class="dl">"</span><span class="s2">LDgtR1ZQdFiCbBY</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">apiKey</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">gX3bWaCYWXx7</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">nonce</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">{{nonce}}</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">verified</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">{{verify}}</span><span class="dl">"</span>
+<span class="p">}</span>
+</code></pre></div>
 <p><strong>返回参数:</strong></p>
 
 <table><thead>
@@ -4663,7 +4315,7 @@
 <td>code</td>
 <td>true</td>
 <td>string</td>
-<td>http 错误码，200 为正确</td>
+<td>0 为正确</td>
 </tr>
 <tr>
 <td>message</td>
@@ -4679,8 +4331,18 @@
 </tr>
 </tbody></table>
 
-<p><strong>备注</strong>：返回成功表示成功调用了合约交易，需要用返回的 data 中的 uuid 调用本页面的最后一个接口：查询合约交易的状态</p>
-<h2 id='976ff7cfd4'>铸造（增发）</h2>
+<p><strong>备注</strong>：返回成功表示成功调用了合约交易，需要用返回的 data 中的 requestId 调用本页面的最后一个接口：查询合约交易的状态</p>
+<div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="p">{</span>
+    <span class="dl">"</span><span class="s2">from</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">0x8E93ed5792a279DC3Ac72C5bC24FE24Da7d9B5d0</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">to</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">0x610e2ac7849720c9e89a5c50f81c3370987451c7</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">data</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">0x254cf7950000000000000000000000000000000000000000000000000000000000000000</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">chainId</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">0x22B8</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">value</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">0x0</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">requestId</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">1677643699</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">uid</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">LDgtR1ZQdFiCbBY</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">uuid</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">1677643699</span><span class="dl">"</span>
+<span class="p">}</span>
+</code></pre></div><h2 id='976ff7cfd4'>铸造（增发）</h2>
 <p><code>POST api/v1/coin-manage/mint</code></p>
 
 <p><strong>请求参数：</strong></p>
@@ -4712,7 +4374,15 @@
 <td>操作者账户 ID</td>
 </tr>
 </tbody></table>
-
+<div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="p">{</span>
+    <span class="dl">"</span><span class="s2">amount</span><span class="dl">"</span><span class="p">:</span><span class="dl">"</span><span class="s2">1000</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">contractAddr</span><span class="dl">"</span><span class="p">:</span><span class="dl">"</span><span class="s2">0x610e2ac7849720c9e89a5c50f81c3370987451c7</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">operatorId</span><span class="dl">"</span><span class="p">:</span><span class="dl">"</span><span class="s2">LDgtR1ZQdFiCbBY</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">apiKey</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">gX3bWaCYWXx7</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">nonce</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">{{nonce}}</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">verified</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">{{verify}}</span><span class="dl">"</span>
+<span class="p">}</span>
+</code></pre></div>
 <p><strong>返回参数:</strong></p>
 
 <table><thead>
@@ -4727,7 +4397,7 @@
 <td>code</td>
 <td>true</td>
 <td>string</td>
-<td>http 错误码，200 为正确</td>
+<td>0 为正确</td>
 </tr>
 <tr>
 <td>message</td>
@@ -4743,8 +4413,18 @@
 </tr>
 </tbody></table>
 
-<p><strong>备注</strong>：返回成功表示成功调用了合约交易，需要用返回的 data 中的 uuid 调用本页面的最后一个接口：查询合约交易的状态</p>
-<h2 id='2337a00bc4'>销毁</h2>
+<p><strong>备注</strong>：返回成功表示成功调用了合约交易，需要用返回的 data 中的 requestId 调用本页面的最后一个接口：查询合约交易的状态</p>
+<div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="p">{</span>
+    <span class="dl">"</span><span class="s2">from</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">0x8E93ed5792a279DC3Ac72C5bC24FE24Da7d9B5d0</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">to</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">0x610e2ac7849720c9e89a5c50f81c3370987451c7</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">data</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">0x40c10f190000000000000000000000008e93ed5792a279dc3ac72c5bc24fe24da7d9b5d000000000000000000000000000000000000000000000000000005af3107a4000</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">chainId</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">0x22B8</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">value</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">0x0</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">requestId</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">1677651290</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">uid</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">LDgtR1ZQdFiCbBY</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">uuid</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">1677651290</span><span class="dl">"</span>
+<span class="p">}</span>
+</code></pre></div><h2 id='2337a00bc4'>销毁</h2>
 <p><code>POST api/v1/coin-manage/burn</code></p>
 
 <p><strong>请求参数：</strong></p>
@@ -4776,7 +4456,15 @@
 <td>操作者账户 ID</td>
 </tr>
 </tbody></table>
-
+<div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="p">{</span>
+    <span class="dl">"</span><span class="s2">amount</span><span class="dl">"</span><span class="p">:</span><span class="dl">"</span><span class="s2">10</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">contractAddr</span><span class="dl">"</span><span class="p">:</span><span class="dl">"</span><span class="s2">0x610e2ac7849720c9e89a5c50f81c3370987451c7</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">operatorId</span><span class="dl">"</span><span class="p">:</span><span class="dl">"</span><span class="s2">LDgtR1ZQdFiCbBY</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">apiKey</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">gX3bWaCYWXx7</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">nonce</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">{{nonce}}</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">verified</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">{{verify}}</span><span class="dl">"</span>
+<span class="p">}</span>
+</code></pre></div>
 <p><strong>返回参数:</strong></p>
 
 <table><thead>
@@ -4791,7 +4479,7 @@
 <td>code</td>
 <td>true</td>
 <td>string</td>
-<td>http 错误码，200 为正确</td>
+<td>0 为正确</td>
 </tr>
 <tr>
 <td>message</td>
@@ -4807,8 +4495,18 @@
 </tr>
 </tbody></table>
 
-<p><strong>备注</strong>：返回成功表示成功调用了合约交易，需要用返回的 data 中的 uuid 调用本页面的最后一个接口：查询合约交易的状态</p>
-<h2 id='7c387c4bc1'>销毁指定账户下的代币</h2>
+<p><strong>备注</strong>：返回成功表示成功调用了合约交易，需要用返回的 data 中的 requestId 调用本页面的最后一个接口：查询合约交易的状态</p>
+<div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="p">{</span>
+    <span class="dl">"</span><span class="s2">from</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">0x8E93ed5792a279DC3Ac72C5bC24FE24Da7d9B5d0</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">to</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">0x610e2ac7849720c9e89a5c50f81c3370987451c7</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">data</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">0x42966c68000000000000000000000000000000000000000000000000000000000000000a</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">chainId</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">0x22B8</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">value</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">0x0</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">requestId</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">1677651387</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">uid</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">LDgtR1ZQdFiCbBY</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">uuid</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">1677651387</span><span class="dl">"</span>
+<span class="p">}</span>
+</code></pre></div><h2 id='7c387c4bc1'>销毁指定账户下的代币</h2>
 <p><code>POST api/v1/coin-manage/burnFrom</code></p>
 
 <p><strong>请求参数：</strong></p>
@@ -4846,7 +4544,16 @@
 <td>目标账户 ID</td>
 </tr>
 </tbody></table>
-
+<div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="p">{</span>
+    <span class="dl">"</span><span class="s2">amount</span><span class="dl">"</span><span class="p">:</span><span class="dl">"</span><span class="s2">10</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">contractAddr</span><span class="dl">"</span><span class="p">:</span><span class="dl">"</span><span class="s2">0x610e2ac7849720c9e89a5c50f81c3370987451c7</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">operatorId</span><span class="dl">"</span><span class="p">:</span><span class="dl">"</span><span class="s2">LDgtR1ZQdFiCbBY</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">targetId</span><span class="dl">"</span><span class="p">:</span><span class="dl">"</span><span class="s2">LDgtR1ZQdFiCbBY</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">apiKey</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">gX3bWaCYWXx7</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">nonce</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">{{nonce}}</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">verified</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">{{verify}}</span><span class="dl">"</span>
+<span class="p">}</span>
+</code></pre></div>
 <p><strong>返回参数:</strong></p>
 
 <table><thead>
@@ -4861,7 +4568,7 @@
 <td>code</td>
 <td>true</td>
 <td>string</td>
-<td>http 错误码，200 为正确</td>
+<td>0 为正确</td>
 </tr>
 <tr>
 <td>message</td>
@@ -4877,8 +4584,18 @@
 </tr>
 </tbody></table>
 
-<p><strong>备注</strong>：返回成功表示成功调用了合约交易，需要用返回的 data 中的 uuid 调用本页面的最后一个接口：查询合约交易的状态</p>
-<h2 id='e6ed15278e'>查询账户的冻结代币数量</h2>
+<p><strong>备注</strong>：返回成功表示成功调用了合约交易，需要用返回的 data 中的 requestId 调用本页面的最后一个接口：查询合约交易的状态</p>
+<div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="p">{</span>
+    <span class="dl">"</span><span class="s2">from</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">0x8E93ed5792a279DC3Ac72C5bC24FE24Da7d9B5d0</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">to</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">0x610e2ac7849720c9e89a5c50f81c3370987451c7</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">data</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">0x79cc67900000000000000000000000008e93ed5792a279dc3ac72c5bc24fe24da7d9b5d0000000000000000000000000000000000000000000000000000000000000000a</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">chainId</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">0x22B8</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">value</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">0x0</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">requestId</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">1677651477</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">uid</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">LDgtR1ZQdFiCbBY</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">uuid</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">1677651477</span><span class="dl">"</span>
+<span class="p">}</span>
+</code></pre></div><h2 id='e6ed15278e'>查询账户的冻结代币数量</h2>
 <p><code>POST api/v1/coin-manage/forzenAmount</code></p>
 
 <p><strong>请求参数：</strong></p>
@@ -4904,7 +4621,14 @@
 <td>操作者账户 ID</td>
 </tr>
 </tbody></table>
-
+<div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="p">{</span>
+    <span class="dl">"</span><span class="s2">contractAddr</span><span class="dl">"</span><span class="p">:</span><span class="dl">"</span><span class="s2">0x610e2ac7849720c9e89a5c50f81c3370987451c7</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">accountId</span><span class="dl">"</span><span class="p">:</span><span class="dl">"</span><span class="s2">LDgtR1ZQdFiCbBY</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">apiKey</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">gX3bWaCYWXx7</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">nonce</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">{{nonce}}</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">verified</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">{{verify}}</span><span class="dl">"</span>
+<span class="p">}</span>
+</code></pre></div>
 <p><strong>返回参数:</strong></p>
 
 <table><thead>
@@ -4919,7 +4643,7 @@
 <td>code</td>
 <td>true</td>
 <td>string</td>
-<td>http 错误码，200 为正确</td>
+<td>0 为正确</td>
 </tr>
 <tr>
 <td>message</td>
@@ -4934,7 +4658,12 @@
 <td>冻结数量</td>
 </tr>
 </tbody></table>
-<h2 id='800eb50673'>查询代币的总容量</h2>
+<div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="p">{</span>
+    <span class="dl">"</span><span class="s2">code</span><span class="dl">"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">message</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">success</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">data</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">999</span><span class="dl">"</span>
+<span class="p">}</span>
+</code></pre></div><h2 id='800eb50673'>查询代币的总容量</h2>
 <p><code>POST api/v1/coin-manage/cap</code></p>
 
 <p><strong>请求参数：</strong></p>
@@ -4954,7 +4683,13 @@
 <td>代币地址</td>
 </tr>
 </tbody></table>
-
+<div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="p">{</span>
+    <span class="dl">"</span><span class="s2">contractAddr</span><span class="dl">"</span><span class="p">:</span><span class="dl">"</span><span class="s2">0x610e2ac7849720c9e89a5c50f81c3370987451c7</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">apiKey</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">gX3bWaCYWXx7</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">nonce</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">{{nonce}}</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">verified</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">{{verify}}</span><span class="dl">"</span>
+<span class="p">}</span>
+</code></pre></div>
 <p><strong>返回参数:</strong></p>
 
 <table><thead>
@@ -4969,7 +4704,7 @@
 <td>code</td>
 <td>true</td>
 <td>string</td>
-<td>http 错误码，200 为正确</td>
+<td>0 为正确</td>
 </tr>
 <tr>
 <td>message</td>
@@ -4984,7 +4719,12 @@
 <td>总容量</td>
 </tr>
 </tbody></table>
-<h2 id='251a0f2883'>查询代币的闪电费用比例</h2>
+<div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="p">{</span>
+    <span class="dl">"</span><span class="s2">code</span><span class="dl">"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">message</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">success</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">data</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">10000700000000000</span><span class="dl">"</span>
+<span class="p">}</span>
+</code></pre></div><h2 id='251a0f2883'>查询代币的闪电费用比例</h2>
 <p><code>POST api/v1/coin-manage/flashFee</code></p>
 
 <p><strong>请求参数：</strong></p>
@@ -5004,7 +4744,13 @@
 <td>代币地址</td>
 </tr>
 </tbody></table>
-
+<div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="p">{</span>
+    <span class="dl">"</span><span class="s2">contractAddr</span><span class="dl">"</span><span class="p">:</span><span class="dl">"</span><span class="s2">0xa97a7e49930c91d7bba6a115f01a5c41a6218676</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">apiKey</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">gX3bWaCYWXx7</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">nonce</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">{{nonce}}</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">verified</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">{{verify}}</span><span class="dl">"</span>
+<span class="p">}</span>
+</code></pre></div>
 <p><strong>返回参数:</strong></p>
 
 <table><thead>
@@ -5019,7 +4765,7 @@
 <td>code</td>
 <td>true</td>
 <td>string</td>
-<td>http 错误码，200 为正确</td>
+<td>0 为正确</td>
 </tr>
 <tr>
 <td>message</td>
@@ -5034,7 +4780,12 @@
 <td>代币的闪电费比例</td>
 </tr>
 </tbody></table>
-<h2 id='720356fabf'>查询代币的禁止交易区间</h2>
+<div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="p">{</span>
+    <span class="dl">"</span><span class="s2">code</span><span class="dl">"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">message</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">success</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">data</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">20</span><span class="dl">"</span>
+<span class="p">}</span>
+</code></pre></div><h2 id='720356fabf'>查询代币的禁止交易区间</h2>
 <p><code>POST api/v1/coin-manage/blackRange</code></p>
 
 <p><strong>请求参数：</strong></p>
@@ -5054,7 +4805,13 @@
 <td>代币地址</td>
 </tr>
 </tbody></table>
-
+<div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="p">{</span>
+    <span class="dl">"</span><span class="s2">contractAddr</span><span class="dl">"</span><span class="p">:</span><span class="dl">"</span><span class="s2">0x610e2ac7849720c9e89a5c50f81c3370987451c7</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">apiKey</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">gX3bWaCYWXx7</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">nonce</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">{{nonce}}</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">verified</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">{{verify}}</span><span class="dl">"</span>
+<span class="p">}</span>
+</code></pre></div>
 <p><strong>返回参数:</strong></p>
 
 <table><thead>
@@ -5069,7 +4826,7 @@
 <td>code</td>
 <td>true</td>
 <td>string</td>
-<td>http 错误码，200 为正确</td>
+<td>0 为正确</td>
 </tr>
 <tr>
 <td>message</td>
@@ -5122,25 +4879,26 @@
 </tr>
 </thead><tbody>
 <tr>
-<td>contractAddr</td>
-<td>true</td>
-<td>string</td>
-<td>代币地址</td>
-</tr>
-<tr>
 <td>accountId</td>
 <td>true</td>
 <td>string</td>
 <td>账户 ID</td>
 </tr>
 <tr>
-<td>uuid</td>
+<td>requestId</td>
 <td>true</td>
 <td>string</td>
-<td>合约交易成功发出后返回的字串中的 uuid</td>
+<td>合约交易成功发出后返回的字串中的 requestId</td>
 </tr>
 </tbody></table>
-
+<div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="p">{</span>
+    <span class="dl">"</span><span class="s2">accountId</span><span class="dl">"</span><span class="p">:</span><span class="dl">"</span><span class="s2">LDgtR1ZQdFiCbBY</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">requestId</span><span class="dl">"</span><span class="p">:</span><span class="dl">"</span><span class="s2">1677643398</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">apiKey</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">gX3bWaCYWXx7</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">nonce</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">{{nonce}}</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">verified</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">{{verify}}</span><span class="dl">"</span>
+<span class="p">}</span>
+</code></pre></div>
 <p><strong>返回参数:</strong></p>
 
 <table><thead>
@@ -5155,22 +4913,30 @@
 <td>code</td>
 <td>true</td>
 <td>string</td>
-<td>http 错误码，200 为正确</td>
+<td>0 为正确</td>
 </tr>
 <tr>
 <td>message</td>
 <td>true</td>
 <td>string</td>
-<td>成功或错误信息</td>
+<td>成功或错误信息(succes 或 fail)</td>
 </tr>
 <tr>
 <td>data</td>
 <td>true</td>
 <td>string</td>
-<td>任务的状态</td>
+<td>任务的详情（&quot;{\&quot;requestId\&quot;:\&quot;1677491187\&quot;,\&quot;hash\&quot;:\&quot;0x6c7308c10c9be1c43c212161fc2a84df3f8e79c374857032e71120cb25ab4d13\&quot;,\&quot;code\&quot;:0,\&quot;message\&quot;:\&quot;ok\&quot;,\&quot;status\&quot;:1,\&quot;tx_hash\&quot;:\&quot;0x6c7308c10c9be1c43c212161fc2a84df3f8e79c374857032e71120cb25ab4d13\&quot;}&quot;）</td>
 </tr>
 </tbody></table>
-
+<div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="p">{</span>
+    <span class="dl">"</span><span class="s2">requestId</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">1677643398</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">hash</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">0xa6530534ecc35f04f45002a27e112d4f14641f466868fa9542d555dfe2638ba0</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">code</span><span class="dl">"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">message</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">ok</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">status</span><span class="dl">"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">tx_hash</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">0xa6530534ecc35f04f45002a27e112d4f14641f466868fa9542d555dfe2638ba0</span><span class="dl">"</span>
+<span class="p">}</span>
+</code></pre></div>
       </div>
       <div class="dark-box">
       </div>
