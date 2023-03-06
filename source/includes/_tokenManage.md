@@ -1,4 +1,4 @@
-# 代币管理 token
+# 8代币管理 token
 
 > GET 请求的 body 中要有：
 
@@ -10,7 +10,7 @@
 }
 ```
 
-## 查询已发代币列表
+## 81查询已发代币列表
 
 查询某个账户 ID 下所发代币的代币列表
 
@@ -69,7 +69,7 @@
   }
 ```
 
-## 查询代币详情
+## 82查询代币详情
 
 查询某个代币的代币详情
 
@@ -109,7 +109,7 @@
 }
 ```
 
-## 查询代币的持有者信息
+## 83查询代币的持有者信息
 
 `GET api/v1/coin-manage/holderInfos`
 
@@ -149,7 +149,7 @@
 | Balance      | string   | 代币余额                   |
 | Height       | string   | 更新代币余额所在的区块高度 |
 
-## 查询代币余额
+## 84查询代币余额
 
 `GET api/v1/coin-manage/tokenBalance`
 
@@ -176,7 +176,7 @@
 }
 ```
 
-## 查询账户下代币的状态
+## 85查询账户下代币的状态
 
 `POST api/v1/coin-manage/tokenStatus`
 
@@ -225,7 +225,7 @@
 | NowFrozenAmount  | Int      | 当前冻结数量 |
 | WaitFrozenAmount | Int      | 等待冻结数量 |
 
-## 代币的模型查询
+## 86代币的模型查询
 
 `POST api/v1/coin-manage/tokenModel`
 
@@ -272,7 +272,7 @@
 | _CAPPED_    | Int      | 6      | 设置总量上限模型 |
 | _DEFLATION_ | Int      | 7      | 通缩模型         |
 
-## 查询代币的交易费比例
+## 87查询代币的交易费比例
 
 `POST api/v1/coin-manage/taxFee`
 
@@ -307,7 +307,7 @@
 }
 ```
 
-## 查询代币的奖励分红比例
+## 88查询代币的奖励分红比例
 
 `POST api/v1/coin-manage/bonusFee`
 
@@ -342,7 +342,7 @@
 }
 ```
 
-## 账户的代币交易记录查询
+## 89账户的代币交易记录查询
 
 `GET api/v1/coin-manage/txHistory`
 
@@ -455,7 +455,7 @@
 | MaxPriorityFeePerGas | int       | 最高有限消费                                                         |
 | BurntFees            | int       | 燃烧的小费                                                           |
 
-## 查询账户的代币销毁数量
+## 810查询账户的代币销毁数量
 
 `GET api/v1/coin-manage/burnAmount`
 
@@ -482,7 +482,7 @@
 | message  | true         | string   | 成功或错误信息 |
 | data     | true         | string   | 销毁数量       |
 
-## 链的区块高度查询
+## 811链的区块高度查询
 
 `GET api/v1/coin-manage/height`
 
@@ -504,7 +504,7 @@
 | message  | true         | string   | 成功或错误信息 |
 | data     | true         | string   | 区块高度       |
 
-## 查询代币的初始供应量和增发历史
+## 812查询代币的初始供应量和增发历史
 
 `GET api/v1/coin-manage/tokenHistory`
 
@@ -529,7 +529,7 @@
 }
 ```
 
-## 加入黑名单
+## 813加入黑名单
 
 `POST api/v1/coin-manage/addBlack`
 
@@ -575,7 +575,7 @@
 }
 ```
 
-## 移出黑名单
+## 814移出黑名单
 
 `POST api/v1/coin-manage/removeBlack`
 
@@ -621,7 +621,7 @@
 }
 ```
 
-## 添加转入黑名单
+## 815添加转入黑名单
 
 `POST api/v1/coin-manage/addBlackIn`
 
@@ -667,7 +667,7 @@
 }
 ```
 
-## 移出转入黑名单
+## 816移出转入黑名单
 
 `POST api/v1/coin-manage/removeBlackIn`
 
@@ -713,7 +713,7 @@
 }
 ```
 
-## 添加转出黑名单
+## 817添加转出黑名单
 
 `POST api/v1/coin-manage/addBlackOut`
 
@@ -759,7 +759,7 @@
 }
 ```
 
-## 移出转出黑名单
+## 818移出转出黑名单
 
 `POST api/v1/coin-manage/removeBlackOut`
 
@@ -805,7 +805,7 @@
 }
 ```
 
-## 冻结
+## 819冻结
 
 `POST api/v1/coin-manage/frozen`
 
@@ -853,7 +853,7 @@
 }
 ```
 
-## 解冻
+## 820解冻
 
 `POST api/v1/coin-manage/unfrozen`
 
@@ -901,7 +901,7 @@
 }
 ```
 
-## 添加区块高度间交易黑名单
+## 821添加区块高度间交易黑名单
 
 `POST api/v1/coin-manage/addBlackRange`
 
@@ -949,7 +949,7 @@
 }
 ```
 
-## 移出区块高度间交易黑名单
+## 822移出区块高度间交易黑名单
 
 `POST api/v1/coin-manage/removeBlackRange`
 
@@ -995,7 +995,7 @@
 }
 ```
 
-## 铸造（增发）
+## 823铸造（增发）
 
 `POST api/v1/coin-manage/mint`
 
@@ -1041,7 +1041,7 @@
 }
 ```
 
-## 销毁
+## 824销毁
 
 `POST api/v1/coin-manage/burn`
 
@@ -1087,7 +1087,7 @@
 }
 ```
 
-## 销毁指定账户下的代币
+## 825销毁指定账户下的代币
 
 `POST api/v1/coin-manage/burnFrom`
 
@@ -1135,7 +1135,7 @@
 }
 ```
 
-## 查询账户的冻结代币数量
+## 826查询账户的冻结代币数量
 
 `POST api/v1/coin-manage/forzenAmount`
 
@@ -1172,7 +1172,7 @@
 }
 ```
 
-## 查询代币的总容量
+## 827查询代币的总容量
 
 `POST api/v1/coin-manage/cap`
 
@@ -1207,7 +1207,7 @@
 }
 ```
 
-## 查询代币的闪电费用比例
+## 828查询代币的闪电费用比例
 
 `POST api/v1/coin-manage/flashFee`
 
@@ -1242,7 +1242,7 @@
 }
 ```
 
-## 查询代币的禁止交易区间
+## 829查询代币的禁止交易区间
 
 `POST api/v1/coin-manage/blackRange`
 
@@ -1276,7 +1276,7 @@
 | BeginBlock | true         | string   | 起始区间 |
 | EndBlock   | true         | string   | 结束区间 |
 
-## 查询合约交易的状态
+## 830查询合约交易的状态
 
 `POST api/v1/coin-manage/txStatus`
 

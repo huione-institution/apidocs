@@ -1,6 +1,6 @@
-# **发币**
+# 7发币
 
-## **发币**
+## 71发币
 
 `POST api/v1/token/create`
 
@@ -29,7 +29,21 @@
 | -------- | -------- | -------------------------------- |
 | orderId  | String   | 订单号（通过订单号查询发币结果） |
 
-## **查询发币状态**
+> 返回示例
+
+```javascript
+{
+  "code": 0,
+    "msg": null,
+    "data": {
+    "orderId": "fd6a6944-a0aa-4bdc-8cfd-3cd962083c27"
+  },
+  "success": true
+}
+
+```
+
+## 72查询发币状态
 
 `GET api/v1/token/status`
 
@@ -46,7 +60,22 @@
 | ------------ | -------- | ----------------------------------------------------------------------- |
 | tokenAddress | String   | 代币地址（代币地址为空表示还在处理中或者出错了，错误信息查看：message） |
 
-## **查询发币订单详情**
+> 返回示例
+
+```javascript
+{
+  "code": 0,
+    "msg": null,
+    "data": {
+    "tokenAddress": "0x2bd3aaadc599c59e57f638ec6a31b96a23105f7f"
+  },
+  "success": true
+}
+
+
+```
+
+## 73查询发币订单详情
 
 `GET api/v1/token/order/detail`
 
@@ -87,7 +116,47 @@
 | blockNumber | long     | 区块高度                                                                                           |
 | blockPaused | boolean  | 代币当前是否被项目方设置为区块暂停                                                                 |
 
-## **查询发币记录**
+> 返回示例
+
+```javascript
+{
+  "code": 0,
+    "msg": null,
+    "data": {
+    "tokenType": 1,
+      "holders": 0,
+      "uid": "LDgtR1ZQdFiCbBY",
+      "decimal": 3,
+      "minter": "0x8E93ed5792a279DC3Ac72C5bC24FE24Da7d9B5d0",
+      "operator": "0x8E93ed5792a279DC3Ac72C5bC24FE24Da7d9B5d0",
+      "amount": "10007700000000000",
+      "receiver": "0x4c47DEAfe0C5b5632636eeBdc71909C45aa2ED23",
+      "contract": "0x2bd3aaadc599c59e57f638ec6a31b96a23105f7f",
+      "status": 4,
+      "reason": null,
+      "createTime": 1677747355000,
+      "updateTime": 1677747359000,
+      "name": "3月2日通缩代币0712",
+      "symbol": "sdkt",
+      "model": 7,
+      "taxFee": 35500,
+      "bonusFee": 0,
+      "paused": false,
+      "totalSupply": "10007699999881253",
+      "cap": "10607800000000000",
+      "remainMint": "10607800000000000",
+      "blockNumber": "3590801",
+      "blockPaused": false,
+      "addr": "0x8E93ed5792a279DC3Ac72C5bC24FE24Da7d9B5d0",
+      "orderId": "fd6a6944-a0aa-4bdc-8cfd-3cd962083c27",
+      "iconAddress": "https://images.pexels.com/photos/10768835/pexels-photo-10768835.jpeg"
+  },
+  "success": true
+}
+
+```
+
+## 74查询发币记录
 
 `GET api/v1/token/order/list`
 
@@ -106,3 +175,45 @@
 | symbol     | String   | 代币标识                                   |
 | status     | int      | 订单状态（0:创建；4:发币成功；5:发币失败） |
 | createTime | long     | 创建时间                                   |
+
+> 返回示例
+
+```javascript
+{
+  "code": 0,
+    "msg": null,
+    "data": [
+    {
+      "tokenType": 1,
+      "holders": 0,
+      "uid": "LDgtR1ZQdFiCbBY",
+      "decimal": 3,
+      "minter": "0x8E93ed5792a279DC3Ac72C5bC24FE24Da7d9B5d0",
+      "operator": "0x8E93ed5792a279DC3Ac72C5bC24FE24Da7d9B5d0",
+      "amount": "10007700000000000",
+      "receiver": "0x4c47DEAfe0C5b5632636eeBdc71909C45aa2ED23",
+      "contract": "0x2bd3aaadc599c59e57f638ec6a31b96a23105f7f",
+      "status": 4,
+      "reason": null,
+      "createTime": 1677747355000,
+      "updateTime": 1677747359000,
+      "name": "3月2日通缩代币0712",
+      "symbol": "sdkt",
+      "model": 7,
+      "taxFee": 35500,
+      "bonusFee": 0,
+      "paused": false,
+      "totalSupply": "10007700000000000",
+      "cap": "10607800000000000",
+      "remainMint": "10607800000000000",
+      "blockNumber": "3588633",
+      "blockPaused": false,
+      "addr": "0x8E93ed5792a279DC3Ac72C5bC24FE24Da7d9B5d0",
+      "orderId": "fd6a6944-a0aa-4bdc-8cfd-3cd962083c27",
+      "iconAddress": "https://images.pexels.com/photos/10768835/pexels-photo-10768835.jpeg"
+    }
+  ],
+    "success": true
+}
+
+```

@@ -1,8 +1,8 @@
-# 提现功能
+# 5提现功能
 
-## 执行提现
+## 51执行提现
 
-`POST api/v1/assets/withDraw`
+`POST api/v1/assets/withdraw`
 
 **请求参数**
 

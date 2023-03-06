@@ -1,8 +1,10 @@
-# 账户(account)
+# 2账户(account)
 
 账户模块遵循[Api 调用规范](#45fa4e00db)，所以此处只提供调用需要的业务字段
 
-## 创建账户
+## 21创建账户
+
+该任务通过和业务方提前约定好的UserID信息为业务方用户生成accountID和链上地址
 
 `POST api/v1/account/create`
 
@@ -23,7 +25,7 @@
 | btc       | string   | btc 链地址          |
 | trx       | string   | trx 系链地址        |
 
-## 账户地址查询
+## 22账户地址查询
 
 `GET api/v1/account/query?accountId=XXX`
 
@@ -43,7 +45,7 @@
 | btc       | string   | 链地址   |
 | trx       | string   | 链地址   |
 
-## 账户查询(通过用户名）
+## 23账户查询(通过用户名）
 
 `GET api/v1/account/queryUser`
 
@@ -64,7 +66,7 @@
 | btc       | string   | 链地址   |
 | trx       | string   | 链地址   |
 
-## 账户列表（翻页）
+## 24账户列表（翻页）
 
 `GET api/v1/account/list`
 

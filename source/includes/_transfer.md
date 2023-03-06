@@ -1,6 +1,6 @@
-# 转账
+# 6转账
 
-## 执行内部转账
+## 61执行内部转账
 
 `POST /v1/internalTransfer`
 
@@ -77,7 +77,7 @@
 }
 ```
 
-## 充值提现转账历史记录
+## 62充值提现转账历史记录
 
 `POST /v1/internalTransferHistory`
 
