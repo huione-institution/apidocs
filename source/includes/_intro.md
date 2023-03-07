@@ -36,7 +36,7 @@ apiKey 就是您的申请到的 ApiKey
 
 nonce 代表唯一的请求，避免被抓包重放。您可以用自增数字，也可以随便用随机数，只要保证近期不重复即可。即使业务上需要重试操作，nonce 也要变，认证握手和业务无关
 
-verified 是校验字段，需要用到申请时给的 ApiSecret 来加密，具体的加密方式有提供 Javascript/Java 系列/Python/Go/Rust 等各种语言的样例可供参考
+verified 是校验字段，需要用到申请时给的 ApiSecret 来加密，具体的加密方式有提供 Javascript/Java 系列/Python/Go/Rust 等各种语言的样例可供参考，猛戳↓这里拿代码
 
 **调用环境**
 
