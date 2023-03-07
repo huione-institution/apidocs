@@ -520,26 +520,22 @@
       <div class="dark-box"></div>
       <div class="content">
         <h1 id='45fa4e00db'>介绍</h1>
-<p><strong>API Key 设置</strong></p>
+<p><strong>API Key/Secret 说明</strong></p>
 
 <ul>
-<li>所有接口需要 API Key 才可以访问.</li>
-<li><strong>永远不要把你的 API key/secret 告诉给任何人</strong></li>
+<li>所有接口均需要API Key和Secret加密信息才可以正常访问。</li>
+<li><strong>请妥善保管您的API key和secret</strong></li>
 </ul>
 
-<p><strong>API Key 权限设置</strong></p>
+<p><strong>账户说明</strong></p>
 
 <ul>
-<li>目前新创建的 API 的默认权限是全部 API 功能。</li>
+<li>业务层通过提供用户唯一标识来申请支付账户。</li>
 </ul>
-
-<p><strong>账户</strong></p>
-
-<p>平台不区分机构账户、普通账户，业务层通过用户 ID 创建账户。</p>
 
 <p><strong>调用方式</strong></p>
 
-<p>所有 Api 调用都需要在业务字段之外附加三个握手字段</p>
+<p>所有Api调用都需要在业务字段之外附加三个握手字段，go代码如下：</p>
 
 <blockquote>
 <p>go 代码如下</p>
@@ -563,6 +559,27 @@
 <p>nonce 代表唯一的请求，避免被抓包重放。您可以用自增数字，也可以随便用随机数，只要保证近期不重复即可。即使业务上需要重试操作，nonce 也要变，认证握手和业务无关</p>
 
 <p>verified 是校验字段，需要用到申请时给的 ApiSecret 来加密，具体的加密方式有提供 Javascript/Java 系列/Python/Go/Rust 等各种语言的样例可供参考</p>
+
+<p><strong>调用环境</strong></p>
+
+<table><thead>
+<tr>
+<th><strong>环境</strong></th>
+<th><strong>域名</strong></th>
+<th><strong>api key申请</strong></th>
+</tr>
+</thead><tbody>
+<tr>
+<td>测试环境</td>
+<td>https://api.alpha.huiwang.io</td>
+<td><a href="https://t.me/+1VFnuoY1dfs0ZWRl">API Key申请</a></td>
+</tr>
+<tr>
+<td>正式环境</td>
+<td>待定</td>
+<td></td>
+</tr>
+</tbody></table>
 <h1 id='1api-key'>1API Key 管理</h1><h2 id='11-api-key'>11三方自助申请 API Key</h2>
 <p>不对外暴露，必须由内部模块发起。</p>
 
