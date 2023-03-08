@@ -38,6 +38,14 @@ nonce 代表唯一的请求，避免被抓包重放。您可以用自增数字�
 
 verified 是校验字段，需要用到申请时给的 ApiSecret 来加密，具体的加密方式有提供 Javascript/Java 系列/Python/Go/Rust 等各种语言的样例可供参考，猛戳↓这里拿代码
 
+**代码在这**
+
+- golang示例 [下载](https://hwwallet.s3.ap-northeast-1.amazonaws.com/v1/api_demo/demo_go.zip)
+- java示例 [下载](https://hwwallet.s3.ap-northeast-1.amazonaws.com/v1/api_demo/demo_jvm.zip)
+- js示例 [下载](https://hwwallet.s3.ap-northeast-1.amazonaws.com/v1/api_demo/demo_js.zip)
+- python示例 [下载](https://hwwallet.s3.ap-northeast-1.amazonaws.com/v1/api_demo/demo_py.zip)
+- rust示例 [下载](https://hwwallet.s3.ap-northeast-1.amazonaws.com/v1/api_demo/demo_rs.zip)
+
 **调用环境**
 
 | **环境**      | **域名** | **api key申请** |

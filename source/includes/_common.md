@@ -28,8 +28,6 @@
 
 ## 42获取所有币
 
-请求方式:
-
 `GET api/v1/config/token/list?chain=`
 
 **请求参数:**
