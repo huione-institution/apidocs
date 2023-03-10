@@ -77,10 +77,12 @@ body {
     // display: block;
     // max-width: 100%;
     // margin-bottom: $logo-margin;
-    display: none;
+    // display: none;
+    // margin-top: 20px;
   }
 
   & > .search {
+    margin-top: 8px;
     position: relative;
 
     input {
