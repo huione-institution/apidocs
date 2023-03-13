@@ -2,6 +2,8 @@
 
 ## 71发币
 
+`POST api/v1/token/create`
+
 > 返回示例
 
 ```javascript
@@ -15,8 +17,6 @@
 }
 
 ```
-
-`POST api/v1/token/create`
 
 **请求参数**
 
@@ -47,6 +47,8 @@
 
 ## 72查询发币状态
 
+`GET api/v1/token/status`
+
 > 返回示例
 
 ```javascript
@@ -61,8 +63,6 @@
 
 
 ```
-
-`GET api/v1/token/status`
 
 **请求参数**
 
@@ -83,6 +83,9 @@
 
 
 > 返回示例
+
+`GET api/v1/token/order/detail`
+
 
 ```javascript
 {
@@ -121,8 +124,6 @@
 }
 
 ```
-
-`GET api/v1/token/order/detail`
 
 **请求参数**
 
@@ -166,6 +167,8 @@
 
 > 返回示例
 
+`GET api/v1/token/order/list`
+
 ```javascript
 {
   "code": 0,
@@ -205,9 +208,6 @@
 }
 
 ```
-
-
-`GET api/v1/token/order/list`
 
 **请求参数**
 

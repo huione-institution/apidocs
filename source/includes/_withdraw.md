@@ -2,6 +2,8 @@
 
 ## 51执行提现
 
+`POST api/v1/assets/withdraw`
+
 > 示例请求
 
 ```javascript
@@ -15,10 +17,6 @@
     "isSync": true
 }
 ```
-
-
-`POST api/v1/assets/withdraw`
-
 **请求参数**
 
 | **参数** | **是否必填** | **参数类型** | **描述说明** |

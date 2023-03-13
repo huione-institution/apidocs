@@ -2,6 +2,9 @@
 
 ## 31获取充值地址
 
+
+`GET api/v1/account/depositAddress`
+
 > 返回示例
 
 ```javascript
@@ -22,8 +25,6 @@
 
 ```
 
-`GET api/v1/account/depositAddress`
-
 **请求参数**
 
 | **参数**  | **是否必须** | **类型** | **说明**            |
@@ -40,6 +41,8 @@
 
 
 ## 32充值回调 
+
+`POST api/v1/setting/callback`
 
 > 返回示例
 
@@ -60,9 +63,6 @@
 }
 
 ```
-
-
-`POST api/v1/setting/callback`
 
 **请求参数**
 

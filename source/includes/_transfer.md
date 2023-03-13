@@ -2,6 +2,8 @@
 
 ## 61执行内部转账
 
+`POST /v1/internalTransfer`
+
 ```javascript
 //示例
 {
@@ -29,8 +31,6 @@
     "is_transaction":true
 }
 ```
-`POST /v1/internalTransfer`
-
 **请求参数**
 
 | **参数名**          | **是否必填** | **参数类型** | **描述说明**            |
@@ -81,6 +81,8 @@
 ## 62充值提现转账历史记录
 
 
+`POST /v1/internalTransferHistory`
+
 ```javascript
 {
     "params": [
@@ -95,9 +97,6 @@
     ]
 }
 ```
-
-`POST /v1/internalTransferHistory`
-
 **请求参数**
 
 | **参数名**    | **是否必填** | **参数类型** | **描述说明**                    |

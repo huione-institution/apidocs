@@ -6,6 +6,9 @@
 
 > 返回的数据示例如下
 
+`GET api/v1/coin-manage/tokenList`
+
+
 ```javascript
 {
     "code": 0,
@@ -25,8 +28,6 @@
     }]
   }
 ```
-
-`GET api/v1/coin-manage/tokenList`
 
 **请求参数：**
 
@@ -64,6 +65,9 @@
 ## 82查询代币详情
 
 查询某个代币的代币详情
+
+`GET api/v1/coin-manage/tokenDetail`
+
 > 返回示例如下：
 
 ```javascript
@@ -81,8 +85,6 @@
   }
 }
 ```
-`GET api/v1/coin-manage/tokenDetail`
-
 **请求参数:**
 
 | **参数**     | **是否必须** | **类型** | **说明** |
@@ -101,6 +103,8 @@
 
 
 ## 83查询代币的持有者信息
+
+`GET api/v1/coin-manage/holderInfos`
 ```javascript
 [
   {
@@ -113,8 +117,6 @@
   },
 ];
 ```
-`GET api/v1/coin-manage/holderInfos`
-
 **请求参数:**
 
 | **参数**     | **是否必须** | **类型** | **说明** |
@@ -142,6 +144,9 @@
 
 ## 84查询代币余额
 
+`GET api/v1/coin-manage/tokenBalance`
+
+
 ```javascript
 {
     "code": 0,
@@ -149,8 +154,6 @@
     "data": "10000700000000000"
 }
 ```
-
-`GET api/v1/coin-manage/tokenBalance`
 
 **请求参数：**
 
@@ -171,7 +174,7 @@
 
 ## 85查询账户下代币的状态
 
-
+`POST api/v1/coin-manage/tokenStatus`
 ```javascript
 {
     "contractAddr":"0x610e2ac7849720c9e89a5c50f81c3370987451c7",
@@ -181,9 +184,6 @@
     "verified": "{{verify}}"
 }
 ```
-
-`POST api/v1/coin-manage/tokenStatus`
-
 **请求参数:**
 
 | **参数**     | **是否必须** | **类型** | **说明** |
@@ -223,6 +223,8 @@
 
 ## 86代币的模型查询
 
+`POST api/v1/coin-manage/tokenModel`
+
 ```javascript
 {
     "contractAddr":"0x610e2ac7849720c9e89a5c50f81c3370987451c7",
@@ -231,9 +233,6 @@
     "verified": "{{verify}}"
 }
 ```
-
-`POST api/v1/coin-manage/tokenModel`
-
 **请求参数：**
 
 | **参数**     | **是否必须** | **类型** | **说明** |
@@ -271,6 +270,9 @@
 
 ## 87查询代币的交易费比例
 
+`POST api/v1/coin-manage/taxFee`
+
+
 ```javascript
 {
     "contractAddr":"0x610e2ac7849720c9e89a5c50f81c3370987451c7",
@@ -279,8 +281,6 @@
     "verified": "{{verify}}"
 }
 ```
-
-`POST api/v1/coin-manage/taxFee`
 
 **请求参数:**
 
@@ -309,6 +309,8 @@
 
 ## 88查询代币的奖励分红比例
 
+`POST api/v1/coin-manage/bonusFee`
+
 ```javascript
 {
     "contractAddr":"0x610e2ac7849720c9e89a5c50f81c3370987451c7",
@@ -317,8 +319,6 @@
     "verified": "{{verify}}"
 }
 ```
-
-`POST api/v1/coin-manage/bonusFee`
 
 **请求参数：**
 
@@ -345,6 +345,8 @@
 
 
 ## 89账户的代币交易记录查询
+
+`GET api/v1/coin-manage/txHistory`
 
 ```javascript
 {
@@ -392,8 +394,6 @@
     ]
 }
 ```
-
-`GET api/v1/coin-manage/txHistory`
 
 **请求参数：**
 
@@ -459,6 +459,9 @@
 | BurntFees            | int       | 燃烧的小费                                                           |
 
 ## 810查询账户的代币销毁数量
+
+`GET api/v1/coin-manage/burnAmount`
+
 ```javascript
 {
     "code": 0,
@@ -466,9 +469,6 @@
     "data": "0"
 }
 ```
-
-`GET api/v1/coin-manage/burnAmount`
-
 **请求参数：**
 
 | **参数**     | **是否必须** | **类型** | **说明** |
@@ -485,6 +485,9 @@
 | data     | true         | string   | 销毁数量       |
 
 ## 811链的区块高度查询
+
+`GET api/v1/coin-manage/height`
+
 ```javascript
 {
     "code": 0,
@@ -492,8 +495,6 @@
     "data": "3536048"
 }
 ```
-`GET api/v1/coin-manage/height`
-
 **请求参数：**无
 
 **返回参数:**
@@ -506,15 +507,14 @@
 
 ## 812查询代币的初始供应量和增发历史
 
+`GET api/v1/coin-manage/tokenHistory`
+
 ```javascript
 {
     "init_coin_supply": "10000700000000000",
     "add_coin_history": ""
 }
 ```
-
-`GET api/v1/coin-manage/tokenHistory`
-
 **请求参数：**
 
 | **参数**     | **是否必须** | **类型** | **说明** |
@@ -532,6 +532,8 @@
 
 ## 813加入黑名单
 
+`POST api/v1/coin-manage/addBlack`
+
 ```javascript
 {
     "contractAddr":"0x610e2ac7849720c9e89a5c50f81c3370987451c7",
@@ -542,10 +544,6 @@
     "verified": "{{verify}}"
 }
 ```
-
-
-`POST api/v1/coin-manage/addBlack`
-
 **请求参数：**
 
 | **参数**     | **是否必须** | **类型** | **说明**      |
@@ -580,6 +578,9 @@
 
 
 ## 814移出黑名单
+
+`POST api/v1/coin-manage/removeBlack`
+
 ```javascript
 {
     "contractAddr":"0x610e2ac7849720c9e89a5c50f81c3370987451c7",
@@ -590,8 +591,6 @@
     "verified": "{{verify}}"
 }
 ```
-`POST api/v1/coin-manage/removeBlack`
-
 **请求参数：**
 
 | **参数**     | **是否必须** | **类型** | **说明**      |
@@ -627,6 +626,10 @@
 
 ## 815添加转入黑名单
 
+
+`POST api/v1/coin-manage/addBlackIn`
+
+
 ```javascript
 {
     "contractAddr":"0x610e2ac7849720c9e89a5c50f81c3370987451c7",
@@ -637,9 +640,6 @@
     "verified": "{{verify}}"
 }
 ```
-
-`POST api/v1/coin-manage/addBlackIn`
-
 **请求参数：**
 
 | **参数**     | **是否必须** | **类型** | **说明**      |
@@ -675,6 +675,9 @@
 
 ## 816移出转入黑名单
 
+`POST api/v1/coin-manage/removeBlackIn`
+
+
 ```javascript
 {
     "contractAddr":"0x610e2ac7849720c9e89a5c50f81c3370987451c7",
@@ -685,8 +688,6 @@
     "verified": "{{verify}}"
 }
 ```
-
-`POST api/v1/coin-manage/removeBlackIn`
 
 **请求参数：**
 
@@ -722,6 +723,8 @@
 
 ## 817添加转出黑名单
 
+`POST api/v1/coin-manage/addBlackOut`
+
 ```javascript
 {
     "contractAddr":"0x610e2ac7849720c9e89a5c50f81c3370987451c7",
@@ -732,9 +735,6 @@
     "verified": "{{verify}}"
 }
 ```
-
-`POST api/v1/coin-manage/addBlackOut`
-
 **请求参数：**
 
 | **参数**     | **是否必须** | **类型** | **说明**      |
@@ -771,6 +771,9 @@
 
 ## 818移出转出黑名单
 
+
+`POST api/v1/coin-manage/removeBlackOut`
+
 ```javascript
 {
     "contractAddr":"0x610e2ac7849720c9e89a5c50f81c3370987451c7",
@@ -781,9 +784,6 @@
     "verified": "{{verify}}"
 }
 ```
-
-`POST api/v1/coin-manage/removeBlackOut`
-
 **请求参数：**
 
 | **参数**     | **是否必须** | **类型** | **说明**      |
@@ -820,6 +820,10 @@
 
 ## 819冻结
 
+
+`POST api/v1/coin-manage/frozen`
+
+
 ```javascript
 {
     "amount":"1000",
@@ -831,9 +835,6 @@
     "verified": "{{verify}}"
 }
 ```
-
-`POST api/v1/coin-manage/frozen`
-
 **请求参数：**
 
 | **参数**     | **是否必须** | **类型** | **说明**               |
@@ -870,6 +871,8 @@
 
 ## 820解冻
 
+`POST api/v1/coin-manage/unfrozen`
+
 ```javascript
 {
     "amount":"1",
@@ -881,9 +884,6 @@
     "verified": "{{verify}}"
 }
 ```
-
-`POST api/v1/coin-manage/unfrozen`
-
 **请求参数：**
 
 | **参数**     | **是否必须** | **类型** | **说明**               |
@@ -918,6 +918,8 @@
 
 ## 821添加区块高度间交易黑名单
 
+`POST api/v1/coin-manage/addBlackRange`
+
 ```javascript
 {
     "startblock":"200",
@@ -929,8 +931,6 @@
     "verified": "{{verify}}"
 }
 ```
-
-`POST api/v1/coin-manage/addBlackRange`
 
 **请求参数：**
 
@@ -966,6 +966,9 @@
 
 
 ## 822移出区块高度间交易黑名单
+
+`POST api/v1/coin-manage/removeBlackRange`
+
 ```javascript
 {
     "index":"0",
@@ -976,8 +979,6 @@
     "verified": "{{verify}}"
 }
 ```
-`POST api/v1/coin-manage/removeBlackRange`
-
 **请求参数：**
 
 | **参数**     | **是否必须** | **类型** | **说明**      |
@@ -1013,6 +1014,8 @@
 
 ## 823铸造（增发）
 
+`POST api/v1/coin-manage/mint`
+
 ```javascript
 {
     "amount":"1000",
@@ -1023,9 +1026,6 @@
     "verified": "{{verify}}"
 }
 ```
-
-`POST api/v1/coin-manage/mint`
-
 **请求参数：**
 
 | **参数**     | **是否必须** | **类型** | **说明**      |
@@ -1060,6 +1060,8 @@
 
 ## 824销毁
 
+`POST api/v1/coin-manage/burn`
+
 ```javascript
 {
     "amount":"10",
@@ -1070,8 +1072,6 @@
     "verified": "{{verify}}"
 }
 ```
-
-`POST api/v1/coin-manage/burn`
 
 **请求参数：**
 
@@ -1108,6 +1108,8 @@
 
 ## 825销毁指定账户下的代币
 
+`POST api/v1/coin-manage/burnFrom`
+
 ```javascript
 {
     "amount":"10",
@@ -1119,9 +1121,6 @@
     "verified": "{{verify}}"
 }
 ```
-
-`POST api/v1/coin-manage/burnFrom`
-
 **请求参数：**
 
 | **参数**     | **是否必须** | **类型** | **说明**               |
@@ -1158,6 +1157,9 @@
 
 ## 826查询账户的冻结代币数量
 
+`POST api/v1/coin-manage/forzenAmount`
+
+
 ```javascript
 {
     "contractAddr":"0x610e2ac7849720c9e89a5c50f81c3370987451c7",
@@ -1167,9 +1169,6 @@
     "verified": "{{verify}}"
 }
 ```
-
-`POST api/v1/coin-manage/forzenAmount`
-
 **请求参数：**
 
 | **参数**     | **是否必须** | **类型** | **说明**      |
@@ -1197,6 +1196,9 @@
 
 ## 827查询代币的总容量
 
+
+`POST api/v1/coin-manage/cap`
+
 ```javascript
 {
     "contractAddr":"0x610e2ac7849720c9e89a5c50f81c3370987451c7",
@@ -1205,9 +1207,6 @@
     "verified": "{{verify}}"
 }
 ```
-
-`POST api/v1/coin-manage/cap`
-
 **请求参数：**
 
 | **参数**     | **是否必须** | **类型** | **说明** |
@@ -1234,6 +1233,8 @@
 
 ## 828查询代币的闪电费用比例
 
+`POST api/v1/coin-manage/flashFee`
+
 ```javascript
 {
     "contractAddr":"0xa97a7e49930c91d7bba6a115f01a5c41a6218676",
@@ -1242,9 +1243,6 @@
     "verified": "{{verify}}"
 }
 ```
-
-`POST api/v1/coin-manage/flashFee`
-
 **请求参数：**
 
 | **参数**     | **是否必须** | **类型** | **说明** |
@@ -1271,6 +1269,8 @@
 
 ## 829查询代币的禁止交易区间
 
+`POST api/v1/coin-manage/blackRange`
+
 ```javascript
 {
     "contractAddr":"0x610e2ac7849720c9e89a5c50f81c3370987451c7",
@@ -1279,9 +1279,6 @@
     "verified": "{{verify}}"
 }
 ```
-
-`POST api/v1/coin-manage/blackRange`
-
 **请求参数：**
 
 | **参数**     | **是否必须** | **类型** | **说明** |
@@ -1296,7 +1293,7 @@
 | -------- | ------------ | -------- | --------------------------------------- |
 | code     | true         | string   | 0 为正确                                |
 | message  | true         | string   | 成功或错误信息                          |
-| data     | true         | string   | jaon 字符串，可转化为交易区间结构体数组 |
+| data     | true         | string   | json 字符串，可转化为交易区间结构体数组 |
 
 交易区间结构体定义如下：
 
@@ -1307,6 +1304,8 @@
 
 ## 830查询合约交易的状态
 
+`POST api/v1/coin-manage/txStatus`
+
 ```javascript
 {
     "accountId":"LDgtR1ZQdFiCbBY",
@@ -1316,9 +1315,6 @@
     "verified": "{{verify}}"
 }
 ```
-
-`POST api/v1/coin-manage/txStatus`
-
 **请求参数：**
 
 | **参数**  | **是否必须** | **类型** | **说明**                                   |

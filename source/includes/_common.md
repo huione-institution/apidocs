@@ -31,6 +31,9 @@
 
 > 返回示例:
 
+
+`GET api/v1/config/token/list?chain=`
+
 ```javascript
 {
   "code": 0,
@@ -52,8 +55,6 @@
 }
 ```
 
-`GET api/v1/config/token/list?chain=`
-
 **请求参数:**
 
 | **字段** | **类型** | **描述** |
@@ -72,6 +73,8 @@
 
 
 ## 43所有币配置
+
+`GET api/v1/config/token/config`
 
 > 返回示例:
 
@@ -93,8 +96,6 @@
 }
 ```
 
-`GET api/v1/config/token/config`
-
 **返回参数:**
 
 | **字段**           | **类型** | **描述**         |
@@ -111,6 +112,8 @@
 
 ## 44获取提现手续费
 
+`POST api/v1/config/token/fee`
+
 > 返回示例:
 
 ```javascript
@@ -120,8 +123,6 @@
     "data": "0"
 }
 ```
-
-`POST api/v1/config/token/fee`
 
 **请求参数:**
 
