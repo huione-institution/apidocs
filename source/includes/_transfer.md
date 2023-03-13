@@ -2,30 +2,13 @@
 
 ## 61执行内部转账
 
-`POST /v1/internalTransfer`
-
-**请求参数**
-
-| **参数名**          | **是否必填** | **参数类型** | **描述说明**            |
-| ------------------- | ------------ | ------------ | ----------------------- |
-| transfers           | true         | String       | 请求转账结构体数组      |
-| transfersFromAccout | true         | String       | 转出账户                |
-| transfersToAccout   | true         | String       | 转入账户                |
-| transfersThirdId    | true         | String       | 外部订单 id(重复不处理) |
-| transfersSymbol     | true         | String       | 代币名称                |
-| transfersAmount     | true         | String       | 转账金额                |
-| transfersCallBack   | false        | String       | 转账成功回调地址        |
-| transfersExt        | false        | String       | 透传参数                |
-| isSync              | true         | Boolean      | 是否同步执行            |
-| isTransaction       | true         | Boolean      | 是否整体做为事务        |
-
 ```javascript
 //示例
 {
     "transfers":[
         {
-            "from_accout":"10",
-            "to_accout":"12",
+            "from_account":"10",
+            "to_account":"12",
             "third_id":"1",
             "token":"hui",
             "amount":"1",
@@ -33,8 +16,8 @@
             "ext":""
         },
          {
-            "from_accout":"10",
-            "to_accout":"12",
+            "from_account":"10",
+            "to_account":"12",
             "third_id":"3",
             "token":"hui",
             "amount":"2",
@@ -46,17 +29,23 @@
     "is_transaction":true
 }
 ```
+`POST /v1/internalTransfer`
 
-**返回参数**
+**请求参数**
 
-| **参数名**  | **参数类型** | **描述说明**                  |
-| ----------- | ------------ | ----------------------------- |
-| code        | Integer      | 状态码 0 为处理成功其余为错误 |
-| msg         | String       | 错误信息提示                  |
-| data        | Array        | 结果数组                      |
-| dataOrderId | String       | 内部订单 id                   |
-| dataThirdId | String       | 三方订单 id                   |
-| dataSuccess | Boolean      | 是否成功                      |
+| **参数名**          | **是否必填** | **参数类型** | **描述说明**            |
+| ------------------- | ------------ | ------------ | ----------------------- |
+| transfers           | true         | String       | 请求转账结构体数组      |
+| transfersFromaccount | true         | String       | 转出账户                |
+| transfersToaccount   | true         | String       | 转入账户                |
+| transfersThirdId    | true         | String       | 外部订单 id(重复不处理) |
+| transfersSymbol     | true         | String       | 代币名称                |
+| transfersAmount     | true         | String       | 转账金额                |
+| transfersCallBack   | false        | String       | 转账成功回调地址        |
+| transfersExt        | false        | String       | 透传参数                |
+| isSync              | true         | Boolean      | 是否同步执行            |
+| isTransaction       | true         | Boolean      | 是否整体做为事务        |
+
 
 ```javascript
 {
@@ -76,18 +65,21 @@
     ]
 }
 ```
+**返回参数**
+
+| **参数名**  | **参数类型** | **描述说明**                  |
+| ----------- | ------------ | ----------------------------- |
+| code        | Integer      | 状态码 0 为处理成功其余为错误 |
+| msg         | String       | 错误信息提示                  |
+| data        | Array        | 结果数组                      |
+| dataOrderId | String       | 内部订单 id                   |
+| dataThirdId | String       | 三方订单 id                   |
+| dataSuccess | Boolean      | 是否成功                      |
+
+
 
 ## 62充值提现转账历史记录
 
-`POST /v1/internalTransferHistory`
-
-**请求参数**
-
-| **参数名**    | **是否必填** | **参数类型** | **描述说明**                    |
-| ------------- | ------------ | ------------ | ------------------------------- |
-| params        | true         | Array        | 查询数组一次最多支持查询 100 条 |
-| paramsThirdId | true         | String       | 三方订单 id                     |
-| paramsOrderId | true         | String       | 内部订单 id                     |
 
 ```javascript
 {
@@ -104,30 +96,16 @@
 }
 ```
 
-**返回参数**
+`POST /v1/internalTransferHistory`
 
-| **名**         | **是否必填** | **参数类型** | **描述说明**                              |
-| -------------- | ------------ | ------------ | ----------------------------------------- |
-| code           | true         | Integer      | 状态码 0 为正常                           |
-| msg            | true         | String       | 信息                                      |
-| Data           | true         | Array        |                                           |
-| DataOrderId    | true         | String       | 订单 id                                   |
-| DataOrderType  | true         | Integer      | 订单类型 1 充值订单 2 转账订单 3 提现订单 |
-| DataFrom       | true         | String       | 链上转出地址                              |
-| DataTo         | true         | String       | 链上转入地址                              |
-| DataTxHash     | true         | String       | 链上交易 hash                             |
-| DataStatus     | true         | Integer      | 0 处理中 1 处理成功 2 处理出错 3 处理中   |
-| DataMessage    | true         | String       |                                           |
-| DataThirdId    | true         | String       | 三方订单 id                               |
-| DataCreateTime | true         | Integer      | 创建时间                                  |
-| DataUpdateTime | true         | Integer      | 更新时间                                  |
-| DataCallBack   | true         | String       | 回调 url                                  |
-| DataExt        | true         | String       | 透传参数                                  |
-| DataFromUid    | true         | String       | 转出内部 id                               |
-| DataToUid      | true         | String       | 转入内部 id                               |
-| DataAmount     | true         | String       | 金额                                      |
-| DataSymbol     | true         | String       | 代币名称                                  |
-| DataChain      | true         | String       | 链名称                                    |
+**请求参数**
+
+| **参数名**    | **是否必填** | **参数类型** | **描述说明**                    |
+| ------------- | ------------ | ------------ | ------------------------------- |
+| params        | true         | Array        | 查询数组一次最多支持查询 100 条 |
+| paramsThirdId | true         | String       | 三方订单 id                     |
+| paramsOrderId | true         | String       | 内部订单 id                     |
+
 
 ```javascript
 {
@@ -175,3 +153,28 @@
 	]
 }
 ```
+
+**返回参数**
+
+| **名**         | **是否必填** | **参数类型** | **描述说明**                              |
+| -------------- | ------------ | ------------ | ----------------------------------------- |
+| code           | true         | Integer      | 状态码 0 为正常                           |
+| msg            | true         | String       | 信息                                      |
+| Data           | true         | Array        |                                           |
+| DataOrderId    | true         | String       | 订单 id                                   |
+| DataOrderType  | true         | Integer      | 订单类型 1 充值订单 2 转账订单 3 提现订单 |
+| DataFrom       | true         | String       | 链上转出地址                              |
+| DataTo         | true         | String       | 链上转入地址                              |
+| DataTxHash     | true         | String       | 链上交易 hash                             |
+| DataStatus     | true         | Integer      | 0 处理中 1 处理成功 2 处理出错 3 处理中   |
+| DataMessage    | true         | String       |                                           |
+| DataThirdId    | true         | String       | 三方订单 id                               |
+| DataCreateTime | true         | Integer      | 创建时间                                  |
+| DataUpdateTime | true         | Integer      | 更新时间                                  |
+| DataCallBack   | true         | String       | 回调 url                                  |
+| DataExt        | true         | String       | 透传参数                                  |
+| DataFromUid    | true         | String       | 转出内部 id                               |
+| DataToUid      | true         | String       | 转入内部 id                               |
+| DataAmount     | true         | String       | 金额                                      |
+| DataSymbol     | true         | String       | 代币名称                                  |
+| DataChain      | true         | String       | 链名称                                    |
