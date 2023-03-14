@@ -50,5 +50,5 @@ verified 是校验字段，需要用到申请时给的 ApiSecret 来加密，具
 
 | **环境**      | **域名** | **api key申请** |
 |-------------|--------|---------------|
-| 测试环境 | https://api.alpha.huiwang.io   | [API Key申请](https://t.me/+1VFnuoY1dfs0ZWRl) |
+| 测试环境 | https://api.alpha.huiwang.io   | <a href="https://t.me/+1VFnuoY1dfs0ZWRl" target="_blank">API Key申请</a>|
 | 正式环境   | 待定   |               |

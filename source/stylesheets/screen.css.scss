@@ -74,12 +74,15 @@ body {
 
   // This is the logo at the top of the ToC
   .logo {
-    display: block;
-    max-width: 100%;
-    margin-bottom: $logo-margin;
+    // display: block;
+    // max-width: 100%;
+    // margin-bottom: $logo-margin;
+    // display: none;
+    // margin-top: 20px;
   }
 
   & > .search {
+    margin-top: 8px;
     position: relative;
 
     input {
